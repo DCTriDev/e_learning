@@ -1,18 +1,16 @@
-import {USER_INFO} from "../Utils/config";
+import { USER_INFO } from "../Utils/config";
 
-const localServices = {
+export const localServices = {
     setUserInfo: (values) => {
-        let userInfo = JSON.stringify(values)
-        localStorage.setItem(USER_INFO, userInfo)
+        let data = JSON.stringify(values);
+        localStorage.setItem(USER_INFO, data);
     },
     getUserInfo: () => {
-        if (localStorage.getItem(USER_INFO)){
-            return JSON.parse(localStorage.getItem(USER_INFO))
+        if (localStorage.getItem(USER_INFO)) {
+            return JSON.parse(localStorage.getItem(USER_INFO));
         }
     },
     removeUserInfo: () => {
-        localStorage.setItem(USER_INFO, '')
-    }
-}
-
-export default localServices
+        localStorage.setItem(USER_INFO, "");
+    },
+};
