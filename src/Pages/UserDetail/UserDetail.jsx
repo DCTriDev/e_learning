@@ -14,10 +14,10 @@ export default function UserDetail() {
     console.log(className);
   }
   const dispatch = useDispatch();
-  let data = { taiKhoan: "anh123", matKhau: "anh123" };
+  // let data = { taiKhoan: "anh123", matKhau: "anh123" };
   useEffect(() => {
     httpService
-      .getUserDetail(data)
+      .getUserDetail({ taiKhoan: "anh123", matKhau: "anh123" })
       .then((res) => {
         dispatch(setUserDetail(res.data));
       })

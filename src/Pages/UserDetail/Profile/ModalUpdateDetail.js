@@ -19,26 +19,48 @@ export default function ModalUpdateDetail() {
   const dispatch = useDispatch();
   const onFinish = (values) => {
     httpService
-      .updateUserDetail({ ...userDetail, ...values })
+      .updateUserDetail({ ...values, maLoaiNguoiDung: "HV", maNhom: "GP01" })
       .then((res) => {
-        dispatch(setUserDetail(res.data));
+        // console.log({ res });
+        // dispatch(setUserDetail(res.data));
+        // httpService
+        //   .getUserDetail({ taikhoan: res.taikhoan, matKhau: res.matKhau })
+        //   .then((res) => {
+        //     dispatch(setUserDetail(res.data));
+        //   })
+        //   .catch((err) => console.log(err));
+        // console.log({ userDetail });
         success("Cập nhật thành công");
+        console.log(res.data);
+        let data = res.data;
+        return data;
       })
-      .catch((err) => {
-        console.log(err);
+      .then((data) => {
+        httpService
+          .getUserDetail({ taikhoan: data.taiKhoan, matKhau: data.matKhau })
+          .then((res) => {
+            dispatch(setUserDetail(res.data));
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((erros) => {
+        console.log({ erros });
+        console.log(erros.err.response.data);
+        error(`${erros.err.response.data}`);
       });
   };
   const success = () => {
     message.success("cập nhật thành công");
   };
-  const error = () => {
-    message.error("Cập nhật thất bại");
+  const error = (data) => {
+    message.error(data);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
     error(errorInfo);
   };
   const { userDetail } = useSelector((state) => state.userSlice);
+  // console.log({ userDetail });
 
   return (
     <div>
