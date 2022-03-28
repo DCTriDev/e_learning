@@ -17,7 +17,7 @@ function HomeCarousel() {
         <Carousel autoplay className='' style={{background: '#232323'}}>
             <div className='grid space-x-5 sm:grid-cols-1 md:grid-cols-2  sm:h-72 md:h-90'>
                 <div className="col-span-1">
-                    <div className='bg-red-400 relative w-full'>
+                    <div className='bg-red-400 relative w-full h-full'>
                         <img className='w-full h-full object-cover '
                              src="https://blog.vinahost.vn/wp-content/uploads/2021/11/huong-dan-tao-moi-mot-nodejs-app-tren-shared-hosting.png"
                              alt=""/>
@@ -29,7 +29,7 @@ function HomeCarousel() {
             </div>
             <div className='grid space-x-5 sm:grid-cols-1 md:grid-cols-2  sm:h-72 md:h-90'>
                 <div className="col-span-1">
-                    <div className='bg-red-400 relative w-full'>
+                    <div className='bg-red-400 relative w-full h-full'>
                         <img className='w-full h-full object-cover '
                              src="https://blog.vinahost.vn/wp-content/uploads/2021/11/huong-dan-tao-moi-mot-nodejs-app-tren-shared-hosting.png"
                              alt=""/>
@@ -41,7 +41,7 @@ function HomeCarousel() {
             </div>
             <div className='grid space-x-5 sm:grid-cols-1 md:grid-cols-2  sm:h-72 md:h-90'>
                 <div className="col-span-1">
-                    <div className='bg-red-400 relative w-full'>
+                    <div className='bg-red-400 relative w-full h-full'>
                         <img className='w-full h-full object-cover'
                              src="https://antrandigital.com/wp-content/uploads/2021/03/chia-se-khoa-hoc-reactjs-day-du-mien-phi-antrandigital.jpg"
                              alt=""/>
