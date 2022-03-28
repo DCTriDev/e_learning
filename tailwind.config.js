@@ -9,13 +9,13 @@ module.exports = {
   },
   theme: {
     screens: {
-      'sm': '375px', //iPhone 8
+      'xs': '375px', //iPhone 8
       // => @media (min-width: 375px) { ... }
-      'md': '414px', //iPhone 8+
+      'sm': '414px', //iPhone 8+
       // => @media (min-width: 414px) { ... }
-      'lg': '768px', //iPad
+      'md': '768px', //iPad
       // => @media (min-width: 768px) { ... }
-      'xl': '1200px', //Desktop
+      'lg': '1200px', //Desktop
       // => @media (min-width: 1200px) { ... }
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
