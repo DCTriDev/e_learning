@@ -67,11 +67,18 @@ module.exports = {
       },
       container: {
         padding: {
-          DEFAULT: "3rem",
+          DEFAULT: "2rem",
           sm: "2rem",
-          lg: "4rem",
-          xl: "5rem",
+          lg: "2.5rem",
+          xl: "3rem",
           "2xl": "6rem",
+        },
+        maxWidth: {
+          DEFAULT: "100%",
+          sm: "1140px !important",
+          lg: "1140px !important",
+          xl: "1140px !important",
+          "2xl": "1140px !important",
         },
       },
       minHeight: {

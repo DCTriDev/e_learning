@@ -1,4 +1,5 @@
 import React from 'react';
+import Layouts from "../../Layouts";
 
 function HomePage() {
     return (
@@ -8,4 +9,4 @@ function HomePage() {
     );
 }
 
-export default HomePage;
+export default Layouts(HomePage);
