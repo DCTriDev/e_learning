@@ -28,7 +28,11 @@ class HttpRequestService {
   };
   updateUserDetail = (data, setLoading = true) => {
     const uri = "/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung";
-    return AxiosServ.putMethod(uri, data, (setLoading = true));
+    return AxiosServ.putMethod(uri, data, setLoading);
+  };
+  cancleCourse = (data, setLoading = true) => {
+    const uri = "/api/QuanLyKhoaHoc/HuyGhiDanh";
+    return AxiosServ.postMethod(uri, data, setLoading);
   };
 }
 

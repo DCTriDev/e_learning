@@ -18,20 +18,13 @@ export default function ModalUpdateDetail() {
   };
   const dispatch = useDispatch();
   const onFinish = (values) => {
+    // if (userDetail.includes(values)) {
+    //   // error("Chưa có thông tin nào được thay đổi");
+    // }
     httpService
       .updateUserDetail({ ...values, maLoaiNguoiDung: "HV", maNhom: "GP01" })
       .then((res) => {
-        // console.log({ res });
-        // dispatch(setUserDetail(res.data));
-        // httpService
-        //   .getUserDetail({ taikhoan: res.taikhoan, matKhau: res.matKhau })
-        //   .then((res) => {
-        //     dispatch(setUserDetail(res.data));
-        //   })
-        //   .catch((err) => console.log(err));
-        // console.log({ userDetail });
         success("Cập nhật thành công");
-        console.log(res.data);
         let data = res.data;
         return data;
       })

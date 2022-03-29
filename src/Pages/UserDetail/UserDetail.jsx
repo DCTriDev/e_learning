@@ -11,7 +11,7 @@ import Profile from "./Profile/Profile";
 export default function UserDetail() {
   const { TabPane } = Tabs;
   function callback(className) {
-    console.log(className);
+    // console.log(className);
   }
   const dispatch = useDispatch();
   // let data = { taiKhoan: "anh123", matKhau: "anh123" };
