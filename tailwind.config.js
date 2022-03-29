@@ -9,14 +9,14 @@ module.exports = {
   },
   theme: {
     screens: {
-      'xs': '375px', //iPhone 8
-      // => @media (min-width: 375px) { ... }
-      'sm': '414px', //iPhone 8+
-      // => @media (min-width: 414px) { ... }
-      'md': '768px', //iPad
-      // => @media (min-width: 768px) { ... }
-      'lg': '1200px', //Desktop
-      // => @media (min-width: 1200px) { ... }
+      'xs': '280px', //iphone 8
+      // => @media (min-width: 280) { ... }
+      'sm': '376', //iPhone 8+
+      // => @media (min-width: 376) { ... }
+      'md': '769', //iPad
+      // => @media (min-width: 769px) { ... }
+      'lg': '1201px', //Desktop
+      // => @media (min-width: 1201px) { ... }
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
