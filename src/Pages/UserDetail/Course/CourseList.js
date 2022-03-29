@@ -11,6 +11,7 @@ export default function CourseList() {
     // console.log(data);
     searchCourse(value);
     console.log({ listSearch });
+    listSearch.sort();
     setdsh(listSearch);
   };
   const { userDetail } = useSelector((state) => state.userSlice);
