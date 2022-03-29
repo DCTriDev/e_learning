@@ -20,7 +20,7 @@ export default function CourseItem({ data }) {
         setDetail(res.data);
       })
       .catch((err) => console.log(err));
-    console.log(userDetail.taiKhoan, data.maKhoaHoc);
+    // console.log(userDetail.taiKhoan, data.maKhoaHoc);
   }, [data.maKhoaHoc]);
   const cancleCourse = (data) => {
     httpService
@@ -48,15 +48,15 @@ export default function CourseItem({ data }) {
       <img className=" h-52 w-40" src="https://picsum.photos/200/300" alt="" />
       <div className=" flex flex-grow justify-between">
         <div className="  ">
-          <p className=" text-black text-xl uppercase">
+          <p className=" text-black text-xl uppercase font-bold">
             <span className="text-lg font-semibold bg-red-600 text-white rounded-md px-2 mr-3 normal-case">
               {detail.danhMucKhoaHoc?.maDanhMucKhoahoc}
             </span>
             {detail?.tenKhoaHoc}
           </p>
           <p className=" text-black text-lg">
-            {detail.moTa?.length > 600
-              ? `${detail.moTa.substring(0, 600)}...`
+            {detail.moTa?.length > 500
+              ? `${detail.moTa.substring(0, 450)}...`
               : `${detail.moTa}`}
           </p>
         </div>
