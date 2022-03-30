@@ -1,19 +1,16 @@
-@font-face {
-    font-family: Poppins;
-    src:         url('./Assets/Fonts/Poppins-Regular.ttf');
-}
-
 body {
     margin:                  0;
-    font-family:             Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    font-family:             'Source Serif Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
                              'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
                              sans-serif;
     -webkit-font-smoothing:  antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background: #F7F7F7;
+    color: #131313
 }
 
 button:focus {
-    outline: none !important;
+    outline: none;
 }
 
 @tailwind base;

@@ -61,7 +61,7 @@ class AxiosService {
         );
     }
 
-    deleteMothod(uri, loading = true) {
+    deleteMethod(uri, loading = true) {
         return this.handleFlow(this.axios.delete(uri, this.axiosConfig), loading);
     }
 

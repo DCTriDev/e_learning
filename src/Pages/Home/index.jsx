@@ -1,12 +1,15 @@
 import React from 'react';
-import Layouts from "../../Layouts";
+import Layout from "../../Layouts";
+import HomeCarousel from "./HomeCarousel";
+import CourseList from "./CourseList";
 
 function HomePage() {
     return (
-        <div>
-            <h1 className='sm:text-green-600 md:text-red-600 text-xl lg:text-amber-500 xl:text-black'>Homepage</h1>
+        <div className='mt-20'>
+            <HomeCarousel/>
+            <CourseList/>
         </div>
     );
 }
 
-export default Layouts(HomePage);
+export default Layout(HomePage);
