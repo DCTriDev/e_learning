@@ -3,7 +3,7 @@ import httpService from "../../Services/http.service";
 
 const initialState = {
     courseList: null,
-    courseCatalogList: null,
+    courseCatalog: null,
     error: null,
 };
 
@@ -11,6 +11,14 @@ export const fetchCourseList = createAsyncThunk(
     'course/fetchCourseList',
     async () => {
         const response = await httpService.getCoursesList();
+        return response.data;
+    }
+);
+
+export const fetchCourseCatalog = createAsyncThunk(
+    'course/fetchCourseCatalog',
+    async () => {
+        const response = await httpService.getCourseCatalog();
         return response.data;
     }
 );
@@ -27,9 +35,10 @@ const courseSlice = createSlice({
         [fetchCourseList.fulfilled]: (state, action) => {
             state.courseList = action.payload;
         },
+        [fetchCourseCatalog.fulfilled]: (state, action) => {
+            state.courseCatalog = action.payload;
+        },
     },
 });
-
-export const {setCourseList, setCourseListCatalog} = courseSlice.actions;
 
 export default courseSlice.reducer;
