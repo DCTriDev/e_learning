@@ -2,8 +2,11 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import httpService from "../../../Services/http.service";
 import { message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserDetail } from "../../../Redux/Slice/userSlice";
-export default function CourseItem({ data }) {
+// import { setUserDetail } from "../../../Redux/Slice/userSlice";
+import { removeCourse } from "../../../Redux/Slice/listCourseSlice";
+export default function CourseItem({ data, index }) {
+  // console.log(data);
+  // const dispatch = useDispatch();
   const warning = () => {
     message.warning(" bạn đã hủy khóa học");
   };
@@ -12,34 +15,20 @@ export default function CourseItem({ data }) {
     message.error("This is an error message");
   };
   const dispatch = useDispatch();
-  let [detail, setDetail] = useState({});
-  useEffect(() => {
-    httpService
-      .getCourseDetail(data.maKhoaHoc)
-      .then((res) => {
-        setDetail(res.data);
-      })
-      .catch((err) => console.log(err));
-    // console.log(userDetail.taiKhoan, data.maKhoaHoc);
-  }, [data.maKhoaHoc]);
+
   const cancleCourse = (data) => {
+    console.log(index);
     httpService
       .cancleCourse(data)
       .then((res) => {
         console.log(res);
+        dispatch(removeCourse(data.maKhoaHoc));
         warning(" bạn đã hủy khóa học");
-        httpService
-          .getUserDetail({
-            taikhoan: userDetail.taiKhoan,
-            matKhau: userDetail.matKhau,
-          })
-          .then((res) => {
-            dispatch(setUserDetail(res.data));
-          })
-          .catch((err) => console.log(err));
       })
+
       .catch((err) => {
-        error();
+        console.log(err);
+        // error();
       });
   };
   let { userDetail } = useSelector((state) => state.userSlice);
@@ -50,14 +39,14 @@ export default function CourseItem({ data }) {
         <div className="  ">
           <p className=" text-black text-xl uppercase font-bold">
             <span className="text-lg font-semibold bg-red-600 text-white rounded-md px-2 mr-3 normal-case">
-              {detail.danhMucKhoaHoc?.maDanhMucKhoahoc}
+              {data.maKhoaHoc}
             </span>
-            {detail?.tenKhoaHoc}
+            {data?.tenKhoaHoc}
           </p>
           <p className=" text-black text-lg">
-            {detail.moTa?.length > 500
-              ? `${detail.moTa.substring(0, 450)}...`
-              : `${detail.moTa}`}
+            {data.moTa?.length > 500
+              ? `${data.moTa.substring(0, 450)}...`
+              : `${data.moTa}`}
           </p>
         </div>
         <div className=" ">

@@ -5,40 +5,38 @@ import { Input, Space } from "antd";
 
 export default function CourseList() {
   const { Search } = Input;
-
-  const onSearch = (value) => {
-    // let data = searchCourse(value);
-    // console.log(data);
-    searchCourse(value);
-    console.log({ listSearch });
-    listSearch.sort();
-    setdsh(listSearch);
-  };
-  const { userDetail } = useSelector((state) => state.userSlice);
-
   let listSearch = [];
+  const onSearch = (value) => {
+    searchCourse(value);
+    setdskh(listSearch);
+  };
   let searchCourse = (text) => {
     listSearch = [];
-    return userDetail.chiTietKhoaHocGhiDanh.map((khoaHoc) => {
+    listCourseDetail.map((khoaHoc) => {
       let result = khoaHoc.tenKhoaHoc.toLowerCase().search(text.toLowerCase());
       if (result !== -1) {
         listSearch.push(khoaHoc);
       }
-      // console.log(listSearch);
-      return listSearch;
     });
+    return listSearch;
   };
-  let [dskkh, setdsh] = useState(userDetail.chiTietKhoaHocGhiDanh);
+  let { listCourseDetail } = useSelector((state) => state.listCourseSlice);
+  let [dskh, setdskh] = useState(listCourseDetail);
+  useEffect(() => {
+    setdskh(listCourseDetail);
+  }, [listCourseDetail]);
+
   let renderContent = () => {
-    if (dskkh.length === 0) {
+    if (dskh.length === 0) {
       return (
         <p className=" italic text-center text-xl  text-red-500">
           (Không tìm thấy khóa học nào)
         </p>
       );
     } else {
-      return dskkh?.map((item, index) => {
-        return <CourseItem key={index} data={item} />;
+      return dskh?.map((item, index) => {
+        // console.log({ dskh });
+        return <CourseItem key={index} data={item} index={index} />;
       });
     }
   };

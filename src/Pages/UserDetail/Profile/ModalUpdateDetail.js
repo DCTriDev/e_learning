@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { Modal, Button, Form, Input, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import httpService from "../../../Services/http.service";
-import { setUserDetail } from "../../../Redux/Slice/userSlice";
+import {
+  setUserDetail,
+  updateUserDetail,
+} from "../../../Redux/Slice/userSlice";
 // import isEmail from "validator/lib/isEmail";
 import validator from "validator";
 export default function ModalUpdateDetail() {
@@ -25,17 +28,20 @@ export default function ModalUpdateDetail() {
       .updateUserDetail({ ...values, maLoaiNguoiDung: "HV", maNhom: "GP01" })
       .then((res) => {
         success("Cập nhật thành công");
-        let data = res.data;
-        return data;
+        // let data = res.data;
+        // return data;
+        dispatch(
+          updateUserDetail({ ...values, maLoaiNguoiDung: "HV", maNhom: "GP01" })
+        );
       })
-      .then((data) => {
-        httpService
-          .getUserDetail({ taikhoan: data.taiKhoan, matKhau: data.matKhau })
-          .then((res) => {
-            dispatch(setUserDetail(res.data));
-          })
-          .catch((err) => console.log(err));
-      })
+      // .then((data) => {
+      //   httpService
+      //     .getUserDetail({ taikhoan: data.taiKhoan, matKhau: data.matKhau })
+      //     .then((res) => {
+      //       dispatch(setUserDetail(res.data));
+      //     })
+      //     .catch((err) => console.log(err));
+      // })
       .catch((erros) => {
         console.log({ erros });
         console.log(erros.err.response.data);
