@@ -66,6 +66,7 @@ module.exports = {
         "max-w-114": "460px",
       },
       container: {
+        center: true,
         padding: {
           DEFAULT: "2rem",
           sm: "2rem",
@@ -74,11 +75,11 @@ module.exports = {
           "2xl": "6rem",
         },
         maxWidth: {
-          DEFAULT: "100%",
-          sm: "1140px !important",
-          lg: "1140px !important",
-          xl: "1140px !important",
-          "2xl": "1140px !important",
+          DEFAULT: "100% !important",
+          sm: "100% !important",
+          lg: "100% !important",
+          xl: "100% !important",
+          "2xl": "100% !important",
         },
       },
       minHeight: {

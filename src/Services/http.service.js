@@ -23,6 +23,11 @@ class HttpRequestService {
     return AxiosServ.getMethod(uri, data, setLoading)
   }
 
+  getCourseListByCatalog = (values, data, setLoading = true) => {
+    const uri = `/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${values}&MaNhom=GP05`
+    return AxiosServ.getMethod(uri, data, setLoading)
+  }
+
   getCourseDetail = (values, data, setLoading = true) => {
     const uri = `/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${values}`
     return AxiosServ.getMethod(uri, data, setLoading)
