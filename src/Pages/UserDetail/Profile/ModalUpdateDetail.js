@@ -21,32 +21,34 @@ export default function ModalUpdateDetail() {
   };
   const dispatch = useDispatch();
   const onFinish = (values) => {
-    // if (userDetail.includes(values)) {
-    //   // error("Chưa có thông tin nào được thay đổi");
-    // }
-    httpService
-      .updateUserDetail({ ...values, maLoaiNguoiDung: "HV", maNhom: "GP01" })
-      .then((res) => {
-        success("Cập nhật thành công");
-        // let data = res.data;
-        // return data;
-        dispatch(
-          updateUserDetail({ ...values, maLoaiNguoiDung: "HV", maNhom: "GP01" })
-        );
-      })
-      // .then((data) => {
-      //   httpService
-      //     .getUserDetail({ taikhoan: data.taiKhoan, matKhau: data.matKhau })
-      //     .then((res) => {
-      //       dispatch(setUserDetail(res.data));
-      //     })
-      //     .catch((err) => console.log(err));
-      // })
-      .catch((erros) => {
-        console.log({ erros });
-        console.log(erros.err.response.data);
-        error(`${erros.err.response.data}`);
-      });
+    if (
+      values.matKhau === userDetail.matKhau &&
+      values.email === userDetail.email &&
+      values.hoTen === userDetail.hoTen &&
+      values.soDT === userDetail.soDT
+    ) {
+      error("chưa có thông tin nào  cập nhật");
+    } else {
+      httpService
+        .updateUserDetail({ ...values, maLoaiNguoiDung: "HV", maNhom: "GP01" })
+        .then((res) => {
+          success("Cập nhật thành công");
+
+          dispatch(
+            updateUserDetail({
+              ...values,
+              maLoaiNguoiDung: "HV",
+              maNhom: "GP01",
+            })
+          );
+        })
+
+        .catch((erros) => {
+          console.log({ erros });
+          console.log(erros.err.response.data);
+          error(`${erros.err.response.data}`);
+        });
+    }
   };
   const success = () => {
     message.success("cập nhật thành công");
@@ -59,7 +61,6 @@ export default function ModalUpdateDetail() {
     error(errorInfo);
   };
   const { userDetail } = useSelector((state) => state.userSlice);
-  // console.log({ userDetail });
 
   return (
     <div>
@@ -74,7 +75,6 @@ export default function ModalUpdateDetail() {
         footer={null}
       >
         <Form
-          // resetFields=
           initialValues={userDetail}
           name="basic"
           labelCol={{
@@ -92,7 +92,6 @@ export default function ModalUpdateDetail() {
           </Form.Item>
 
           <Form.Item
-            // validateTrigger="onBlur"
             label="Mật khẩu"
             name="matKhau"
             rules={[
@@ -110,7 +109,6 @@ export default function ModalUpdateDetail() {
             <Input />
           </Form.Item>
           <Form.Item
-            // validateTrigger="onBlur"
             label="Email"
             name="email"
             rules={[
@@ -130,7 +128,6 @@ export default function ModalUpdateDetail() {
             <Input />
           </Form.Item>
           <Form.Item
-            // validateTrigger="onBlur"
             label="Họ tên"
             name="hoTen"
             rules={[
@@ -144,7 +141,6 @@ export default function ModalUpdateDetail() {
             <Input />
           </Form.Item>
           <Form.Item
-            // validateTrigger="onBlur"
             label="Số điện thoại"
             name="soDT"
             rules={[
@@ -165,7 +161,6 @@ export default function ModalUpdateDetail() {
           </Form.Item>
 
           <Form.Item
-            // validateTrigger="onBlur"
             wrapperCol={{
               offset: 8,
               span: 16,
