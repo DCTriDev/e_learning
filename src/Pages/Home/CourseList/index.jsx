@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchCourseList} from "../../../Redux/Slice/courseSlice";
-import ItemHomePageCourse from "./ItemHomePageCourse";
+import CourseCard from "../../../Components/ItemCourse/CourseCard";
 
 function CourseList() {
     const CARD_RENDER_AMOUNT = 8
 
-    let {courseList} = useSelector(state => state.courseSlice);
-    console.log(courseList)
+    let courseList = useSelector(state => state.courseSlice.courseList);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchCourseList());
@@ -16,7 +15,7 @@ function CourseList() {
     let handleRenderCourseItem = () => {
         return courseList?.map((item, index) => {
             if (index < CARD_RENDER_AMOUNT) {
-                return <ItemHomePageCourse key={index} data={item}/>
+                return <CourseCard key={index} data={item}/>
             }
         });
     };

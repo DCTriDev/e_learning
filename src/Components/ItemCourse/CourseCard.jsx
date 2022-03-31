@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 
 const {Meta} = Card;
 
-function ItemHomePageCourse({data}) {
+function CourseCard({data}) {
     let substringByLength = (string, length) => {
         if (string.length > length) {
             return string.substring(0, length) + '...';
@@ -27,10 +27,10 @@ function ItemHomePageCourse({data}) {
             </NavLink>]}
         >
             <div className='h-28 flex flex-col space-y-1'>
-                <h3 className='text-xl text-center uppercase whitespace-nowrap font-semibold'>{substringByLength(data.tenKhoaHoc, 20)}</h3>
-                <Meta description={substringByLength(data.moTa, 80)}/>
+                <h3 className='text-xl text-center uppercase whitespace-wrap font-semibold'>{substringByLength(data.tenKhoaHoc, 20)}</h3>
+                <Meta className='italic text-md' description={substringByLength(data.moTa, 75)}/>
             </div>
         </Card>);
 }
 
-export default ItemHomePageCourse;
+export default CourseCard;

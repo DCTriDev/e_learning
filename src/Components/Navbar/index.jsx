@@ -19,7 +19,6 @@ const changeNavbarScollHeight = () => {
 
 function Navbar() {
     const courseCatalog = useSelector(state => state.courseSlice.courseCatalog);
-    console.log(courseCatalog);
     const dispatch = useDispatch();
 
     const menu = (
@@ -27,7 +26,7 @@ function Navbar() {
             {courseCatalog?.map((item, index) => {
                 return (
                     <Menu.Item key={index} className='hover:bg-blue-500 rounded-lg  duration-300 transition-all ease-in-out'>
-                        <NavLink className='text-lg duration-300 transition-all hover:text-white hover:text-white ease-in-out' to={`/course-catalog/${item.maDanhMuc}`}>{item.tenDanhMuc}</NavLink>
+                        <a className='text-lg duration-300 transition-all hover:text-white hover:text-white ease-in-out' href={`/course-catalog/${item.maDanhMuc}`}>{item.tenDanhMuc}</a>
                     </Menu.Item>
                 )
             })}
