@@ -3,31 +3,27 @@ import { Form, Input, Button, Checkbox, message } from "antd";
 
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-// import { setUserAction } from "../../../Redux/Action/userAction";
 import httpService from "../../../Services/http.service";
-//Dùng redux toolkit rôì mà sao ông lại dùng readucer làm chi nữa
 
 export default function LogInForm() {
     let dispatch = useDispatch();
     let history = useHistory();
     const onFinish = (values) => {
-        handleSignIn(values);
+        handleLogIn(values);
     };
-    let showErr = (err) => {
-        message.error(err);
-    };
+
     const onFinishFailed = (errorInfo) => {
         console.log("Failed:", errorInfo);
     };
-    const handleSignIn = (values) => {
-        // dispatch(setUserAction(values, showErr));
+    const handleLogIn = (values) => {
         return httpService
             .login(values)
             .then((res) => {
                 console.log(res.data);
+                history.push("/");
             })
-            .catch((err) => {
-                console.log(err.response);
+            .catch(({ err }) => {
+                alert(err.response.data);
             });
     };
 

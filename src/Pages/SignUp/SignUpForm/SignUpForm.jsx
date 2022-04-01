@@ -3,6 +3,7 @@ import { Form, Input, Button, Checkbox, message } from "antd";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { userServices } from "../../../Services/userServices";
+import httpService from "../../../Services/http.service";
 export default function SignUpForm() {
     let history = useHistory();
     const onFinish = (values) => {
@@ -14,15 +15,23 @@ export default function SignUpForm() {
     };
     const handleSignUp = (values) => {
         let cloneValues = { ...values, maNhom: "GP01" };
-        userServices
-            .dangKi(cloneValues)
-            .then((res) => {
-                console.log("res");
+        // userServices
+        //     .dangKi(cloneValues)
+        //     .then((res) => {
+        //         console.log("res");
 
+        //         history.push("/login");
+        //     })
+        //     .catch((err) => {
+        //         message.error(err.message);
+        //     });.
+        return httpService
+            .signUp(cloneValues)
+            .then((res) => {
                 history.push("/login");
             })
-            .catch((err) => {
-                message.error(err.message);
+            .catch(({ err }) => {
+                message.error(err.respone.data);
             });
     };
     return (
@@ -62,7 +71,7 @@ export default function SignUpForm() {
                         message: "Vui lòng nhập mật khẩu!",
                     },
                 ]}>
-                <Input />
+                <Input.Password />
             </Form.Item>
             <Form.Item
                 label="Họ Tên"
