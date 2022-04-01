@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Input, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import httpService from "../../../Services/http.service";
-import {
-  setUserDetail,
-  updateUserDetail,
-} from "../../../Redux/Slice/userSlice";
-// import isEmail from "validator/lib/isEmail";
+import { fetchUpdateUser } from "../../../Redux/Slice/userSlice";
 import validator from "validator";
 export default function ModalUpdateDetail() {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [form] = Form.useForm();
   const showModal = () => {
+    form.resetFields();
     setIsModalVisible(true);
   };
   const handleOk = () => {
@@ -29,25 +26,8 @@ export default function ModalUpdateDetail() {
     ) {
       error("chưa có thông tin nào  cập nhật");
     } else {
-      httpService
-        .updateUserDetail({ ...values, maLoaiNguoiDung: "HV", maNhom: "GP01" })
-        .then((res) => {
-          success("Cập nhật thành công");
-
-          dispatch(
-            updateUserDetail({
-              ...values,
-              maLoaiNguoiDung: "HV",
-              maNhom: "GP01",
-            })
-          );
-        })
-
-        .catch((erros) => {
-          console.log({ erros });
-          console.log(erros.err.response.data);
-          error(`${erros.err.response.data}`);
-        });
+      dispatch(fetchUpdateUser({ ...userDetail, ...values }));
+      success();
     }
   };
   const success = () => {
@@ -75,6 +55,7 @@ export default function ModalUpdateDetail() {
         footer={null}
       >
         <Form
+          form={form}
           initialValues={userDetail}
           name="basic"
           labelCol={{

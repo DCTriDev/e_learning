@@ -1,33 +1,22 @@
 import { Tabs } from "antd";
 
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setUserDetail } from "../../Redux/Slice/userSlice";
-import httpService from "../../Services/http.service";
+import { useDispatch } from "react-redux";
+import { fetchUserDetail } from "../../Redux/Slice/userSlice";
 import CourseList from "./Course/CourseList";
 
 import Profile from "./Profile/Profile";
 
 export default function UserDetail() {
   const { TabPane } = Tabs;
-  function callback(className) {
-    // console.log(className);
-  }
   const dispatch = useDispatch();
-  // let data = { taiKhoan: "anh123", matKhau: "anh123" };
   useEffect(() => {
-    httpService
-      .getUserDetail({ taiKhoan: "anh123", matKhau: "anh123" })
-      .then((res) => {
-        dispatch(setUserDetail(res.data));
-      })
-      .catch((err) => console.log(err));
+    dispatch(fetchUserDetail({ taiKhoan: "anh123", matKhau: "anh123" }));
   }, []);
-  // const { userDetail } = useSelector((state) => state.userSlice);
 
   return (
     <div className=" container mx-auto ">
-      <Tabs onChange={callback} type="card">
+      <Tabs type="card">
         <TabPane
           tab={
             <div>

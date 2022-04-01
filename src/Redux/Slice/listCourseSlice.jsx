@@ -1,5 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
-
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import httpService from "../../Services/http.service";
+export const fetchCourseDetail = createAsyncThunk(
+  "course/fetchCourseDetail",
+  async (maKhoaHoc) => {
+    const response = await httpService.getCourseDetail(maKhoaHoc);
+    return response.data;
+  }
+);
+export const fetchCancleCourse = createAsyncThunk(
+  "course/fetchCancleCourse",
+  async (data) => {
+    await httpService.cancleCourse(data);
+    return data.maKhoaHoc;
+  }
+);
 const initialState = {
   listCourseDetail: [],
 };
@@ -7,15 +21,16 @@ const initialState = {
 const listCourseSlice = createSlice({
   name: "listCourseSlice",
   initialState,
-  reducers: {
-    setList: (state, action) => {
+  reducers: {},
+  extraReducers: {
+    [fetchCourseDetail.fulfilled]: (state, action) => {
       state.listCourseDetail = [...state.listCourseDetail, action.payload];
     },
-    removeCourse: (state, action) => {
-      let newState = state.listCourseDetail.filter((item) => {
+    [fetchCancleCourse.fulfilled]: (state, action) => {
+      let newlistCourseDetail = [...state.listCourseDetail].filter((item) => {
         return item.maKhoaHoc !== action.payload;
       });
-      state.listCourseDetail = newState;
+      state.listCourseDetail = newlistCourseDetail;
     },
   },
 });

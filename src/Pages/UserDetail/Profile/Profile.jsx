@@ -1,27 +1,16 @@
 // import { Tabs } from "antd";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setList } from "../../../Redux/Slice/listCourseSlice";
-import httpService from "../../../Services/http.service";
+import { useSelector } from "react-redux";
 import ModalUpdateDetail from "./ModalUpdateDetail";
 
 export default function Profile() {
   const { userDetail } = useSelector((state) => state.userSlice);
-  // useEffect(() =>{})
-  const dispatch = useDispatch();
+
   let [detail, setDetail] = useState({});
   useEffect(() => {
     setDetail(userDetail);
-
-    userDetail.chiTietKhoaHocGhiDanh?.map((item, index) => {
-      httpService
-        .getCourseDetail(item.maKhoaHoc)
-        .then((res) => {
-          dispatch(setList(res.data));
-        })
-        .catch((err) => console.log(err));
-    });
   }, [userDetail]);
+
   return (
     <div>
       <div className=" grid grid-cols-2 space-x-28  w-3/4 mx-auto ">

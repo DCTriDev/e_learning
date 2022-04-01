@@ -1,15 +1,17 @@
+import { Input, Pagination, Space } from "antd";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCourseDetail } from "../../../Redux/Slice/listCourseSlice";
 import CourseItem from "./CourseItem";
-import { Input, Space } from "antd";
-import { Pagination } from "antd";
 export default function CourseList() {
+  const { userDetail } = useSelector((state) => state.userSlice);
   const { Search } = Input;
   let listSearch = [];
   const onSearch = (value) => {
     searchCourse(value);
     setdskh(listSearch);
   };
+  const dispatch = useDispatch();
   let searchCourse = (text) => {
     listSearch = [];
     listCourseDetail.map((khoaHoc) => {
@@ -24,13 +26,19 @@ export default function CourseList() {
   let [dskh, setdskh] = useState(listCourseDetail);
   useEffect(() => {
     setdskh(listCourseDetail);
+  }, [listCourseDetail]);
+  useEffect(() => {
     setState({
       totalPage: dskh.length / 2,
       minIndex: 0,
       maxIndex: 2,
     });
-  }, [listCourseDetail]);
-
+  }, [dskh]);
+  useEffect(() => {
+    userDetail.chiTietKhoaHocGhiDanh?.map((item, index) => {
+      dispatch(fetchCourseDetail(item.maKhoaHoc));
+    });
+  }, []);
   let renderContent = () => {
     if (dskh.length === 0) {
       return (
@@ -39,8 +47,7 @@ export default function CourseList() {
         </p>
       );
     } else {
-      return dskh.slice(state.minValue, state.maxValue).map((item, index) => {
-        // console.log({ dskh });
+      return dskh.map((item, index) => {
         return (
           index >= state.minIndex &&
           index < state.maxIndex && (
@@ -83,7 +90,7 @@ export default function CourseList() {
         <Pagination
           className=" absolute bottom-0 mx-auto"
           pageSize={2}
-          // current={1}
+          current={1}
           total={dskh.length}
           onChange={handleChange}
         />

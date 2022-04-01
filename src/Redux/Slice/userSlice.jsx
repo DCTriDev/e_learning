@@ -1,24 +1,34 @@
-// import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import httpService from "../../Services/http.service";
+export const fetchUserDetail = createAsyncThunk(
+  "user/fetchUserDetail",
 
-import { createSlice } from "@reduxjs/toolkit";
-
+  async (maKhoaHoc) => {
+    const response = await httpService.getUserDetail(maKhoaHoc);
+    return response.data;
+  }
+);
+export const fetchUpdateUser = createAsyncThunk(
+  "user/fetchUpdateUser",
+  async (ttcn) => {
+    await httpService.updateUserDetail(ttcn);
+    return ttcn;
+  }
+);
 const initialState = {
   userDetail: {},
 };
-
 const userSlice = createSlice({
   name: "userSlice",
   initialState,
-  reducers: {
-    setUserDetail: (state, action) => {
+  reducers: {},
+  extraReducers: {
+    [fetchUserDetail.fulfilled]: (state, action) => {
       state.userDetail = action.payload;
     },
-    updateUserDetail: (state, action) => {
+    [fetchUpdateUser.fulfilled]: (state, action) => {
       state.userDetail = action.payload;
     },
   },
 });
-
-export const { setUserDetail, updateUserDetail } = userSlice.actions;
-
 export default userSlice.reducer;

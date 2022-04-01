@@ -1,35 +1,17 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import httpService from "../../../Services/http.service";
 import { message } from "antd";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { setUserDetail } from "../../../Redux/Slice/userSlice";
-import { removeCourse } from "../../../Redux/Slice/listCourseSlice";
+import { fetchCancleCourse } from "../../../Redux/Slice/listCourseSlice";
 export default function CourseItem({ data, index }) {
-  // console.log(data);
-  // const dispatch = useDispatch();
   const warning = () => {
     message.warning(" bạn đã hủy khóa học");
   };
 
-  const error = () => {
-    message.error("This is an error message");
-  };
   const dispatch = useDispatch();
 
-  const cancleCourse = (data) => {
-    console.log(index);
-    httpService
-      .cancleCourse(data)
-      .then((res) => {
-        console.log(res);
-        dispatch(removeCourse(data.maKhoaHoc));
-        warning(" bạn đã hủy khóa học");
-      })
-
-      .catch((err) => {
-        console.log(err);
-        // error();
-      });
+  const cancleCourse = (maKhoaHoc) => {
+    dispatch(fetchCancleCourse(maKhoaHoc));
+    warning(" bạn đã hủy khóa học");
   };
   let { userDetail } = useSelector((state) => state.userSlice);
   return (
@@ -39,7 +21,7 @@ export default function CourseItem({ data, index }) {
         <div className="  ">
           <p className=" text-black text-xl uppercase font-bold">
             <span className="text-lg font-semibold bg-red-600 text-white rounded-md px-2 mr-3 normal-case">
-              {data.maKhoaHoc}
+              {data.danhMucKhoaHoc.maDanhMucKhoahoc}
             </span>
             {data?.tenKhoaHoc}
           </p>
