@@ -4,6 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCourseDetail } from "../../../Redux/Slice/listCourseSlice";
 import CourseItem from "./CourseItem";
 export default function CourseList() {
+  let [state, setState] = useState({
+    data: [],
+    totalPage: 0,
+    current: 1,
+    minIndex: 0,
+    maxIndex: 0,
+  });
+  const pageSize = 2;
   const { userDetail } = useSelector((state) => state.userSlice);
   const { Search } = Input;
   let listSearch = [];
@@ -29,9 +37,11 @@ export default function CourseList() {
   }, [listCourseDetail]);
   useEffect(() => {
     setState({
-      totalPage: dskh.length / 2,
+      data: dskh,
+      totalPage: dskh.length / pageSize,
       minIndex: 0,
-      maxIndex: 2,
+      current: 1,
+      maxIndex: pageSize,
     });
   }, [dskh]);
   useEffect(() => {
@@ -59,23 +69,19 @@ export default function CourseList() {
   };
   ///
 
-  let [state, setState] = useState({
-    totalPage: 0,
-    current: 1,
-    minIndex: 0,
-    maxIndex: 0,
-  });
   let handleChange = (page) => {
     setState({
       current: page,
-      minIndex: (page - 1) * 2,
-      maxIndex: page * 2,
+      minIndex: (page - 1) * pageSize,
+      maxIndex: page * pageSize,
     });
   };
   ///
   return (
-    <div className=" flex flex-col space-y-6  ">
-      <h1 className=" text-center uppercase">các khóa học đã tham gia</h1>
+    <div className=" flex flex-col md:space-y-3 xl:space-y-6 xl:h-fit  lg:h-screen lg:space-y-3   relative">
+      <h1 className=" lg:text-xl text-center uppercase">
+        các khóa học đã tham gia
+      </h1>
       <div className=" self-end">
         <Space direction="vertical">
           <Search
@@ -85,12 +91,12 @@ export default function CourseList() {
           />
         </Space>
       </div>
-      <div className="space-y-3 min-h-[65vh]  relative flex flex-col items-center">
-        {renderContent()}
+      <div className="space-y-3 flex flex-col items-center justify-start ">
+        <div className="  md:h-[500px]">{renderContent()}</div>
         <Pagination
-          className=" absolute bottom-0 mx-auto"
-          pageSize={2}
-          current={1}
+          className="   mx-auto "
+          pageSize={pageSize}
+          defaultCurrent={state.current}
           total={dskh.length}
           onChange={handleChange}
         />

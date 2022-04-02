@@ -43,8 +43,8 @@ export default function ModalUpdateDetail() {
   const { userDetail } = useSelector((state) => state.userSlice);
 
   return (
-    <div>
-      <Button type="primary" onClick={showModal}>
+    <div className=" w-fit lg:mx-auto  ">
+      <Button className=" " type="primary" onClick={showModal}>
         Chỉnh sửa
       </Button>
       <Modal
@@ -69,6 +69,9 @@ export default function ModalUpdateDetail() {
           autoComplete="off"
         >
           <Form.Item label="Tài khoản" name="taiKhoan">
+            <Input disabled />
+          </Form.Item>
+          <Form.Item label="Mã người dùng" name="maLoaiNguoiDung">
             <Input disabled />
           </Form.Item>
 
@@ -140,7 +143,6 @@ export default function ModalUpdateDetail() {
           >
             <Input />
           </Form.Item>
-
           <Form.Item
             wrapperCol={{
               offset: 8,
