@@ -20,7 +20,7 @@ function CourseCard({data}) {
             cover={<img className='w-full h-48 object-cover' alt="example" src={data.hinhAnh}/>}
             actions={[<NavLink
                 className='text-center text-white text-lg py-2 px-4 rounded-lg bg-green-600 hover:bg-green-700'
-                to={`/course/${data.maKhoaHoc}`}>
+                to={`/course-detail/${data.maKhoaHoc}`}>
                 <div className=''>
                     Xem chi tiết
                 </div>
