@@ -16,3 +16,14 @@ button:focus {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .btn {
+        @apply rounded-2xl px-3 py-2;
+    }
+
+    .btn-primary {
+        @apply bg-blue-500 text-white hover:bg-blue-700 hover:text-gray-200;
+    }
+
+}

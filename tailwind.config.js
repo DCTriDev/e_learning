@@ -11,9 +11,9 @@ module.exports = {
     screens: {
       'xs': '280px', //iphone 8
       // => @media (min-width: 280) { ... }
-      'sm': '376', //iPhone 8+
+      'sm': '376px', //iPhone 8+
       // => @media (min-width: 376) { ... }
-      'md': '769', //iPad
+      'md': '769px', //iPad
       // => @media (min-width: 769px) { ... }
       'lg': '1201px', //Desktop
       // => @media (min-width: 1201px) { ... }
@@ -70,16 +70,10 @@ module.exports = {
         padding: {
           DEFAULT: "2rem",
           sm: "2rem",
+          md: "2.5rem",
           lg: "2.5rem",
           xl: "3rem",
           "2xl": "6rem",
-        },
-        maxWidth: {
-          DEFAULT: "100% !important",
-          sm: "100% !important",
-          lg: "100% !important",
-          xl: "100% !important",
-          "2xl": "100% !important",
         },
       },
       minHeight: {

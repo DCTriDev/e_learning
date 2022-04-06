@@ -14,7 +14,7 @@ function CourseCard({data}) {
 
     return (
         <Card
-            className='rounded-lg overflow-hidden hover:scale-105 duration-300 transition-all cursor-default'
+            className='rounded-lg overflow-hidden hover:scale-105 duration-300 transition-all cursor-default col-span-1'
             hoverable
             style={{width: '100%', height: 'auto', padding: '0', margin: '0'}}
             cover={<img className='w-full h-48 object-cover' alt="example" src={data.hinhAnh}/>}

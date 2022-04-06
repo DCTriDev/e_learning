@@ -15,10 +15,10 @@ const textGradient = {
 function HomeCarousel() {
     return (
         <Carousel autoplay className='' style={{background: '#232323'}}>
-            <div className='grid space-x-5 sm:grid-cols-1 grid-cols-2 h-96 sm:h-72 md:h-90'>
-                <div className="col-span-1">
+            <div className='grid space-x-5 lg:grid-cols-2 sm:grid-cols-1  h-96 md:h-auto'>
+            <div className="col-span-1">
                     <div className='bg-red-400 relative w-full h-full'>
-                        <img className='w-full h-full object-cover '
+                        <img className='w-full h-full md:h-72 object-cover'
                              src="https://blog.vinahost.vn/wp-content/uploads/2021/11/huong-dan-tao-moi-mot-nodejs-app-tren-shared-hosting.png"
                              alt=""/>
                     </div>
@@ -27,10 +27,10 @@ function HomeCarousel() {
                     <h1 style={textGradient}>NodeJS</h1>
                 </div>
             </div>
-            <div className='grid space-x-5 sm:grid-cols-1 grid-cols-2 h-96 sm:h-72 md:h-90'>
-                <div className="col-span-1">
+            <div className='grid space-x-5 lg:grid-cols-2 sm:grid-cols-1  h-96 md:h-auto'>
+            <div className="col-span-1">
                     <div className='bg-red-400 relative w-full h-full'>
-                        <img className='w-full h-full object-cover '
+                        <img className='w-full h-full md:h-72 object-cover'
                              src="https://blog.vinahost.vn/wp-content/uploads/2021/11/huong-dan-tao-moi-mot-nodejs-app-tren-shared-hosting.png"
                              alt=""/>
                     </div>
@@ -39,10 +39,10 @@ function HomeCarousel() {
                     <h1 style={textGradient}>NodeJS</h1>
                 </div>
             </div>
-            <div className='grid space-x-5 sm:grid-cols-1 grid-cols-2 h-96 sm:h-72 md:h-90'>
-                <div className="col-span-1">
+            <div className='grid space-x-5 lg:grid-cols-2 sm:grid-cols-1  h-96 md:h-auto'>
+            <div className="col-span-1">
                     <div className='bg-red-400 relative w-full h-full'>
-                        <img className='w-full h-full object-cover'
+                        <img className='w-full h-full md:h-72 object-cover'
                              src="https://antrandigital.com/wp-content/uploads/2021/03/chia-se-khoa-hoc-reactjs-day-du-mien-phi-antrandigital.jpg"
                              alt=""/>
                     </div>
