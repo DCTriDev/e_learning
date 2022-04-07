@@ -3,8 +3,12 @@ import SignUpForm from "./SignUpForm/SignUpForm";
 
 export default function SignUp() {
     return (
-        <div className="w-full h-screen flex justify-center items-center bg-red-900 p-5">
-            <div className="w-2/3 p-3 rounded-lg shadow-lg bg-white">
+        <div className=" flex justify-center items-center py-20">
+            <img
+                src="https://pixerio.com/wp-content/uploads/2020/11/E-learning-Company.png"
+                width={500}
+            />
+            <div className="">
                 <SignUpForm />
             </div>
         </div>

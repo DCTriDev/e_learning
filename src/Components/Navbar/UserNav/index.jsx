@@ -29,7 +29,8 @@ const menu = (
         <Menu.Divider />
         <Menu.Item key="2" className="hover:bg-blue-500 rounded-lg">
             <NavLink
-                to="/profile"
+                exact
+                path="/"
                 className="hover:text-white duration-300 transition-all ease-in-out">
                 <span className="flex items-center space-x-2">
                     <ion-icon name="log-out-outline" />
@@ -41,8 +42,7 @@ const menu = (
 );
 
 function UserNav() {
-    let { userInfo } = useSelector((state) => state.userReducer);
-
+    let userInfo = null;
     return userInfo?.accessToken ? (
         <div className="flex items-center justify-center space-x-2">
             <div>{userInfo?.hoTen}</div>

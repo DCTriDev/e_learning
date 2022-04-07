@@ -19,11 +19,11 @@ export default function LogInForm() {
         return httpService
             .login(values)
             .then((res) => {
-                console.log(res.data);
+                console.log(handleLogIn);
                 history.push("/");
             })
             .catch(({ err }) => {
-                alert(err.response.data);
+                message.error(err.response.data);
             });
     };
 
@@ -32,7 +32,7 @@ export default function LogInForm() {
             name="basic"
             layout="vertical"
             labelCol={{
-                span: 8,
+                span: 24,
             }}
             wrapperCol={{
                 span: 24,

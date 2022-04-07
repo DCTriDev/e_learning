@@ -9,6 +9,7 @@ export const userReducer = (state = initialState, action) => {
         case SET_USER_INFO: {
             state.userInfo = action.payload;
             return { ...state };
+            console.log(userReducer);
         }
         default:
             return state;
