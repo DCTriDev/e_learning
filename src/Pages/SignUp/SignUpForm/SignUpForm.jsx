@@ -72,17 +72,7 @@ export default function SignUpForm() {
                     ]}>
                     <Input.Password />
                 </Form.Item>
-                <Form.Item
-                    label="Nhập lại mật khẩu"
-                    name="matKhau"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Vui lòng nhập mật khẩu!",
-                        },
-                    ]}>
-                    <Input.Password />
-                </Form.Item>
+
                 <Form.Item
                     label="Họ Tên"
                     name="hoTen"
