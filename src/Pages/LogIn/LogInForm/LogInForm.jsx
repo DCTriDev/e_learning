@@ -51,6 +51,7 @@ export default function LogInForm() {
                         required: true,
                         message: "Vui lòng nhập tài khoản!",
                     },
+                    { whitespace: true },
                 ]}>
                 <Input />
             </Form.Item>
@@ -62,6 +63,11 @@ export default function LogInForm() {
                     {
                         required: true,
                         message: "Vui lòng nhập mật khẩu!",
+                    },
+                    { whitespace: true },
+                    {
+                        min: 6,
+                        message: "Mật khẩu không thể ít hơn 6 ký tự",
                     },
                 ]}>
                 <Input.Password />

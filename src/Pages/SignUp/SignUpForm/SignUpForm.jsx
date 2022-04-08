@@ -38,10 +38,10 @@ export default function SignUpForm() {
                 name="basic"
                 layout="vertical"
                 labelCol={{
-                    span: 24,
+                    span: 32,
                 }}
                 wrapperCol={{
-                    span: 24,
+                    span: 32,
                 }}
                 initialValues={{
                     remember: true,
@@ -57,7 +57,10 @@ export default function SignUpForm() {
                             required: true,
                             message: "Vui lòng nhập tên tài khoản!",
                         },
-                    ]}>
+                        { whitespace: true },
+                        { min: 3, message: "Tên tài khoản ít nhất 3 ký tự" },
+                    ]}
+                    hasFeedback>
                     <Input />
                 </Form.Item>
 
@@ -69,10 +72,42 @@ export default function SignUpForm() {
                             required: true,
                             message: "Vui lòng nhập mật khẩu!",
                         },
-                    ]}>
+                        { whitespace: true },
+                        {
+                            min: 6,
+                            message:
+                                "Password can't be lower than 6 characters",
+                        },
+                    ]}
+                    hasFeedback>
                     <Input.Password />
                 </Form.Item>
-
+                <Form.Item
+                    label="Nhập lại mật khẩu"
+                    name="xacNhanMatKhau"
+                    dependencies={["matKhau"]}
+                    rules={[
+                        {
+                            required: true,
+                            message: "Vui lòng nhập mật khẩu!",
+                        },
+                        ({ getFieldValue }) => ({
+                            validator(_, value) {
+                                if (
+                                    !value ||
+                                    getFieldValue("matKhau") === value
+                                ) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject(
+                                    "Xác nhận mật khẩu không khớp"
+                                );
+                            },
+                        }),
+                    ]}
+                    hasFeedback>
+                    <Input.Password />
+                </Form.Item>
                 <Form.Item
                     label="Họ Tên"
                     name="hoTen"
@@ -81,7 +116,9 @@ export default function SignUpForm() {
                             required: true,
                             message: "Vui lòng nhập họ tên!",
                         },
-                    ]}>
+                        { whitespace: true },
+                    ]}
+                    hasFeedback>
                     <Input />
                 </Form.Item>
 
@@ -93,7 +130,13 @@ export default function SignUpForm() {
                             required: true,
                             message: "Please input your email!",
                         },
-                    ]}>
+                        {
+                            type: "email",
+                            message: "Vui lòng nhập email đúng định dạng",
+                        },
+                        { whitespace: true },
+                    ]}
+                    hasFeedback>
                     <Input />
                 </Form.Item>
                 <Form.Item
@@ -104,10 +147,37 @@ export default function SignUpForm() {
                             required: true,
                             message: "Vui lòng nhập số điện thoại!",
                         },
-                    ]}>
+                        {
+                            min: 10,
+                            message: "Số điện thoại không thể ít hơn 10 số",
+                        },
+                        {
+                            max: 10,
+                            message: "Số điện thoại không thể nhiều hơn 10 số",
+                        },
+                        { whitespace: true },
+                    ]}
+                    hasFeedback>
                     <Input />
                 </Form.Item>
-
+                <Form.Item
+                    name="dieuKhoan"
+                    valuePropName="checked"
+                    rules={[
+                        {
+                            validator: (_, value) =>
+                                value
+                                    ? Promise.resolve()
+                                    : Promise.reject(
+                                          "Để tiếp tục, bạn cần chấp nhận điều khoản sử dụng"
+                                      ),
+                        },
+                    ]}>
+                    <Checkbox>
+                        Chấp nhận <a href="#"> điều khoản sử dụng</a> của chúng
+                        tôi
+                    </Checkbox>
+                </Form.Item>
                 <Form.Item
                     wrapperCol={{
                         span: 24,
