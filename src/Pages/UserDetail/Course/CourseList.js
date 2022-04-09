@@ -79,10 +79,10 @@ export default function CourseList() {
   ///
   return (
     <div className=" flex flex-col md:space-y-3 xl:space-y-6 xl:h-fit  lg:h-screen lg:space-y-3   relative">
-      <h1 className=" lg:text-xl text-center uppercase">
+      <h1 className=" lg:text-xl text-center uppercase font-bold ">
         các khóa học đã tham gia
       </h1>
-      <div className=" self-end">
+      <div className=" self-end ">
         <Space direction="vertical">
           <Search
             placeholder="tìm kiếm khóa học"
@@ -92,11 +92,11 @@ export default function CourseList() {
         </Space>
       </div>
       <div className="space-y-3 flex flex-col items-center justify-start ">
-        <div className="  md:h-[500px]">{renderContent()}</div>
+        <div className=" min-h-[460px]">{renderContent()}</div>
         <Pagination
-          className="   mx-auto "
+          className=" mx-auto  min-h-[200px]"
           pageSize={pageSize}
-          defaultCurrent={state.current}
+          current={state.current}
           total={dskh.length}
           onChange={handleChange}
         />

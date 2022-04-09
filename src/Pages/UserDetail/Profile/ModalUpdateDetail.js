@@ -43,8 +43,12 @@ export default function ModalUpdateDetail() {
   const { userDetail } = useSelector((state) => state.userSlice);
 
   return (
-    <div className=" w-fit lg:mx-auto  ">
-      <Button className=" " type="primary" onClick={showModal}>
+    <div className=" w-fit lg:mx-auto ">
+      <Button
+        className=" bg-yellow-400 border-yellow-400 h-14 rounded-lg  lg:text-xl hover:shadow-xl  hover:-translate-y-3"
+        type="primary"
+        onClick={showModal}
+      >
         Chỉnh sửa
       </Button>
       <Modal
@@ -55,28 +59,23 @@ export default function ModalUpdateDetail() {
         footer={null}
       >
         <Form
+          className=" lg:space-y-14"
           form={form}
           initialValues={userDetail}
           name="basic"
           labelCol={{
-            span: 8,
+            span: 24,
           }}
           wrapperCol={{
-            span: 16,
+            span: 24,
           }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
-          <Form.Item label="Tài khoản" name="taiKhoan">
-            <Input disabled />
-          </Form.Item>
-          <Form.Item label="Mã người dùng" name="maLoaiNguoiDung">
-            <Input disabled />
-          </Form.Item>
-
           <Form.Item
-            label="Mật khẩu"
+            className=" flex items-center"
+            label={<span className=" text-lg text-white">Mật khẩu</span>}
             name="matKhau"
             rules={[
               {
@@ -90,10 +89,11 @@ export default function ModalUpdateDetail() {
             ]}
             hasFeedback
           >
-            <Input />
+            <Input className=" lg:h-14 rounded-xl hover:border-yellow-500" />
           </Form.Item>
           <Form.Item
-            label="Email"
+            className=" flex items-center"
+            label={<span className=" text-lg text-white">Email</span>}
             name="email"
             rules={[
               {
@@ -109,10 +109,11 @@ export default function ModalUpdateDetail() {
             ]}
             hasFeedback
           >
-            <Input />
+            <Input className=" lg:h-14 rounded-xl hover:border-yellow-500" />
           </Form.Item>
           <Form.Item
-            label="Họ tên"
+            className=" flex items-center"
+            label={<span className=" text-lg text-white">Họ tên</span>}
             name="hoTen"
             rules={[
               {
@@ -122,10 +123,11 @@ export default function ModalUpdateDetail() {
             ]}
             hasFeedback
           >
-            <Input />
+            <Input className=" lg:h-14 rounded-xl hover:border-yellow-500" />
           </Form.Item>
           <Form.Item
-            label="Số điện thoại"
+            className=" flex items-center"
+            label={<span className=" text-lg text-white">Số điện thoại</span>}
             name="soDT"
             rules={[
               {
@@ -141,15 +143,20 @@ export default function ModalUpdateDetail() {
             ]}
             hasFeedback
           >
-            <Input />
+            <Input className=" lg:h-14 rounded-xl hover:border-yellow-500" />
           </Form.Item>
           <Form.Item
+            className=" flex items-center"
             wrapperCol={{
-              offset: 8,
-              span: 16,
+              offset: 10,
+              span: 24,
             }}
           >
-            <Button type="primary" htmlType="submit">
+            <Button
+              type="primary"
+              className=" bg-white text-yellow-400 h-10 w-20  border-yellow-600 hover:shadow-xl  hover:-translate-y-3 mx-auto"
+              htmlType="submit"
+            >
               Lưu
             </Button>
           </Form.Item>
