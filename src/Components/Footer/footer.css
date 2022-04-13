@@ -1,0 +1,13 @@
+.footer__wrapper .button_advertising,
+.button_consult_register{
+    padding: 5px 15px;
+    border-radius: 3px;
+    background: linear-gradient(90deg,#227df9,#df3ef8);
+    color: #fff;
+    font-weight: 700;
+}
+
+.email-input input {
+    width: fit-content !important;
+    padding-right: 20px !important
+}
