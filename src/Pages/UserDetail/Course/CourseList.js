@@ -1,7 +1,11 @@
-import { Input, Pagination, Space } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import { Button, Form, Input, Pagination, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCourseDetail } from "../../../Redux/Slice/listCourseSlice";
+import {
+  fetchCourseDetail,
+  searchUser,
+} from "../../../Redux/Slice/listCourseSlice";
 import CourseItem from "./CourseItem";
 export default function CourseList() {
   let [state, setState] = useState({
@@ -13,51 +17,42 @@ export default function CourseList() {
   });
   const pageSize = 2;
   const { userDetail } = useSelector((state) => state.userSlice);
-  const { Search } = Input;
-  let listSearch = [];
-  const onSearch = (value) => {
-    searchCourse(value);
-    setdskh(listSearch);
-  };
-  const dispatch = useDispatch();
-  let searchCourse = (text) => {
-    listSearch = [];
-    listCourseDetail.map((khoaHoc) => {
-      let result = khoaHoc.tenKhoaHoc.toLowerCase().search(text.toLowerCase());
-      if (result !== -1) {
-        listSearch.push(khoaHoc);
-      }
-    });
-    return listSearch;
-  };
-  let { listCourseDetail } = useSelector((state) => state.listCourseSlice);
-  let [dskh, setdskh] = useState(listCourseDetail);
-  useEffect(() => {
-    setdskh(listCourseDetail);
-  }, [listCourseDetail]);
-  useEffect(() => {
+  // const { Search } = Input;
+  const onFinish = (values) => {
+    dispatch(searchUser(values.valueSearch));
     setState({
-      data: dskh,
-      totalPage: dskh.length / pageSize,
+      data: listCourseDetail,
+      totalPage: listCourseDetail.length / pageSize,
       minIndex: 0,
       current: 1,
       maxIndex: pageSize,
     });
-  }, [dskh]);
+  };
+  const dispatch = useDispatch();
+
+  let { listCourseDetail } = useSelector((state) => state.listCourseSlice);
+
   useEffect(() => {
-    userDetail.chiTietKhoaHocGhiDanh?.map((item, index) => {
+    userDetail.chiTietKhoaHocGhiDanh?.forEach((item, index) => {
       dispatch(fetchCourseDetail(item.maKhoaHoc));
+      setState({
+        data: listCourseDetail,
+        totalPage: listCourseDetail.length / pageSize,
+        minIndex: 0,
+        current: 1,
+        maxIndex: pageSize,
+      });
     });
   }, []);
   let renderContent = () => {
-    if (dskh.length === 0) {
+    if (listCourseDetail.length === 0) {
       return (
         <p className=" italic text-center text-xl  text-red-500">
           (Không tìm thấy khóa học nào)
         </p>
       );
     } else {
-      return dskh.map((item, index) => {
+      return listCourseDetail.map((item, index) => {
         return (
           index >= state.minIndex &&
           index < state.maxIndex && (
@@ -82,14 +77,31 @@ export default function CourseList() {
       <h1 className=" lg:text-xl text-center uppercase font-bold ">
         các khóa học đã tham gia
       </h1>
-      <div className=" self-end ">
-        <Space direction="vertical">
-          <Search
-            placeholder="tìm kiếm khóa học"
-            onSearch={onSearch}
-            enterButton
-          />
-        </Space>
+      <div className=" self-end flex">
+        <Form
+          id="form-search-course"
+          onFinish={onFinish}
+          autoComplete="off"
+          className=" lg:max-w-max-w-1/3 flex"
+        >
+          <Form.Item name="valueSearch">
+            <Input placeholder="Nhập tên khoá học" />
+          </Form.Item>
+
+          <Form.Item>
+            <Button htmlType="submit">
+              <SearchOutlined />
+            </Button>
+          </Form.Item>
+        </Form>
+        <Button
+          onClick={() => {
+            dispatch(searchUser(""));
+            document.getElementById("form-search-course").reset();
+          }}
+        >
+          Reset
+        </Button>
       </div>
       <div className="space-y-3 flex flex-col items-center justify-start ">
         <div className=" min-h-[460px]">{renderContent()}</div>
@@ -97,7 +109,7 @@ export default function CourseList() {
           className=" mx-auto  min-h-[200px]"
           pageSize={pageSize}
           current={state.current}
-          total={dskh.length}
+          total={listCourseDetail.length}
           onChange={handleChange}
         />
       </div>
