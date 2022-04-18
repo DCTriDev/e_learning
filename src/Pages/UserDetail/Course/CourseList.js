@@ -77,12 +77,12 @@ export default function CourseList() {
       <h1 className=" lg:text-xl text-center uppercase font-bold ">
         các khóa học đã tham gia
       </h1>
-      <div className=" self-end flex">
+      <div className=" self-end flex ">
         <Form
           id="form-search-course"
           onFinish={onFinish}
           autoComplete="off"
-          className=" lg:max-w-max-w-1/3 flex"
+          className=" flex"
         >
           <Form.Item name="valueSearch">
             <Input placeholder="Nhập tên khoá học" />
