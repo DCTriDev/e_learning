@@ -76,7 +76,7 @@ export default function TableUser() {
       return (
         <tr>
           <td
-            colspan="7"
+            colSpan="7"
             className=" italic text-red-500 text-xl  text-center "
             // style={{ colspan: 3 }}
           >
@@ -93,11 +93,15 @@ export default function TableUser() {
               key={index}
               className={`${index % 2 === 0 ? "bg-slate-300" : ""} h-12 `}
             >
-              <td className="text-center">{index + 1}</td>
+              <td className="text-center hidden  leading-[54px] lg:block">
+                {index + 1}
+              </td>
               <td className="text-center">{item.taiKhoan}</td>
               <td className="text-center">{item.email}</td>
               <td className="text-center">{item.hoTen}</td>
-              <td className="text-center">{item.soDt}</td>
+              <td className="text-center hidden  leading-[54px] lg:block">
+                {item.soDt}
+              </td>
               <td className="text-center">
                 {item.maLoaiNguoiDung === "GV" ? (
                   <span className=" bg-red-300 p-2 rounded-lg">
@@ -109,9 +113,10 @@ export default function TableUser() {
                   </span>
                 )}
               </td>
-              <td className="text-center space-x-3">
+              <td className="text-center space-y-3 lg:space-y-0 lg:space-x-2  flex flex-col items-center lg:flex-row lg:justify-center lg:items-center">
                 <RegisterPopup data={item} />
                 <NavLink
+                  className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-yellow-500 w-16 lg:w-auto"
                   to={{
                     pathname: "/UserManagement/chinhSuaThongTinNguoiDung",
                     state: {
@@ -119,15 +124,13 @@ export default function TableUser() {
                     },
                   }}
                 >
-                  <button className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-yellow-500">
-                    Sửa
-                  </button>
+                  Sửa
                 </NavLink>
                 <button
                   onClick={() => {
                     handleDeleteUser(item.taiKhoan);
                   }}
-                  className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-red-500"
+                  className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-red-500 w-16 lg:w-auto m-0"
                 >
                   Xóa
                 </button>
@@ -177,13 +180,17 @@ export default function TableUser() {
       <table className=" w-full">
         <thead>
           <tr className=" w-full  bg-yellow-400 h-14 shadow-lg">
-            <th className="text-center w-[5%]">STT</th>
+            <th className="text-center hidden  leading-[54px] lg:block  lg:w-[5%]">
+              STT
+            </th>
             <th className="text-center">Tài Khoản</th>
             <th className="text-center">Email</th>
-            <th className="text-center">Ho tên</th>
-            <th className="text-center">Số Điện thoại </th>
+            <th className="text-center">Họ tên</th>
+            <th className="text-center hidden  leading-[54px] lg:block">
+              Số Điện thoại{" "}
+            </th>
             <th className="text-center"> Loại người dùng</th>
-            <th className="text-center"> Thao tác</th>
+            <th className="text-center lg:w-1/6"> Thao tác</th>
           </tr>
         </thead>
         <tbody>{renderTable()}</tbody>

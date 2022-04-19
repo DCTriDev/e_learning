@@ -19,8 +19,7 @@ export const ModalUser = (props) => {
   const dataUser = type
     ? ""
     : { ...location.state.data, soDT: location.state.data.soDt };
-  const styleInput =
-    "border-x-0 border-t-0 hover:border-x-0 hover:border-t-0 border-b-4 border-white hover:border-b-black focus:border-black focus:border-x-0 focus:border-t-0 focus:shadow-none bg-yellow-400";
+  const styleInput = "";
   const onFinish = (values) => {
     type
       ? AdminSrv.addUser({ ...values, maNhom: "GP01" })
@@ -40,10 +39,8 @@ export const ModalUser = (props) => {
             message.error(err.err.response.data);
           });
   };
-
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
-    // error(errorInfo);
   };
   return (
     <div className=" p-5 h-screen bg-yellow-400">
@@ -63,19 +60,18 @@ export const ModalUser = (props) => {
         onFinishFailed={onFinishFailed}
       >
         <Form.Item
-          hasFeedback
           label="Tài khoản"
           name="taiKhoan"
           rules={[
             { required: true, message: "Không được bỏ trống" },
             type ? { min: 10, message: "ít nhất 8 kí tự " } : "",
           ]}
+          hasFeedback
         >
           <Input disabled={type ? false : true} className={`${styleInput}`} />
         </Form.Item>
         <Form.Item
           label="Email"
-          hasFeedback
           name="email"
           rules={[
             { required: true, message: "Không được bỏ trống" },
@@ -86,20 +82,20 @@ export const ModalUser = (props) => {
                   : Promise.reject(new Error(" email không hợp lệ")),
             },
           ]}
+          hasFeedback
         >
           <Input className={`${styleInput}`} />
         </Form.Item>
         <Form.Item
           label="Họ tên"
-          hasFeedback
           name="hoTen"
           rules={[{ required: true, message: "Không được bỏ trống" }]}
+          hasFeedback
         >
           <Input className={`${styleInput}`} />
         </Form.Item>
         <Form.Item
           className=" "
-          hasFeedback
           label="Mật khẩu "
           name="matKhau"
           rules={[
@@ -122,12 +118,12 @@ export const ModalUser = (props) => {
                     ),
             },
           ]}
+          hasFeedback
         >
           <Input className={`${styleInput}`} />
         </Form.Item>
         <Form.Item
           className=" "
-          hasFeedback
           label="Số điện thoại"
           name="soDT"
           rules={[
@@ -139,14 +135,15 @@ export const ModalUser = (props) => {
                   : Promise.reject(new Error("Số điện thoại không hợp lệ")),
             },
           ]}
+          hasFeedback
         >
           <Input className={`${styleInput}`} />
         </Form.Item>
         <Form.Item
           label="Loại người dùng"
-          hasFeedback
           name="maLoaiNguoiDung"
           rules={[{ required: true, message: "Không được bỏ trống" }]}
+          hasFeedback
         >
           <Select
             className=" border-none"

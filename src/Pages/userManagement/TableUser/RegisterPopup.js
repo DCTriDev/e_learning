@@ -146,19 +146,19 @@ export default function RegisterPopup(props) {
   };
   return (
     <>
-      <Button
-        className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg  bg-green-400"
+      <button
+        className="cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg  bg-green-400 w-16 lg:w-auto  "
         onClick={showModal}
       >
         Ghi danh
-      </Button>
+      </button>
       <Modal
         visible={isModalVisible}
         onCancel={handleCancel}
         className=" w-screen"
         footer={false}
       >
-        <div className=" h-[90vh]">
+        <div className=" h-screen lg:h-[90vh] ">
           <div>
             <p className=" text-2xl">Ghi danh khóa học</p>
             {dskhChuaGhiDanh.length === 0 ? (
