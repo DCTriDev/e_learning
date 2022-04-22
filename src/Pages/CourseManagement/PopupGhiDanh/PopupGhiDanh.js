@@ -1,0 +1,381 @@
+import { SearchOutlined, UndoOutlined } from "@ant-design/icons";
+import { Button, Form, Input, message, Modal, Pagination, Select } from "antd";
+import React, { useState } from "react";
+import CourseManagementSrv from "../../../Services/courseMangement.service";
+const { Option } = Select;
+export default function PopupGhiDanh(props) {
+  let [stateTable2, setStateTable2] = useState({
+    data: [],
+    totalPage: 0,
+    current: 1,
+    minIndex: 0,
+    maxIndex: 0,
+  });
+  let [stateTable1, setStateTable1] = useState({
+    data: [],
+    totalPage: 0,
+    current: 1,
+    minIndex: 0,
+    maxIndex: 0,
+  });
+  let handleChange1 = (page) => {
+    setStateTable1({
+      current: page,
+      minIndex: (page - 1) * 5,
+      maxIndex: page * 5,
+    });
+  };
+  let handleChange2 = (page) => {
+    setStateTable2({
+      current: page,
+      minIndex: (page - 1) * 5,
+      maxIndex: page * 5,
+    });
+  };
+  const onFinish = (values) => {
+    console.log("Success:", values);
+    CourseManagementSrv.registerUser(props.data.maKhoaHoc, values.taiKhoan)
+      .then((res) => {
+        message.success(res.data);
+        let newUserRegisted = [...UnregisteredUssers].find(
+          (item) => item.taiKhoan === values.taiKhoan
+        );
+        let newUnregisteredUssers = [...UnregisteredUssers].filter(
+          (item) => item.taiKhoan !== values.taiKhoan
+        );
+        setUnregisteredUssers(newUnregisteredUssers);
+        setUsersRegisted([...UsersRegisted, newUserRegisted]);
+        document.getElementById("form-register-user").reset();
+      })
+      .catch((err) => message.error(err.err.response.data));
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  let [UsersWaitingApproval, setUsersWaitingApproval] = useState([]);
+  let [UsersRegisted, setUsersRegisted] = useState([]);
+  let [UnregisteredUssers, setUnregisteredUssers] = useState([]);
+  const showModal = () => {
+    CourseManagementSrv.getUsersWaitingApproval(props.data.maKhoaHoc)
+      .then((res) => {
+        setUsersWaitingApproval(res.data);
+      })
+      .catch((err) => console.log(err));
+    CourseManagementSrv.getUsersRegisted(props.data.maKhoaHoc)
+      .then((res) => {
+        setUsersRegisted(res.data);
+      })
+      .catch((err) => console.log(err));
+    CourseManagementSrv.getUnregisteredUssers(props.data.maKhoaHoc)
+      .then((res) => {
+        setUnregisteredUssers(res.data);
+      })
+      .catch((err) => console.log(err));
+    setStateTable1({
+      data: UsersWaitingApproval,
+      totalPage: UsersWaitingApproval.length / 5,
+      minIndex: 0,
+      current: 1,
+      maxIndex: 5,
+    });
+    setStateTable2({
+      data: UsersRegisted,
+      totalPage: UsersRegisted.length / 5,
+      minIndex: 0,
+      current: 1,
+      maxIndex: 5,
+    });
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+  const handleCancleUserWaitingApproval = (maKhoaHoc, taiKhoan) => {
+    CourseManagementSrv.cancleUsersWaitingApproval(maKhoaHoc, taiKhoan)
+      .then((res) => {
+        console.log(res);
+        message.success(res.data);
+
+        let newUnregisteredUsser = [...UsersWaitingApproval].find(
+          (item) => item.taiKhoan === taiKhoan
+        );
+        setUnregisteredUssers([...UnregisteredUssers, newUnregisteredUsser]);
+        setUsersWaitingApproval(
+          [...UsersWaitingApproval].filter((user) => user.taiKhoan !== taiKhoan)
+        );
+      })
+      .catch((err) => {
+        message.error(err.err.response.data);
+      });
+  };
+  const handleCancleUserRegisted = (maKhoaHoc, taiKhoan) => {
+    CourseManagementSrv.cancleUsersWaitingApproval(maKhoaHoc, taiKhoan)
+      .then((res) => {
+        let newUnregisteredUssers = [...UsersRegisted].find(
+          (item) => item.taiKhoan === taiKhoan
+        );
+        setUnregisteredUssers([...UnregisteredUssers, newUnregisteredUssers]);
+        setUsersRegisted(
+          [...UsersRegisted].filter((user) => user.taiKhoan !== taiKhoan)
+        );
+        message.success(res.data);
+      })
+      .catch((err) => {
+        message.error(err.err.response.data);
+      });
+  };
+  const renderTableUsersWaitingApproval = () => {
+    return UsersWaitingApproval?.map((item, i) => {
+      return (
+        i >= stateTable1.minIndex &&
+        i < stateTable1.maxIndex && (
+          <tr key={i} className="text-center">
+            <td className=" border-r-2 border-solid border-black w-1/4">
+              {++i}
+            </td>
+            <td className=" border-r-2 border-solid border-black w-1/4">
+              {item.taiKhoan}
+            </td>
+            <td className=" border-r-2 border-solid border-black w-1/4">
+              {item.hoTen}
+            </td>
+            <td className=" border-r-2 border-solid border-black w-1/4">
+              <button
+                onClick={() => {
+                  CourseManagementSrv.registerUser(
+                    props.data.maKhoaHoc,
+                    item.taiKhoan
+                  )
+                    .then((res) => {
+                      message.success(res.data);
+                      let newUserRegisted = [...UsersWaitingApproval].find(
+                        (user) => user.taiKhoan === item.taiKhoan
+                      );
+                      let newUsersWaitingApproval = [
+                        ...UsersWaitingApproval,
+                      ].filter((user) => user.taiKhoan !== item.taiKhoan);
+                      setUsersWaitingApproval(newUsersWaitingApproval);
+                      setUsersRegisted([...UsersRegisted, newUserRegisted]);
+                    })
+                    .catch((err) => message.error(err.err.response.data));
+                }}
+              >
+                Xác nhận
+              </button>
+              <button
+                onClick={() => {
+                  handleCancleUserWaitingApproval(
+                    props.data.maKhoaHoc,
+                    item.taiKhoan
+                  );
+                  setUsersWaitingApproval(
+                    [...UsersWaitingApproval].filter(
+                      (user) => user.taiKhoan !== item.taiKhoan
+                    )
+                  );
+                  setUnregisteredUssers([...UnregisteredUssers, item]);
+                }}
+              >
+                Hủy
+              </button>
+            </td>
+          </tr>
+        )
+      );
+    });
+  };
+  const renderTableUsersRegisted = () => {
+    return UsersRegisted?.map((item, i) => {
+      return (
+        i >= stateTable2.minIndex &&
+        i < stateTable2.maxIndex && (
+          <tr key={i} className="text-center">
+            <td className=" border-r-2 border-solid border-black w-1/4">
+              {++i}
+            </td>
+            <td className=" border-r-2 border-solid border-black w-1/4">
+              {item.taiKhoan}
+            </td>
+            <td className=" border-r-2 border-solid border-black w-1/4">
+              {item.hoTen}
+            </td>
+            <td className=" border-r-2 border-solid border-black w-1/4">
+              <button
+                onClick={() => {
+                  handleCancleUserRegisted(props.data.maKhoaHoc, item.taiKhoan);
+                }}
+              >
+                Hủy
+              </button>
+            </td>
+          </tr>
+        )
+      );
+    });
+  };
+
+  return (
+    <div>
+      <button
+        onClick={showModal}
+        className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-green-500 w-16 lg:w-auto"
+      >
+        Ghi danh
+      </button>
+      <Modal
+        className=" w-screen"
+        title="Basic Modal"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={false}
+      >
+        <div className=" h-screen">
+          <Form
+            id="form-register-user"
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            className=" flex"
+          >
+            <Form.Item name="taiKhoan">
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                placeholder="Nhập tên người dùng"
+                optionFilterProp="children"
+                filterOption={(input, option) =>
+                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+                }
+                filterSort={(optionA, optionB) =>
+                  optionA.children
+                    .toLowerCase()
+                    .localeCompare(optionB.children.toLowerCase())
+                }
+              >
+                {UnregisteredUssers.map((item, i) => {
+                  console.log(item);
+                  return (
+                    <Option key={i} value={item.taiKhoan}>
+                      {item.hoTen}
+                    </Option>
+                  );
+                })}
+              </Select>
+            </Form.Item>
+            <button type="submit" className="h-[32px]">
+              Ghi Danh
+            </button>
+          </Form>
+          <div className=" h-[270px] relative">
+            <p>Học viên chờ xác nhận</p>
+            {UsersWaitingApproval.length === 0 ? (
+              <p className=" italic text-red-500">Không có học viên</p>
+            ) : (
+              <div>
+                <table className="w-full">
+                  <thead>
+                    <tr>
+                      <th className=" border-r-2 border-solid border-black w-1/4">
+                        STT
+                      </th>
+                      <th className=" border-r-2 border-solid border-black w-1/4">
+                        Tài khoản
+                      </th>
+                      <th className=" border-r-2 border-solid border-black w-1/4">
+                        Họ tên
+                      </th>
+                      <th className=" border-r-2 border-solid border-black w-1/4">
+                        Chờ xác nhận
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>{renderTableUsersWaitingApproval()}</tbody>
+                </table>
+                <Pagination
+                  className=" w-fit absolute top-0 left-1/2 -translate-x-1/2 mt-[260px] "
+                  showSizeChanger={false}
+                  pageSize={5}
+                  defaultCurrent={stateTable1.current}
+                  current={stateTable1.current}
+                  total={UsersWaitingApproval.length}
+                  onChange={handleChange1}
+                />
+              </div>
+            )}
+          </div>
+          <div>
+            <p>Học viên đã tham gia khóa học</p>
+            {UsersRegisted.length === 0 ? (
+              <p className=" italic text-red-500">không có học viên </p>
+            ) : (
+              <div className=" relative">
+                <div className="flex">
+                  <Form
+                    id="form-search-course"
+                    onFinish={onFinish}
+                    autoComplete="off"
+                    className=" lg:max-w-max-w-1/3 flex"
+                  >
+                    <Form.Item name="valueSearchCourse">
+                      <Input placeholder="Nhập tên/tài khoản" />
+                    </Form.Item>
+
+                    <Form.Item>
+                      <Button htmlType="submit">
+                        <SearchOutlined />
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                  <Button
+                    onClick={() => {
+                      // dispatch(searchCourse(""));
+                      // document.getElementById("form-search-course").reset();
+                    }}
+                  >
+                    <UndoOutlined />
+                  </Button>
+                </div>
+                <table className="w-full ">
+                  <thead>
+                    <tr>
+                      <th className=" border-r-2 border-solid border-black w-1/4">
+                        STT
+                      </th>
+                      <th className=" border-r-2 border-solid border-black w-1/4">
+                        Tài khoản
+                      </th>
+                      <th className=" border-r-2 border-solid border-black w-1/4">
+                        Họ tên
+                      </th>
+                      <th className=" border-r-2 border-solid border-black w-1/4">
+                        Thao tác
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>{renderTableUsersRegisted()}</tbody>
+                  <Pagination
+                    className=" w-fit absolute top-0 left-1/2 -translate-x-1/2 mt-[260px] "
+                    showSizeChanger={false}
+                    pageSize={5}
+                    defaultCurrent={stateTable2.current}
+                    current={stateTable2.current}
+                    total={UsersRegisted.length}
+                    onChange={handleChange2}
+                  />
+                </table>
+              </div>
+            )}
+          </div>
+        </div>
+      </Modal>
+    </div>
+  );
+}

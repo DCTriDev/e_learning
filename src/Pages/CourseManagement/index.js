@@ -7,6 +7,7 @@ import {
   fetchDeleteCourse,
   searchCourse,
 } from "../../Redux/Slice/courseSlice";
+import PopupGhiDanh from "./PopupGhiDanh/PopupGhiDanh";
 // import CourseManagementSrv from "../../Services/courseMangement.service";
 
 export default function CourseManagement() {
@@ -21,7 +22,6 @@ export default function CourseManagement() {
 
   useEffect(() => {
     dispatch(fetchCourseList());
-
     setStateTable({
       data: courseList,
       totalPage: courseList.length / 10,
@@ -42,13 +42,12 @@ export default function CourseManagement() {
     if (courseList.length === 0) {
       return (
         <tr>
-          <td colSpan="7" className=" italic text-red-500 ">
+          <td colSpan="7" className=" italic text-red-500  text-center">
             Không tìm thấy khóa học nào
           </td>
         </tr>
       );
     } else {
-      console.log("courseList", courseList);
       return courseList?.map((item, i) => {
         return (
           i >= stateTable.minIndex &&
@@ -57,21 +56,23 @@ export default function CourseManagement() {
               key={i}
               className={`${
                 i % 2 === 0 ? "bg-gray-200" : "bg-white"
-              } text-center`}
+              } text-center  h-24`}
             >
-              <td>{++i}</td>
-              <td>{item.maKhoaHoc}</td>
-              <td>{item.tenKhoaHoc}</td>
-              <td>
+              <td className="text-center">{++i}</td>
+              <td className="text-center">{item.maKhoaHoc}</td>
+              <td className="text-center">{item.tenKhoaHoc}</td>
+              <td className="text-center">
                 <img src="https://picsum.photos/100/100" alt="" />
               </td>
-              <td>{item.luotXem}</td>
-              <td>{item.nguoiTao.hoTen}</td>
-              <td className=" text-white">
-                <button className="bg-green-400 border-none ">Ghi danh</button>
-                <button className="bg-yellow-400 border-none ">Sửa</button>
+              <td className="text-center">{item.luotXem}</td>
+              <td className="text-center">{item.nguoiTao.hoTen}</td>
+              <td className="text-center space-y-3 lg:space-y-0 lg:space-x-2  flex flex-col items-center lg:flex-row lg:justify-center lg:items-center h-24">
+                <button className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-yellow-500 w-16 lg:w-auto">
+                  Sửa
+                </button>
+                <PopupGhiDanh data={item} />
                 <button
-                  className="bg-red-400 border-none "
+                  className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-red-500 w-16 lg:w-auto"
                   onClick={() => {
                     dispatch(fetchDeleteCourse(item.maKhoaHoc));
                   }}
@@ -86,7 +87,7 @@ export default function CourseManagement() {
     }
   };
   const onFinish = (values) => {
-    console.log("Success:", values.valueSearchCourse);
+    // console.log("Success:", values.valueSearchCourse);
     dispatch(searchCourse(values.valueSearchCourse));
     setStateTable({
       data: courseList,
@@ -128,12 +129,12 @@ export default function CourseManagement() {
         <table className="w-full">
           <thead className=" bg-yellow-400 h-14 shadow-lg">
             <tr className="text-center">
-              <th>STT</th>
-              <th>Mã khóa học</th>
-              <th>Tên khóa học</th>
+              <th className=" w-[5%]">STT</th>
+              <th className=" w-[20%]">Mã khóa học</th>
+              <th className=" w-[20%]">Tên khóa học</th>
               <th>Hình ảnh </th>
-              <th>Lượt xem</th>
-              <th>Người tạo</th>
+              <th className=" w-[5%]">Lượt xem</th>
+              <th className=" w-[20%]">Người tạo</th>
               <th>Thao tác</th>
             </tr>
           </thead>

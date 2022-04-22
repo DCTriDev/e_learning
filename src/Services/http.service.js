@@ -32,10 +32,6 @@ class HttpRequestService {
     const uri = `/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${values}`;
     return AxiosServ.getMethod(uri, data, setLoading);
   };
-  deleteCourse(MaKhoaHoc, setLoading = true) {
-    const uri = `/api/QuanLyKhoaHoc/XoaKhoaHoc?maKhoaHoc=${MaKhoaHoc} `;
-    return AxiosServ.deleteMethod(uri, setLoading);
-  }
 }
 
 const httpService = new HttpRequestService();

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { message } from "antd";
+import CourseManagementSrv from "../../Services/courseMangement.service";
 import httpService from "../../Services/http.service";
 
 const initialState = {
@@ -37,11 +38,9 @@ export const fetchDeleteCourse = createAsyncThunk(
   "course/fetchDeleteCourse",
   async (maKhoaHoc, { rejectWithValue }) => {
     try {
-      const response = await httpService.deleteCourse(maKhoaHoc);
-      console.log(response);
+      const response = await CourseManagementSrv.deleteCourse(maKhoaHoc);
       return { res: response.data, maKhoaHoc };
     } catch (err) {
-      console.log(err);
       return rejectWithValue(err.err.response.data);
     }
   }
@@ -84,7 +83,6 @@ const courseSlice = createSlice({
       state.courseListByCatalog = action.payload;
     },
     [fetchDeleteCourse.fulfilled]: (state, action) => {
-      console.log(action.payload);
       message.success(action.payload.res);
       state.courseList = [...state.courseList].filter((item) => {
         return item.maKhoaHoc !== action.payload.maKhoaHoc;
@@ -94,11 +92,6 @@ const courseSlice = createSlice({
       });
     },
     [fetchDeleteCourse.rejected]: (state, action) => {
-      //   console.log(action);
-      console.log("action", action);
-      console.log("state", state);
-      //   console.log("action.error.message", action.error.message);
-      //   state.courseList = action.payload;
       message.error(action.payload);
     },
   },
