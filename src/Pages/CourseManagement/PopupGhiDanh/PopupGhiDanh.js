@@ -4,6 +4,26 @@ import React, { useState } from "react";
 import CourseManagementSrv from "../../../Services/courseMangement.service";
 const { Option } = Select;
 export default function PopupGhiDanh(props) {
+  const searchUserRegisted = (text) => {
+    let newUsersRegisted = [...UsersRegistedClone].filter((item) => {
+      return (
+        item.taiKhoan.toLowerCase().trim().search(text.toLowerCase().trim()) !==
+          -1 ||
+        item.hoTen.toLowerCase().trim().search(text.toLowerCase().trim()) !== -1
+      );
+    });
+    setUsersRegisted(newUsersRegisted);
+    setStateTable2({
+      data: UsersRegisted,
+      totalPage: UsersRegisted.length / 5,
+      minIndex: 0,
+      current: 1,
+      maxIndex: 5,
+    });
+  };
+  const onFinish2 = (values) => {
+    searchUserRegisted(values.valueSearchCourse);
+  };
   let [stateTable2, setStateTable2] = useState({
     data: [],
     totalPage: 0,
@@ -56,7 +76,9 @@ export default function PopupGhiDanh(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   let [UsersWaitingApproval, setUsersWaitingApproval] = useState([]);
   let [UsersRegisted, setUsersRegisted] = useState([]);
+  let [UsersRegistedClone, setUsersRegistedClone] = useState([]);
   let [UnregisteredUssers, setUnregisteredUssers] = useState([]);
+  // let UsersRegistedClone = [];
   const showModal = () => {
     CourseManagementSrv.getUsersWaitingApproval(props.data.maKhoaHoc)
       .then((res) => {
@@ -66,11 +88,13 @@ export default function PopupGhiDanh(props) {
     CourseManagementSrv.getUsersRegisted(props.data.maKhoaHoc)
       .then((res) => {
         setUsersRegisted(res.data);
+        setUsersRegistedClone(res.data);
       })
       .catch((err) => console.log(err));
     CourseManagementSrv.getUnregisteredUssers(props.data.maKhoaHoc)
       .then((res) => {
         setUnregisteredUssers(res.data);
+        console.log("UsersRegistedClone", UsersRegistedClone);
       })
       .catch((err) => console.log(err));
     setStateTable1({
@@ -261,7 +285,6 @@ export default function PopupGhiDanh(props) {
                 }
               >
                 {UnregisteredUssers.map((item, i) => {
-                  console.log(item);
                   return (
                     <Option key={i} value={item.taiKhoan}>
                       {item.hoTen}
@@ -313,36 +336,35 @@ export default function PopupGhiDanh(props) {
           </div>
           <div>
             <p>Học viên đã tham gia khóa học</p>
+            <div className="flex">
+              <Form
+                id="form-search-course"
+                onFinish={onFinish2}
+                autoComplete="off"
+                className=" lg:max-w-max-w-1/3 flex"
+              >
+                <Form.Item name="valueSearchCourse">
+                  <Input placeholder="Nhập tên/tài khoản" />
+                </Form.Item>
+
+                <Form.Item>
+                  <Button htmlType="submit">
+                    <SearchOutlined />
+                  </Button>
+                </Form.Item>
+              </Form>
+              <Button
+                onClick={() => {
+                  searchUserRegisted("");
+                }}
+              >
+                <UndoOutlined />
+              </Button>
+            </div>
             {UsersRegisted.length === 0 ? (
               <p className=" italic text-red-500">không có học viên </p>
             ) : (
               <div className=" relative">
-                <div className="flex">
-                  <Form
-                    id="form-search-course"
-                    onFinish={onFinish}
-                    autoComplete="off"
-                    className=" lg:max-w-max-w-1/3 flex"
-                  >
-                    <Form.Item name="valueSearchCourse">
-                      <Input placeholder="Nhập tên/tài khoản" />
-                    </Form.Item>
-
-                    <Form.Item>
-                      <Button htmlType="submit">
-                        <SearchOutlined />
-                      </Button>
-                    </Form.Item>
-                  </Form>
-                  <Button
-                    onClick={() => {
-                      // dispatch(searchCourse(""));
-                      // document.getElementById("form-search-course").reset();
-                    }}
-                  >
-                    <UndoOutlined />
-                  </Button>
-                </div>
                 <table className="w-full ">
                   <thead>
                     <tr>
@@ -361,16 +383,16 @@ export default function PopupGhiDanh(props) {
                     </tr>
                   </thead>
                   <tbody>{renderTableUsersRegisted()}</tbody>
-                  <Pagination
-                    className=" w-fit absolute top-0 left-1/2 -translate-x-1/2 mt-[260px] "
-                    showSizeChanger={false}
-                    pageSize={5}
-                    defaultCurrent={stateTable2.current}
-                    current={stateTable2.current}
-                    total={UsersRegisted.length}
-                    onChange={handleChange2}
-                  />
                 </table>
+                <Pagination
+                  className=" w-fit absolute top-0 left-1/2 -translate-x-1/2 mt-[260px] "
+                  showSizeChanger={false}
+                  pageSize={5}
+                  defaultCurrent={stateTable2.current}
+                  current={stateTable2.current}
+                  total={UsersRegisted.length}
+                  onChange={handleChange2}
+                />
               </div>
             )}
           </div>
