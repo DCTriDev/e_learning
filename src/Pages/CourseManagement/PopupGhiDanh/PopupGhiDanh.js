@@ -1,29 +1,15 @@
 import { SearchOutlined, UndoOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message, Modal, Pagination, Select } from "antd";
 import React, { useState } from "react";
+
 import CourseManagementSrv from "../../../Services/courseMangement.service";
 const { Option } = Select;
 export default function PopupGhiDanh(props) {
-  const searchUserRegisted = (text) => {
-    let newUsersRegisted = [...UsersRegistedClone].filter((item) => {
-      return (
-        item.taiKhoan.toLowerCase().trim().search(text.toLowerCase().trim()) !==
-          -1 ||
-        item.hoTen.toLowerCase().trim().search(text.toLowerCase().trim()) !== -1
-      );
-    });
-    setUsersRegisted(newUsersRegisted);
-    setStateTable2({
-      data: UsersRegisted,
-      totalPage: UsersRegisted.length / 5,
-      minIndex: 0,
-      current: 1,
-      maxIndex: 5,
-    });
-  };
-  const onFinish2 = (values) => {
-    searchUserRegisted(values.valueSearchCourse);
-  };
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  let [UsersWaitingApproval, setUsersWaitingApproval] = useState([]);
+  let [UsersRegisted, setUsersRegisted] = useState([]);
+  let [UsersRegistedClone, setUsersRegistedClone] = useState([]);
+  let [UnregisteredUssers, setUnregisteredUssers] = useState([]);
   let [stateTable2, setStateTable2] = useState({
     data: [],
     totalPage: 0,
@@ -38,20 +24,6 @@ export default function PopupGhiDanh(props) {
     minIndex: 0,
     maxIndex: 0,
   });
-  let handleChange1 = (page) => {
-    setStateTable1({
-      current: page,
-      minIndex: (page - 1) * 5,
-      maxIndex: page * 5,
-    });
-  };
-  let handleChange2 = (page) => {
-    setStateTable2({
-      current: page,
-      minIndex: (page - 1) * 5,
-      maxIndex: page * 5,
-    });
-  };
   const onFinish = (values) => {
     console.log("Success:", values);
     CourseManagementSrv.registerUser(props.data.maKhoaHoc, values.taiKhoan)
@@ -66,19 +38,31 @@ export default function PopupGhiDanh(props) {
         setUnregisteredUssers(newUnregisteredUssers);
         setUsersRegisted([...UsersRegisted, newUserRegisted]);
         document.getElementById("form-register-user").reset();
+        setUsersRegistedClone([...UsersRegistedClone, newUserRegisted]);
       })
       .catch((err) => message.error(err.err.response.data));
   };
+  const onFinish2 = (values) => {
+    searchUserRegisted(values.valueSearchCourse);
+  };
 
+  let handleChange1 = (page) => {
+    setStateTable1({
+      current: page,
+      minIndex: (page - 1) * 5,
+      maxIndex: page * 5,
+    });
+  };
+  let handleChange2 = (page) => {
+    setStateTable2({
+      current: page,
+      minIndex: (page - 1) * 5,
+      maxIndex: page * 5,
+    });
+  };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  let [UsersWaitingApproval, setUsersWaitingApproval] = useState([]);
-  let [UsersRegisted, setUsersRegisted] = useState([]);
-  let [UsersRegistedClone, setUsersRegistedClone] = useState([]);
-  let [UnregisteredUssers, setUnregisteredUssers] = useState([]);
-  // let UsersRegistedClone = [];
   const showModal = () => {
     CourseManagementSrv.getUsersWaitingApproval(props.data.maKhoaHoc)
       .then((res) => {
@@ -113,13 +97,28 @@ export default function PopupGhiDanh(props) {
     });
     setIsModalVisible(true);
   };
-
   const handleOk = () => {
     setIsModalVisible(false);
   };
-
   const handleCancel = () => {
     setIsModalVisible(false);
+  };
+  const searchUserRegisted = (text) => {
+    let newUsersRegisted = [...UsersRegistedClone].filter((item) => {
+      return (
+        item.taiKhoan.toLowerCase().trim().search(text.toLowerCase().trim()) !==
+          -1 ||
+        item.hoTen.toLowerCase().trim().search(text.toLowerCase().trim()) !== -1
+      );
+    });
+    setUsersRegisted(newUsersRegisted);
+    setStateTable2({
+      data: UsersRegisted,
+      totalPage: UsersRegisted.length / 5,
+      minIndex: 0,
+      current: 1,
+      maxIndex: 5,
+    });
   };
   const handleCancleUserWaitingApproval = (maKhoaHoc, taiKhoan) => {
     CourseManagementSrv.cancleUsersWaitingApproval(maKhoaHoc, taiKhoan)
@@ -150,6 +149,16 @@ export default function PopupGhiDanh(props) {
           [...UsersRegisted].filter((user) => user.taiKhoan !== taiKhoan)
         );
         message.success(res.data);
+        setUsersRegistedClone(
+          [...UsersRegisted].filter((user) => user.taiKhoan !== taiKhoan)
+        );
+        setStateTable2({
+          data: UsersRegisted,
+          totalPage: UsersRegisted.length / 5,
+          minIndex: 0,
+          current: 1,
+          maxIndex: 5,
+        });
       })
       .catch((err) => {
         message.error(err.err.response.data);
@@ -187,6 +196,10 @@ export default function PopupGhiDanh(props) {
                       ].filter((user) => user.taiKhoan !== item.taiKhoan);
                       setUsersWaitingApproval(newUsersWaitingApproval);
                       setUsersRegisted([...UsersRegisted, newUserRegisted]);
+                      setUsersRegistedClone([
+                        ...UsersRegistedClone,
+                        newUserRegisted,
+                      ]);
                     })
                     .catch((err) => message.error(err.err.response.data));
                 }}
@@ -244,7 +257,6 @@ export default function PopupGhiDanh(props) {
       );
     });
   };
-
   return (
     <div>
       <button
