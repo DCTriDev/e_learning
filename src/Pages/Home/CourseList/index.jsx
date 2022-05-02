@@ -21,9 +21,9 @@ function CourseList() {
     };
 
     return (
-        <div className='container mx-auto mt-10'>
+        <div className='lg:container mx-auto mt-10 px-12'>
             <h2 className='text-4xl font-bold mb-8'>Danh Sách Khóa Học Mới Nhất</h2>
-            <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5'>
+            <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-5'>
                 {handleRenderCourseItem()}
             </div>
         </div>

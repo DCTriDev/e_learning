@@ -5,6 +5,7 @@ import UserNav from "./UserNav";
 import {Dropdown, Menu} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchCourseCatalog} from "../../Redux/Slice/courseSlice";
+import SearchBox from "./SearchBox";
 
 const changeNavbarScollHeight = () => {
     window.addEventListener('scroll', () => {
@@ -44,6 +45,7 @@ function Navbar() {
                 <NavLink to={'/'}>
                     <h2 className='mb-0 text-3xl'>E-Learning</h2>
                 </NavLink>
+                <SearchBox/>
                 <div>
                     <div className='flex justify-between space-x-3'>
                         <Dropdown overlay={menu} trigger={['click']} className='text-center'>
