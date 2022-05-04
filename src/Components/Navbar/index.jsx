@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCourseCatalog } from "../../Redux/Slice/courseSlice";
 import SearchBox from "./SearchBox";
 import { BarsOutlined } from "@ant-design/icons";
+import logoBig  from "../../Assets/Images/logo_big.png";
+import logoSmall  from "../../Assets/Images/logo_small.png";
 
 const changeNavbarScollHeight = () => {
   window.addEventListener("scroll", () => {
@@ -25,7 +27,7 @@ function Navbar() {
   let btnNavEl = document.querySelector(".btn-nav");
   const courseCatalog = useSelector((state) => state.courseSlice.courseCatalog);
   const dispatch = useDispatch();
-  const menu = (
+  const items = (
     <Menu className="rounded-xl p-2 -translate-x-1/4 duration-300 transition-all ease-in-out">
       {courseCatalog?.map((item, index) => {
         return (
@@ -61,13 +63,16 @@ function Navbar() {
     <div className="bg-navbar transition-all duration-300 navbar-height">
       <div className="container flex justify-between items-center mx-auto max-w-full h-full ">
         <NavLink to={"/"}>
-          <h2 className="mb-0 text-3xl">E-Learning</h2>
+          <img
+            src={logoBig}
+            alt="logo"
+            className="w-48 mr-4"/>
         </NavLink>
         <SearchBox />
         <div>
           <div className="flex justify-between space-x-3">
             <Dropdown
-              overlay={menu}
+              overlay={items}
               trigger={["click"]}
               className="text-center"
             >
@@ -88,47 +93,47 @@ function Navbar() {
     </div>
   ) : (
     <div className="bg-navbar transition-all duration-300 navbar-height">
-      <div className="flex justify-between items-start">
+      <div className="container flex justify-between items-center mx-auto max-w-full h-full ">
         <NavLink to={"/"}>
-          <h2 className="mb-0 text-3xl">E-Learning</h2>
+          <img
+              src={logoSmall}
+              alt="logo"
+              className="w-24 mr-4"/>
         </NavLink>
-        <div className=" flex  items-start space-x-5">
-          <UserNav />
-
-          <div className="relative ">
-            <button
-              className="btn-nav w-14 h-14"
+        <div className="relative ">
+          <button
+              className="btn-nav w-12 h-12 rounded-2xl bg-transparent border-0"
               onClick={() => {
                 smallNavEl.classList.toggle("hidden");
-                btnNavEl.classList.toggle("bg-yellow-500");
+                // btnNavEl.classList.toggle("bg-yellow-500");
               }}
-            >
-              <BarsOutlined />
-            </button>
-            <div
+          >
+            <BarsOutlined />
+          </button>
+          <div
               id="small-nav"
-              className=" hidden bottom-0 absolute right-0  translate-y-full z-20  bg-gray-100 shadow-2xl p-3 border-gray-300 border-solid border-[1px]"
-            >
-              <SearchBox />
-              <div className="flex flex-col items-start space-y-3">
-                <Dropdown
-                  overlay={menu}
+              className="hidden bottom-0 absolute right-auto rounded-xl -translate-x-1/2 translate-y-full z-20 bg-gray-100 shadow-2xl p-3"
+          >
+            <SearchBox />
+            <div className="flex flex-col items-start space-y-3">
+              <Dropdown
+                  overlay={items}
                   trigger={["click"]}
                   className="text-center"
-                >
-                  <a
-                    className="ant-dropdown-link text-xl"
+              >
+                <a
+                    className="ant-dropdown-link text-xl mx-auto mt-4"
                     href=""
                     onClick={(e) => e.preventDefault()}
-                  >
-                    DANH MỤC
-                  </a>
-                </Dropdown>
-                <NavLink to={"/"}>About</NavLink>
-                <NavLink to={"/"}>Contact</NavLink>
-              </div>
+                >
+                  DANH MỤC
+                </a>
+              </Dropdown>
             </div>
           </div>
+        </div>
+        <div className="flex items-start space-x-5">
+          <UserNav />
         </div>
       </div>
     </div>
