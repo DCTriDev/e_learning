@@ -3,6 +3,7 @@ import HomePage from "./Pages/Home";
 import CourseCatalog from "./Pages/CourseCatalog";
 import LoadingAnim from "./Components/LoadingAnim";
 import CourseManagement from "./Pages/CourseManagement";
+import Search from "./Pages/Search";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <Route exact path='/course-catalog/:maDanhMuc' render={({match}) => {
                         return <CourseCatalog maDanhMuc={match.params.maDanhMuc}/>
                     }}/>
+                    <Route exact path='/search/:input' component={Search} />
                     <Route exact path='/dashboard/course-manage' render={({match}) => {
                         return <CourseManagement {...match}/>
                     }}/>

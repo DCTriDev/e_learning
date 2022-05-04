@@ -20,7 +20,6 @@ function Search() {
     const handleRenderCourseFound = () => {
         if (courseList) {
             let result = handleSearchCourse();
-            console.log(result.length);
             if (result.length === 0) {
                 return <div className='text-center'>Không tìm thấy khóa học. Vui lòng thử lại!</div>
             } else {
