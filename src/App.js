@@ -2,9 +2,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import HomePage from "./Pages/Home";
 import CourseCatalog from "./Pages/CourseCatalog";
 import LoadingAnim from "./Components/LoadingAnim";
-import CourseDetail from "./Pages/CourseDetail";
-import Search from "./Pages/Search";
-import Dashboard from "./Layouts/Dashboard/Dashboard";
+import CourseManagement from "./Pages/CourseManagement";
 
 function App() {
     return (
@@ -17,11 +15,9 @@ function App() {
                     <Route exact path='/course-catalog/:maDanhMuc' render={({match}) => {
                         return <CourseCatalog maDanhMuc={match.params.maDanhMuc}/>
                     }}/>
-                    <Route exact path='/course-detail/:courseID' render={({match}) => {
-                        return <CourseDetail courseID={match.params.courseID}/>
+                    <Route exact path='/dashboard/course-manage' render={({match}) => {
+                        return <CourseManagement {...match}/>
                     }}/>
-                    <Route exact path='/search/:input' component={Search} />
-                    <Route exact path='/dashboard' component={Dashboard} />
                 </Switch>
             </BrowserRouter>
         </div>
