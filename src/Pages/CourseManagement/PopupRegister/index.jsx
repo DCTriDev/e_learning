@@ -350,7 +350,7 @@ export default function PopupRegister(props) {
             <p>Học viên đã tham gia khóa học</p>
             <div className="flex">
               <Form
-                id="form-search-course"
+                id="form-search-user"
                 onFinish={onFinish2}
                 autoComplete="off"
                 className=" lg:max-w-max-w-1/3 flex"
@@ -368,6 +368,7 @@ export default function PopupRegister(props) {
               <Button
                 onClick={() => {
                   searchUserRegisted("");
+                  document.getElementById("form-search-user").reset();
                 }}
               >
                 <UndoOutlined />

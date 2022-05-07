@@ -20,7 +20,7 @@ import {
 
 export default function TableUser() {
   const dispatch = useDispatch();
-  const pageSize = 15;
+  const pageSize = 10;
   let [state, setState] = useState({
     data: [],
     totalPage: 0,
