@@ -8,6 +8,7 @@ import {
   searchCourse,
 } from "../../Redux/Slice/courseSlice";
 import PopupRegister from "./PopupRegister";
+import PopupAddCourse from "./PopupAddCourse";
 
 export default function CourseManagement() {
   let dispatch = useDispatch();
@@ -18,6 +19,9 @@ export default function CourseManagement() {
     minIndex: 0,
     maxIndex: 0,
   });
+  let [courseData, setCourseData] = useState(null)
+
+  const [isAddCourse, setIsAddCourse] = useState(false)
 
   useEffect(() => {
     dispatch(fetchCourseList());
@@ -61,12 +65,16 @@ export default function CourseManagement() {
               <td className="text-center">{item.maKhoaHoc}</td>
               <td className="text-center">{item.tenKhoaHoc}</td>
               <td className="text-center">
-                <img src="https://picsum.photos/100/100" alt="" />
+                <img src={item.hinhAnh} alt="" className='w-20 h-auto' />
               </td>
               <td className="text-center">{item.luotXem}</td>
               <td className="text-center">{item.nguoiTao.hoTen}</td>
               <td className="text-center space-y-3 lg:space-y-0 lg:space-x-2  flex flex-col items-center lg:flex-row lg:justify-center lg:items-center h-24">
-                <button className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-yellow-500 w-16 lg:w-auto">
+                <button className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-yellow-500 w-16 lg:w-auto"
+                onClick={() => {
+                  setCourseData(item)
+                  setIsAddCourse(true)
+                }}>
                   Sửa
                 </button>
                 <PopupRegister data={item} />
@@ -97,7 +105,13 @@ export default function CourseManagement() {
   };
   return (
     <div>
-      <h1>Thêm Khóa Học</h1>
+     <div>
+       <button onClick={()=> {
+         setIsAddCourse(true)
+         setCourseData(null)
+       }}>Thêm Khóa Học</button>
+       <PopupAddCourse isAddCourse={isAddCourse} setIsAddCourse={setIsAddCourse} data={courseData}/>
+     </div>
       <div className=" relative">
         <div className=" flex ">
           <Form
