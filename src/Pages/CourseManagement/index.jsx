@@ -7,7 +7,7 @@ import {
   fetchDeleteCourse,
   searchCourse,
 } from "../../Redux/Slice/courseSlice";
-import PopupRegister from "./PopupGhiDanh/PopupRegister";
+import PopupRegister from "./PopupRegister";
 
 export default function CourseManagement() {
   let dispatch = useDispatch();

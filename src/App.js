@@ -4,7 +4,7 @@ import CourseCatalog from "./Pages/CourseCatalog";
 import LoadingAnim from "./Components/LoadingAnim";
 import Search from "./Pages/Search";
 import Dashboard from "./Layouts/Dashboard/Dashboard";
-import {ModalUser} from "./Pages/userManagement/ModalUser/MoadalUser";
+import {ModalUser} from "./Pages/userManagement/ModalUser";
 
 function App() {
     return (
