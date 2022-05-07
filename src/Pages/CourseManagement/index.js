@@ -8,7 +8,6 @@ import {
   searchCourse,
 } from "../../Redux/Slice/courseSlice";
 import PopupGhiDanh from "./PopupGhiDanh/PopupGhiDanh";
-// import CourseManagementSrv from "../../Services/courseMangement.service";
 
 export default function CourseManagement() {
   let dispatch = useDispatch();
@@ -56,17 +55,21 @@ export default function CourseManagement() {
               key={i}
               className={`${
                 i % 2 === 0 ? "bg-gray-200" : "bg-white"
-              } text-center  h-24`}
+              } text-center`}
             >
-              <td className="text-center">{++i}</td>
-              <td className="text-center">{item.maKhoaHoc}</td>
+              <td className="text-center hidden lg:table-cell">{++i}</td>
+              <td className="text-center hidden md:table-cell ">
+                {item.maKhoaHoc}
+              </td>
               <td className="text-center">{item.tenKhoaHoc}</td>
               <td className="text-center">
                 <img src="https://picsum.photos/100/100" alt="" />
               </td>
-              <td className="text-center">{item.luotXem}</td>
+              <td className="text-center hidden lg:table-cell">
+                {item.luotXem}
+              </td>
               <td className="text-center">{item.nguoiTao.hoTen}</td>
-              <td className="text-center space-y-3 lg:space-y-0 lg:space-x-2  flex flex-col items-center lg:flex-row lg:justify-center lg:items-center h-24">
+              <td className="text-center space-y-3 lg:space-y-0 lg:space-x-2  flex flex-col items-center lg:flex-row justify-center lg:h-[120px] ">
                 <button className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-yellow-500 w-16 lg:w-auto">
                   Sửa
                 </button>
@@ -87,7 +90,6 @@ export default function CourseManagement() {
     }
   };
   const onFinish = (values) => {
-    // console.log("Success:", values.valueSearchCourse);
     dispatch(searchCourse(values.valueSearchCourse));
     setStateTable({
       data: courseList,
@@ -130,19 +132,19 @@ export default function CourseManagement() {
         <table className="w-full">
           <thead className=" bg-yellow-400 h-14 shadow-lg">
             <tr className="text-center">
-              <th className=" w-[5%]">STT</th>
-              <th className=" w-[20%]">Mã khóa học</th>
-              <th className=" w-[20%]">Tên khóa học</th>
+              <th className=" md:w-[5%] hidden lg:table-cell">STT</th>
+              <th className=" md:w-[20%] hidden md:table-cell ">Mã khóa học</th>
+              <th className=" md:w-[20%]">Tên khóa học</th>
               <th>Hình ảnh </th>
-              <th className=" w-[5%]">Lượt xem</th>
-              <th className=" w-[20%]">Người tạo</th>
+              <th className=" md:w-[5%]  hidden lg:table-cell">Lượt xem</th>
+              <th className=" md:w-[20%]">Người tạo</th>
               <th>Thao tác</th>
             </tr>
           </thead>
-          <tbody>{renderTableList()}</tbody>
+          <tbody className=" h-[1200px]">{renderTableList()}</tbody>
         </table>
         <Pagination
-          className=" w-fit top-0 absolute left-1/2 -translate-x-1/2 mt-[1200px] "
+          className=" w-fit mx-auto mt-3 "
           showSizeChanger={false}
           pageSize={10}
           defaultCurrent={stateTable.current}
