@@ -99,6 +99,7 @@ export default function CourseManagement() {
   };
   return (
     <div>
+      <h1>Thêm Khóa Học</h1>
       <div className=" relative">
         <div className=" flex ">
           <Form
