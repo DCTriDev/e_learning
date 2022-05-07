@@ -27,3 +27,12 @@ button:focus {
     }
 
 }
+
+/*Ant Modal*/
+.ant-modal-content{
+    border-radius: 10px;
+}
+
+.ant-modal-header{
+    border-radius: 10px 10px 0 0;
+}

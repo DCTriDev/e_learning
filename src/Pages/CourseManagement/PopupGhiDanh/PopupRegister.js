@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import CourseManagementSrv from "../../../Services/courseMangement.service";
 const { Option } = Select;
-export default function PopupGhiDanh(props) {
+export default function PopupRegister(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   let [UsersWaitingApproval, setUsersWaitingApproval] = useState([]);
   let [UsersRegisted, setUsersRegisted] = useState([]);
@@ -267,13 +267,13 @@ export default function PopupGhiDanh(props) {
       </button>
       <Modal
         className=" w-screen"
-        title="Basic Modal"
+        title="Ghi Danh"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
         footer={false}
       >
-        <div className=" h-screen">
+        <div className="h-fit pb-12">
           <Form
             id="form-register-user"
             onFinish={onFinish}
@@ -309,7 +309,7 @@ export default function PopupGhiDanh(props) {
               Ghi Danh
             </button>
           </Form>
-          <div className=" h-[270px] relative">
+          <div className=" h-auto relative mb-12">
             <p>Học viên chờ xác nhận</p>
             {UsersWaitingApproval.length === 0 ? (
               <p className=" italic text-red-500">Không có học viên</p>
@@ -335,7 +335,7 @@ export default function PopupGhiDanh(props) {
                   <tbody>{renderTableUsersWaitingApproval()}</tbody>
                 </table>
                 <Pagination
-                  className=" w-fit absolute top-0 left-1/2 -translate-x-1/2 mt-[260px] "
+                  className=" w-fit absolute -bottom-12 left-1/2 -translate-x-1/2"
                   showSizeChanger={false}
                   pageSize={5}
                   defaultCurrent={stateTable1.current}
@@ -397,7 +397,7 @@ export default function PopupGhiDanh(props) {
                   <tbody>{renderTableUsersRegisted()}</tbody>
                 </table>
                 <Pagination
-                  className=" w-fit absolute top-0 left-1/2 -translate-x-1/2 mt-[260px] "
+                  className=" w-fit absolute -bottom-12 left-1/2 -translate-x-1/2"
                   showSizeChanger={false}
                   pageSize={5}
                   defaultCurrent={stateTable2.current}

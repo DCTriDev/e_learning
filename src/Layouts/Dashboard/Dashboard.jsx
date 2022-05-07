@@ -5,6 +5,7 @@ import {
 } from '@ant-design/icons';
 import './Dashboard.css';
 import CourseManagement from "../../Pages/CourseManagement";
+import UserManagement from "../../Pages/userManagement";
 
 const {Header, Content, Sider} = Layout;
 
@@ -28,7 +29,7 @@ function Dashboard(props) {
     const handleRenderContent = key =>{
         switch (key) {
             case '1': return <CourseManagement/>
-            case '2': return <div>Quản lý người dùng</div>
+            case '2': return <UserManagement/>
         }
     }
     const handleMenuClick = menu => {

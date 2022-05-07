@@ -4,7 +4,6 @@ import CourseCatalog from "./Pages/CourseCatalog";
 import LoadingAnim from "./Components/LoadingAnim";
 import Search from "./Pages/Search";
 import Dashboard from "./Layouts/Dashboard/Dashboard";
-import UserManagement from "./Pages/userManagement";
 import {ModalUser} from "./Pages/userManagement/ModalUser/MoadalUser";
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
                     }}/>
                     <Route exact path='/search/:input' component={Search} />
                     <Route exact path='/dashboard' component={Dashboard}/>
-                    <Route exact path="/UserManagement" component={UserManagement} />
                     <Route
                         exact
                         path="/UserManagement/themNguoiDung"

@@ -7,8 +7,7 @@ import {
   fetchDeleteCourse,
   searchCourse,
 } from "../../Redux/Slice/courseSlice";
-import PopupGhiDanh from "./PopupGhiDanh/PopupGhiDanh";
-// import CourseManagementSrv from "../../Services/courseMangement.service";
+import PopupRegister from "./PopupGhiDanh/PopupRegister";
 
 export default function CourseManagement() {
   let dispatch = useDispatch();
@@ -70,7 +69,7 @@ export default function CourseManagement() {
                 <button className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-yellow-500 w-16 lg:w-auto">
                   Sửa
                 </button>
-                <PopupGhiDanh data={item} />
+                <PopupRegister data={item} />
                 <button
                   className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-red-500 w-16 lg:w-auto"
                   onClick={() => {
@@ -87,7 +86,6 @@ export default function CourseManagement() {
     }
   };
   const onFinish = (values) => {
-    // console.log("Success:", values.valueSearchCourse);
     dispatch(searchCourse(values.valueSearchCourse));
     setStateTable({
       data: courseList,
