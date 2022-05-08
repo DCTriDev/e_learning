@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {Form, Input, Tabs} from "antd";
+import {Form, Input, Tabs, message} from "antd";
 import {Modal} from 'antd'
 import Layout from "../../Layouts";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchUserDetail} from "../../Redux/Slice/userSlice";
 import CourseList from "./Course/CourseList";
-import Profile from "./Profile/Profile";
+import Profile from "./Profile";
 import "./index.css";
 
 const {TabPane} = Tabs;
@@ -19,11 +19,13 @@ function UserDetail() {
     const showModal = () => {
         setVisible(true);
     };
+
     useEffect(() => {
         if (!userDetail) {
             showModal()
         }else{
             hideModal()
+            message.success('Đăng Nhập Thành Công!')
         }
     }, [userDetail]);
 

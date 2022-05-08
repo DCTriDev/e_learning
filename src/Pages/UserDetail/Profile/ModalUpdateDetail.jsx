@@ -31,7 +31,7 @@ export default function ModalUpdateDetail() {
     }
   };
   const success = () => {
-    message.success("cập nhật thành công");
+    message.success("Cập nhật thành công");
   };
   const error = (data) => {
     message.error(data);

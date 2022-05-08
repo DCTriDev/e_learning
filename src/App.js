@@ -3,7 +3,7 @@ import HomePage from "./Pages/Home";
 import Login from "./Pages/LogIn";
 import SignUp from "./Pages/SignUp";
 import CourseCatalog from "./Pages/CourseCatalog";
-import UserDetail from "./Pages/UserDetail/UserDetail";
+import UserDetail from "./Pages/UserDetail";
 import LoadingAnim from "./Components/LoadingAnim";
 import Search from "./Pages/Search";
 import Dashboard from "./Layouts/Dashboard/Dashboard";

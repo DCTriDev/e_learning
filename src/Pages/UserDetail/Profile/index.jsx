@@ -42,7 +42,7 @@ export default function Profile() {
       </div>
       <div className=" grid grid-cols-1  lg:grid-cols-2  w-3/4 mx-auto gap-x-14">
         <p className=" lg:text-lg flex justify-between text-xl ">
-          <span>email:</span>
+          <span>Email:</span>
           <span className=" font-semibold">{userDetail?.email}</span>
         </p>
         <p className=" lg:text-lg flex justify-between text-xl ">
