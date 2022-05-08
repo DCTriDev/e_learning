@@ -1,19 +1,15 @@
 import React from "react";
 import "./footer.css";
+import logo from "../../Assets/Images/logo_big.png";
 export default function Footer() {
   return (
     <div className="footer__wrapper  bg-gray-800 text-white p-12 flex flex-col space-y-9">
       <div className=" ">
         <div className="footer__logo">
-          <img
-            src="https://cybersoft.edu.vn/wp-content/uploads/2017/04/MAX-OP1.png"
-            width={300}
-            height={100}
-            alt="Cybersoft logo"
-          />
+          <img src={logo} width={300} height={100} alt="Cybersoft logo" />
           <p>
-            Cybersoft Academy - Hệ thống đào tạo lập trình chuyên sâu theo dự án
-            thực tế
+            E-LEARNING - Hệ thống đào tạo lập trình chuyên sâu theo dự án thực
+            tế
           </p>
         </div>
       </div>
@@ -21,7 +17,7 @@ export default function Footer() {
         <div className="footer__advertising ">
           <h2 className="text-white">NHẬN TIN SỰ KIỆN VÀ KHUYẾN MÃI</h2>
           <p>
-            CyberSoft sẽ gửi các bạn khóa học trực tuyến và các chương trình
+            E-LEARNING sẽ gửi các bạn khóa học trực tuyến và các chương trình
             CyberLive hoàn toàn MIỄN PHÍ và các chương trình KHUYẾN MÃI hấp dẫn
             đến các bạn
           </p>
