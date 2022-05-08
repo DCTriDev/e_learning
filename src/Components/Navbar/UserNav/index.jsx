@@ -3,6 +3,10 @@ import {Dropdown, Menu} from 'antd';
 import {NavLink} from "react-router-dom";
 import localServices from "../../../Services/localServices";
 
+const handleLogout = () => {
+    localServices.removeUserInfo()
+};
+
 const menu = (
     <Menu className='rounded-xl p-2 translate-x-1/4'>
         <Menu.Item key="0" className='hover:bg-blue-500 rounded-lg'>
@@ -26,6 +30,7 @@ const menu = (
             <NavLink
                 exact
                 to="/"
+                onClick={handleLogout}
                 className="hover:text-white duration-300 transition-all ease-in-out">
                 <span className="flex items-center space-x-2">
                     <ion-icon name="log-out-outline" />
@@ -40,14 +45,14 @@ function UserNav() {
     let userInfo = localServices.getUserInfo();
     console.log(userInfo);
     return userInfo?.accessToken ? (
-        <div className="flex items-center justify-center space-x-2">
+        <div className="flex items-center justify-center space-x-2 relative">
             <div>Xin chào, <span className='text-red-600'>{userInfo?.hoTen}</span></div>
-            <Dropdown overlay={menu} trigger={["click"]}>
+            <Dropdown overlay={menu} trigger={["click"]} className='relative'>
                 <a
                     className="ant-dropdown-link"
                     onClick={(e) => e.preventDefault()}>
                     <img
-                        className="w-12 h-12 object-cover rounded-full"
+                        className="w-12 h-12 object-cover rounded-full relative"
                         src="https://picsum.photos/200/200"
                         alt=""
                     />

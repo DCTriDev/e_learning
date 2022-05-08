@@ -89,7 +89,7 @@ export default function ModalUpdateDetail() {
             ]}
             hasFeedback
           >
-            <Input className=" lg:h-14 rounded-xl hover:border-yellow-500" />
+            <Input.Password className=" lg:h-14 rounded-xl hover:border-yellow-500" />
           </Form.Item>
           <Form.Item
             className=" flex items-center"

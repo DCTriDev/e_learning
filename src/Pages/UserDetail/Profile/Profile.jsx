@@ -7,7 +7,7 @@ export default function Profile() {
   const { userDetail } = useSelector((state) => state.userSlice);
 
   return (
-    <div className="flex flex-col space-y-7 lg:flex-row">
+   <div className="flex flex-col space-y-7 lg:flex-row">
       <div className=" flex flex-col items-center space-y-6 ">
         <img
           className=" rounded-full  lg:h-44 w-auto"
@@ -15,7 +15,7 @@ export default function Profile() {
           alt=""
         />
         <span className=" font-semibold text-xl uppercase">
-          {userDetail.hoTen}
+          {userDetail?.hoTen}
         </span>
         <div className="grid grid-cols-4">
           <img
@@ -43,34 +43,32 @@ export default function Profile() {
       <div className=" grid grid-cols-1  lg:grid-cols-2  w-3/4 mx-auto gap-x-14">
         <p className=" lg:text-lg flex justify-between text-xl ">
           <span>email:</span>
-          <span className=" font-semibold">{userDetail.email}</span>
+          <span className=" font-semibold">{userDetail?.email}</span>
         </p>
         <p className=" lg:text-lg flex justify-between text-xl ">
           <span>Tài khoản:</span>
-          <span className=" font-semibold">{userDetail.taiKhoan}</span>
+          <span className=" font-semibold">{userDetail?.taiKhoan}</span>
         </p>
         <p className=" lg:text-lg flex justify-between text-xl ">
           <span>Mật khẩu:</span>
-          <span className=" font-semibold">{userDetail.matKhau}</span>
+          <span className=" font-semibold">{userDetail?<span>*********</span>:<></>}</span>
         </p>
         <p className=" lg:text-lg flex justify-between text-xl ">
           <span>Họ tên:</span>
-          <span className=" font-semibold">{userDetail.hoTen}</span>
+          <span className=" font-semibold">{userDetail?.hoTen}</span>
         </p>
         <p className=" lg:text-lg flex justify-between text-xl ">
           <span>Số điện thoại:</span>
-          <span className=" font-semibold">{userDetail.soDT}</span>
+          <span className=" font-semibold">{userDetail?.soDT}</span>
         </p>
         <p className=" lg:text-lg flex justify-between text-xl ">
           <span>Mã người dùng:</span>
-          <span className=" font-semibold">{userDetail.maLoaiNguoiDung}</span>
+          <span className=" font-semibold">{userDetail?.maLoaiNguoiDung}</span>
         </p>
         <div className=" lg:col-span-2">
           <ModalUpdateDetail />
         </div>
       </div>
     </div>
-
-    // </TabPane>
   );
 }

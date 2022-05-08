@@ -1,13 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import httpService from "../../Services/http.service";
+
+const initialState = {
+    userDetail: null,
+};
+
 export const fetchUserDetail = createAsyncThunk(
   "user/fetchUserDetail",
 
-  async (maKhoaHoc) => {
-    const response = await httpService.getUserDetail(maKhoaHoc);
+  async (data) => {
+    const response = await httpService.getUserDetail(data);
     return response.data;
   }
 );
+
 export const fetchUpdateUser = createAsyncThunk(
   "user/fetchUpdateUser",
   async (ttcn) => {
@@ -15,9 +21,6 @@ export const fetchUpdateUser = createAsyncThunk(
     return ttcn;
   }
 );
-const initialState = {
-  userDetail: {},
-};
 
 const userSlice = createSlice({
   name: "userSlice",
