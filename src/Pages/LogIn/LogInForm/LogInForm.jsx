@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button, Checkbox, message } from "antd";
+import { Form, Input, Button, message } from "antd";
 
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -8,23 +8,23 @@ import httpService from "../../../Services/http.service";
 export default function LogInForm() {
     let dispatch = useDispatch();
     let history = useHistory();
-    const onFinish = (values) => {
-        handleLogIn(values);
-    };
 
     const onFinishFailed = (errorInfo) => {
         console.log("Failed:", errorInfo);
     };
-    const handleLogIn = (values) => {
+    const handleLogin = (values) => {
         return httpService
             .login(values)
             .then((res) => {
-                console.log(handleLogIn);
                 history.push("/");
             })
             .catch(({ err }) => {
                 message.error(err.response.data);
             });
+    };
+
+    const onFinish = (values) => {
+        handleLogin(values);
     };
 
     return (
