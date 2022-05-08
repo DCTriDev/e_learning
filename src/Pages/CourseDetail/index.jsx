@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import Layout from "../../Layouts";
 import httpService from "../../Services/http.service";
+import {useParams} from "react-router-dom";
 
-function CourseDetail({courseID}) {
-    console.log(courseID);
+function CourseDetail() {
     let [courseDetail, setCourseDetail] = useState({});
+    let {courseID} = useParams();
+    console.log(courseID)
     useEffect(() => {
         httpService.getCourseDetail(courseID)
             .then(res => {
                 setCourseDetail(res.data);
             })
     }, []);
-
-    console.log(courseDetail);
 
     const renderCourseDetail = () => {
         return (

@@ -14,7 +14,6 @@ function Search() {
   }, []);
 
   const handleSearchCourse = () => {
-    console.log(input);
     return courseList.filter((course) =>
       course.tenKhoaHoc.toLowerCase().includes(input.toLowerCase())
     );

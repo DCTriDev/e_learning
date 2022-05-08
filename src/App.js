@@ -9,6 +9,7 @@ import Search from "./Pages/Search";
 import Dashboard from "./Layouts/Dashboard/Dashboard";
 import {ModalUser} from "./Pages/userManagement/ModalUser";
 import Blog from "./Pages/Blog";
+import CourseDetail from "./Pages/CourseDetail";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route exact path="/" component={HomePage}/>
                     <Route path="/login" component={Login} />
                     <Route path="/signup" component={SignUp} />
+                    <Route path="/course-detail/:courseID" component={CourseDetail} />
                     <Route exact path='/course-catalog/:maDanhMuc' render={({match}) => {
                         return <CourseCatalog maDanhMuc={match.params.maDanhMuc}/>
                     }}/>
