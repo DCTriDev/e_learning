@@ -10,7 +10,6 @@ import Dashboard from "./Layouts/Dashboard/Dashboard";
 import {ModalUser} from "./Pages/userManagement/ModalUser";
 import Blog from "./Pages/Blog";
 import CourseDetail from "./Pages/CourseDetail";
-import Counter from "./Pages/Home/Counter";
 import Notfound from "./Pages/Notfound";
 
 function App() {
@@ -66,7 +65,6 @@ function App() {
                             return <Blog {...match} />;
                         }}
                     />
-                    <Route exact path='/counter' component={Counter} />
                     <Route component={Notfound} />
                 </Switch>
             </BrowserRouter>

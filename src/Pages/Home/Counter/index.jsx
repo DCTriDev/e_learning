@@ -1,65 +1,41 @@
-import React, {useState} from 'react';
+import React from 'react';
+import CountUp from "react-countup";
+import img1 from '../../../Assets/Images/count_up_1.png';
+import img2 from '../../../Assets/Images/count_up_2.png';
+import img3 from '../../../Assets/Images/count_up_3.png';
+import img4 from '../../../Assets/Images/count_up_4.png';
 
+const DURATION_TIME = 3; // seconds
+const imgStyle = {
+    width: '4rem',
+    height: '4rem',
+}
 function Counter() {
-    //  Counter is a state initialized to 0
-    const [counter, setCounter] = useState(0)
-
-    // Function is called everytime increment button is clicked
-    const handleClick1 = () => {
-        // Counter state is incremented
-        setCounter(counter + 1)
-    }
-
-    // Function is called everytime decrement button is clicked
-    const handleClick2 = () => {
-        // Counter state is decremented
-        setCounter(counter - 1)
-    }
     return (
-        <div>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '300%',
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                top: '-15%',
-            }}>
-                Counter App
-                <div style={{
-                    fontSize: '120%',
-                    position: 'relative',
-                    top: '10vh',
-                }}>
-                    {counter}
-                </div>
-                <div className="buttons">
-                    <button style={{
-                        fontSize: '60%',
-                        position: 'relative',
-                        top: '20vh',
-                        marginRight: '5px',
-                        backgroundColor: 'green',
-                        borderRadius: '8%',
-                        color: 'white',
-                    }}
-                            onClick={handleClick1}>Increment</button>
-                    <button style={{
-                        fontSize: '60%',
-                        position: 'relative',
-                        top: '20vh',
-                        marginLeft: '5px',
-                        backgroundColor: 'red',
-                        borderRadius: '8%',
-                        color: 'white',
-                    }}
-                            onClick={handleClick2}>Decrement</button>
-                </div>
-            </div>
-        </div>
+       <div className='w-full bg-blue-200 grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2 px-16 py-6 mt-6'>
+           <div className="col-span-1 flex flex-col justify-center items-center gap-3 text-emerald-600">
+               <img style={imgStyle} src={img1} alt="img"/>
+               <CountUp className='text-5xl bold ' end={9000} duration={DURATION_TIME}/>
+               <h4 className='text-3xl bold text-rose-800'>Học viên</h4>
+           </div>
+           <div className="col-span-1 flex flex-col justify-center items-center gap-3 text-emerald-600">
+               <img style={imgStyle} src={img2} alt="img"/>
+               <CountUp className='text-5xl bold ' end={1000} duration={DURATION_TIME}/>
+               <h4 className='text-3xl bold text-rose-800'>Khóa học</h4>
+           </div>
+           <div className="col-span-1 flex flex-col justify-center items-center gap-3 text-emerald-600">
+               <img style={imgStyle} src={img3} alt="img"/>
+               <CountUp className='text-5xl bold ' end={33200} duration={DURATION_TIME}/>
+               <h4 className='text-3xl bold text-rose-800'>Giờ học</h4>
+           </div>
+           <div className="col-span-1 flex flex-col justify-center items-center gap-3 text-emerald-600">
+               <img style={imgStyle} src={img4} alt="img"/>
+               <CountUp className='text-5xl bold ' end={400} duration={DURATION_TIME}/>
+               <h4 className='text-3xl bold text-rose-800'>Giảng viên</h4>
+           </div>
+
+           
+       </div>
     );
 }
 
