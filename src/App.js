@@ -1,5 +1,7 @@
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import HomePage from "./Pages/Home";
+import Login from "./Pages/LogIn";
+import SignUp from "./Pages/SignUp";
 import CourseCatalog from "./Pages/CourseCatalog";
 import UserDetail from "./Pages/UserDetail/UserDetail";
 import LoadingAnim from "./Components/LoadingAnim";
@@ -15,7 +17,8 @@ function App() {
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" component={HomePage}/>
-                    <Route exact path="/" component={HomePage}/>
+                    <Route path="/login" component={Login} />
+                    <Route path="/signup" component={SignUp} />
                     <Route exact path='/course-catalog/:maDanhMuc' render={({match}) => {
                         return <CourseCatalog maDanhMuc={match.params.maDanhMuc}/>
                     }}/>
