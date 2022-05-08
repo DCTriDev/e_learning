@@ -7,7 +7,7 @@ import localServices from "../../Services/localServices";
 import CourseList from "./Course/CourseList";
 import Profile from "./Profile/Profile";
 import "./index.css";
-import HomeCarousel from "../Home/HomeCarousel";
+
 function UserDetail(match) {
   const { TabPane } = Tabs;
   const dispatch = useDispatch();
