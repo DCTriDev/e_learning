@@ -5,19 +5,19 @@ import { startLoading, stopLoading } from "../Redux/Slice/loadingAnimSlice";
 import localServices from "./localServices";
 
 class AxiosService {
-    axios;
-    axiosConfig;
-    authService;
-    constructor(params) {
-        this.axios = Axios.create({
-            baseURL: this.getBaseUrl(),
-        });
-        this.getAxiosConfig();
-    }
+  axios;
+  axiosConfig;
+  authService;
+  constructor(params) {
+    this.axios = Axios.create({
+      baseURL: this.getBaseUrl(),
+    });
+    this.getAxiosConfig();
+  }
 
-    getBaseUrl() {
-        return BASE_URL;
-    }
+  getBaseUrl() {
+    return BASE_URL;
+  }
 
   getAxiosConfig = (_token) => {
     const token = _token ? _token : localServices.getUserInfo.accessToken;
@@ -29,85 +29,85 @@ class AxiosService {
     };
   };
 
-    removeAxiosConfig = () => {
-        this.axiosConfig = {
-            headers: {
-                iKeapy: ``,
-                "Content-Type": "application/json",
-            },
-        };
+  removeAxiosConfig = () => {
+    this.axiosConfig = {
+      headers: {
+        iKeapy: ``,
+        "Content-Type": "application/json",
+      },
     };
+  };
 
-    getMethod(uri, loading = true) {
-        return this.handleFlow(this.axios.get(uri, this.axiosConfig), loading);
-    }
+  getMethod(uri, loading = true) {
+    return this.handleFlow(this.axios.get(uri, this.axiosConfig), loading);
+  }
 
-    postMethod(uri, data, loading = true) {
-        return this.handleFlow(
-            this.axios.post(uri, data, this.axiosConfig),
-            loading
-        );
-    }
+  postMethod(uri, data, loading = true) {
+    return this.handleFlow(
+      this.axios.post(uri, data, this.axiosConfig),
+      loading
+    );
+  }
 
-    putMethod(uri, data, loading = true) {
-        return this.handleFlow(
-            this.axios.put(uri, data, this.axiosConfig),
-            loading
-        );
-    }
+  putMethod(uri, data, loading = true) {
+    return this.handleFlow(
+      this.axios.put(uri, data, this.axiosConfig),
+      loading
+    );
+  }
 
-    patchMethod(uri, data, loading = true) {
-        return this.handleFlow(
-            this.axios.patch(uri, data, this.axiosConfig),
-            loading
-        );
-    }
+  patchMethod(uri, data, loading = true) {
+    return this.handleFlow(
+      this.axios.patch(uri, data, this.axiosConfig),
+      loading
+    );
+  }
 
-    deleteMethod(uri, loading = true) {
-        return this.handleFlow(this.axios.delete(uri, this.axiosConfig), loading);
-    }
+  deleteMethod(uri, loading = true) {
+    return this.handleFlow(this.axios.delete(uri, this.axiosConfig), loading);
+  }
 
-    handleFlow(method, loading = true) {
-        loading && store.dispatch(startLoading());
-        return new Promise((resolve, reject) => {
-            method
-                .then((res) => {
-                    loading && store.dispatch(stopLoading());
-                    resolve({
-                        data: res.data,
-                        status: res.status,
-                        isSuccess: true,
-                    });
-                })
-                .catch((err) => {
-                    loading && store.dispatch(startLoading());
+  handleFlow(method, loading = true) {
+    loading && store.dispatch(startLoading());
+    return new Promise((resolve, reject) => {
+      method
+        .then((res) => {
+          loading && store.dispatch(stopLoading());
+          resolve({
+            data: res.data,
+            status: res.status,
+            isSuccess: true,
+          });
+        })
+        .catch((err) => {
+          loading && store.dispatch(stopLoading());
 
-                    this.handleError(err);
-                    reject({
-                        err: err,
-                    });
-                });
+          this.handleError(err);
+          reject({
+            err: err,
+          });
         });
+    });
+  }
+
+  handleError = (err) => {
+    const status = err.response?.status;
+    switch (
+      status
+      // case 400:
+      // case 401:
+      // case 403:
+      //   window.location.assign("/lms");
+      //   break;
+      // default:
+      //   break;
+    ) {
     }
+  };
 
-    handleError = (err) => {
-        const status = err.response?.status;
-        switch (
-            status
-            // case 400:
-            // case 401:
-            // case 403:
-            //   window.location.assign("/lms");
-            //   break;
-            // default:
-            //   break;
-            ) {
-        }
-    };
-
-    axiosInstance = (req) => {
-        this.axios(req, this.axiosConfig);
-    };
+  axiosInstance = (req) => {
+    this.axios(req, this.axiosConfig);
+  };
 }
 
 const AxiosServ = new AxiosService();
