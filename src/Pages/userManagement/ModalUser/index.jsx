@@ -2,8 +2,9 @@ import { Select, message, Form, Input } from "antd";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import validator from "validator";
-
+import "./index.css";
 import AdminSrv from "../../../Services/admin.service";
+import { RollbackOutlined } from "@ant-design/icons";
 
 export const ModalUser = (props) => {
   const type = props.path === "/UserManagement/themNguoiDung";
@@ -12,7 +13,7 @@ export const ModalUser = (props) => {
   const dataUser = type
     ? ""
     : { ...location.state.data, soDT: location.state.data.soDt };
-  const styleInput = "";
+  const styleInput = " rounded-lg h-[40px]";
   const onFinish = (values) => {
     type
       ? AdminSrv.addUser({ ...values, maNhom: "GP01" })
@@ -36,12 +37,26 @@ export const ModalUser = (props) => {
     console.log("Failed:", errorInfo);
   };
   return (
-    <div className=" p-5 h-screen bg-yellow-400">
-      <h1>{type ? "Thêm người dùng" : "Chỉnh sửa thông tin người dùng"}</h1>
+    <div className="  h-screen bg-yellow-400">
+      <div className=" flex  space-x-2 items-center bg-yellow-500  shadow-lg  h-24">
+        <div className="h-full w-[4%] flex justify-end hover:justify-start bg-yellow-400">
+          <button
+            className=" shadow-lg  h-full bg-yellow-500 border-transparent border-r-white border-r-2  border-solid  text-white rounded-md px-4 py-2  cursor-pointer"
+            onClick={() => {
+              history.goBack();
+            }}
+          >
+            <RollbackOutlined className=" text-xl " />
+          </button>
+        </div>
+        <h1 className=" header-user-mng  text-white m-0">
+          {type ? "Thêm người dùng" : "Chỉnh sửa thông tin người dùng"}
+        </h1>
+      </div>
       <Form
         initialValues={type ? null : dataUser}
         values={dataUser}
-        className=" w-full grid grid-cols-1  lg:grid-cols-2 gap-x-14 "
+        className="p-5 w-full grid grid-cols-1  lg:grid-cols-2 gap-x-14  overflow-hidden"
         labelCol={{
           span: 24,
         }}
@@ -69,10 +84,14 @@ export const ModalUser = (props) => {
           rules={[
             { required: true, message: "Không được bỏ trống" },
             {
-              validator: (_, value) =>
-                validator.isEmail(value)
+              validator: (_, value) => {
+                if (value === undefined) {
+                  value = "";
+                }
+                return validator.isEmail(value)
                   ? Promise.resolve()
-                  : Promise.reject(new Error(" email không hợp lệ")),
+                  : Promise.reject(new Error(" email không hợp lệ"));
+              },
             },
           ]}
           hasFeedback
@@ -94,8 +113,11 @@ export const ModalUser = (props) => {
           rules={[
             { required: true, message: "Không được bỏ trống" },
             {
-              validator: (_, value) =>
-                validator.isStrongPassword(value, {
+              validator: (_, value) => {
+                if (value === undefined) {
+                  value = "";
+                }
+                return validator.isStrongPassword(value, {
                   minLength: 8,
                   minLowercase: 1,
                   minUppercase: 1,
@@ -108,7 +130,8 @@ export const ModalUser = (props) => {
                       new Error(
                         "Mật khẩu ít nhất 8 kí tự bao gồm : kí tự in hoa , thường , số , kí tự đặc biệt"
                       )
-                    ),
+                    );
+              },
             },
           ]}
           hasFeedback
@@ -122,10 +145,15 @@ export const ModalUser = (props) => {
           rules={[
             { required: true, message: "Không được bỏ trống" },
             {
-              validator: (_, value) =>
-                validator.isMobilePhone(value, "vi-VN")
+              validator: (_, value) => {
+                console.log("valueItem:", value);
+                if (value === undefined) {
+                  value = "";
+                }
+                return validator.isMobilePhone(value, "vi-VN")
                   ? Promise.resolve()
-                  : Promise.reject(new Error("Số điện thoại không hợp lệ")),
+                  : Promise.reject(new Error("Số điện thoại không hợp lệ"));
+              },
             },
           ]}
           hasFeedback
@@ -138,30 +166,29 @@ export const ModalUser = (props) => {
           rules={[{ required: true, message: "Không được bỏ trống" }]}
           hasFeedback
         >
-          <Select
-            className=" border-none"
-            hasFeedback
-            rules={[{ required: true, message: "Không được bỏ trống" }]}
-          >
+          <Select>
             <Select.Option value="HV">Học viên</Select.Option>
             <Select.Option value="GV">Giáo viên</Select.Option>
           </Select>
         </Form.Item>
-        <div>
+        <div className=" mt-5 w-screen flex justify-center">
           {type ? (
-            <button type="submit">Thêm</button>
+            <button
+              className=" bg-green-500 text-white border-none rounded-md px-4 py-2 hover:-translate-y-2 cursor-pointer"
+              type="submit"
+            >
+              Thêm
+            </button>
           ) : (
-            <button type="submit">Lưu</button>
+            <button
+              className=" mt-5 bg-green-500 text-white border-none rounded-md px-4 py-2 hover:-translate-y-2 cursor-pointer"
+              type="submit"
+            >
+              Lưu
+            </button>
           )}
         </div>
       </Form>
-      <button
-        onClick={() => {
-          history.goBack();
-        }}
-      >
-        Quay lại
-      </button>
     </div>
   );
 };

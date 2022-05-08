@@ -1,0 +1,12 @@
+.header-user-mng {
+  /* height: 400px; */
+  /* animation: mymove 5s infinite !important; */
+}
+@keyframes mymove {
+  from {
+    background-color: yellow;
+  }
+  to {
+    background-color: red;
+  }
+}
