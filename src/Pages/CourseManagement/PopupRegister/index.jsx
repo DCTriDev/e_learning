@@ -78,7 +78,6 @@ export default function PopupRegister(props) {
     CourseManagementSrv.getUnregisteredUssers(props.data.maKhoaHoc)
       .then((res) => {
         setUnregisteredUssers(res.data);
-        console.log("UsersRegistedClone", UsersRegistedClone);
       })
       .catch((err) => console.log(err));
     setStateTable1({

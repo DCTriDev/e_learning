@@ -44,51 +44,55 @@ export default function CourseManagement() {
   const renderTableList = () => {
     if (courseList.length === 0) {
       return (
-        <tr>
-          <td colSpan="7" className=" italic text-red-500  text-center">
-            Không tìm thấy khóa học nào
-          </td>
-        </tr>
+          <tr>
+            <td colSpan="7" className=" italic text-red-500  text-center">
+              Không tìm thấy khóa học nào
+            </td>
+          </tr>
       );
     } else {
       return courseList?.map((item, i) => {
         return (
-          i >= stateTable.minIndex &&
-          i < stateTable.maxIndex && (
-            <tr
-              key={i}
-              className={`${
-                i % 2 === 0 ? "bg-gray-200" : "bg-white"
-              } text-center  h-24`}
-            >
-              <td className="text-center">{++i}</td>
-              <td className="text-center">{item.maKhoaHoc}</td>
-              <td className="text-center">{item.tenKhoaHoc}</td>
-              <td className="text-center">
-                <img src={item.hinhAnh} alt="" className='w-20 h-auto' />
-              </td>
-              <td className="text-center">{item.luotXem}</td>
-              <td className="text-center">{item.nguoiTao.hoTen}</td>
-              <td className="text-center space-y-3 lg:space-y-0 lg:space-x-2  flex flex-col items-center lg:flex-row lg:justify-center lg:items-center h-24">
-                <button className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-yellow-500 w-16 lg:w-auto"
-                onClick={() => {
-                  setCourseData(item)
-                  setIsAddCourse(true)
-                }}>
-                  Sửa
-                </button>
-                <PopupRegister data={item} />
-                <button
-                  className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-red-500 w-16 lg:w-auto"
-                  onClick={() => {
-                    dispatch(fetchDeleteCourse(item.maKhoaHoc));
-                  }}
+            i >= stateTable.minIndex &&
+            i < stateTable.maxIndex && (
+                <tr
+                    key={i}
+                    className={`${
+                        i % 2 === 0 ? "bg-gray-200" : "bg-white"
+                    } text-center`}
                 >
-                  Xóa
-                </button>
-              </td>
-            </tr>
-          )
+                  <td className="text-center hidden lg:table-cell">{++i}</td>
+                  <td className="text-center hidden md:table-cell ">
+                    {item.maKhoaHoc}
+                  </td>
+                  <td className="text-center">{item.tenKhoaHoc}</td>
+                  <td className="text-center">
+                    <img src={item.hinhAnh} alt="" className='w-20 h-auto' />
+                  </td>
+                  <td className="text-center hidden lg:table-cell">
+                    {item.luotXem}
+                  </td>
+                  <td className="text-center">{item.nguoiTao.hoTen}</td>
+                  <td className="text-center space-y-3 lg:space-y-0 lg:space-x-2  flex flex-col items-center lg:flex-row justify-center lg:h-[120px] ">
+                    <button className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-yellow-500 w-16 lg:w-auto"
+                      onClick={() => {
+                      setCourseData(item)
+                      setIsAddCourse(true)
+                    }}>
+                      Sửa
+                    </button>
+                    <PopupRegister data={item} />
+                    <button
+                        className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-red-500 w-16 lg:w-auto"
+                        onClick={() => {
+                          dispatch(fetchDeleteCourse(item.maKhoaHoc));
+                        }}
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+            )
         );
       });
     }
@@ -104,65 +108,65 @@ export default function CourseManagement() {
     });
   };
   return (
-    <div>
-     <div>
-       <button onClick={()=> {
-         setIsAddCourse(true)
-         setCourseData(null)
-       }}>Thêm Khóa Học</button>
-       <PopupAddCourse isAddCourse={isAddCourse} setIsAddCourse={setIsAddCourse} data={courseData}/>
-     </div>
-      <div className=" relative">
-        <div className=" flex ">
-          <Form
-            id="form-search-course"
-            onFinish={onFinish}
-            autoComplete="off"
-            className=" lg:max-w-max-w-1/3 flex"
-          >
-            <Form.Item name="valueSearchCourse">
-              <Input placeholder="Nhập tên/mã khóa học" />
-            </Form.Item>
-
-            <Form.Item>
-              <Button htmlType="submit">
-                <SearchOutlined />
-              </Button>
-            </Form.Item>
-          </Form>
-          <Button
-            onClick={() => {
-              dispatch(searchCourse(""));
-              document.getElementById("form-search-course").reset();
-            }}
-          >
-            <UndoOutlined />
-          </Button>
+      <div>
+        <div>
+          <button onClick={()=> {
+            setIsAddCourse(true)
+            setCourseData(null)
+          }}>Thêm Khóa Học</button>
+          <PopupAddCourse isAddCourse={isAddCourse} setIsAddCourse={setIsAddCourse} data={courseData}/>
         </div>
-        <table className="w-full">
-          <thead className=" bg-yellow-400 h-14 shadow-lg">
-            <tr className="text-center">
-              <th className=" w-[5%]">STT</th>
-              <th className=" w-[20%]">Mã khóa học</th>
-              <th className=" w-[20%]">Tên khóa học</th>
-              <th>Hình ảnh </th>
-              <th className=" w-[5%]">Lượt xem</th>
-              <th className=" w-[20%]">Người tạo</th>
-              <th>Thao tác</th>
-            </tr>
-          </thead>
-          <tbody>{renderTableList()}</tbody>
-        </table>
-        <Pagination
-          className=" w-fit top-0 absolute left-1/2 -translate-x-1/2 mt-[1200px] "
-          showSizeChanger={false}
-          pageSize={10}
-          defaultCurrent={stateTable.current}
-          current={stateTable.current}
-          total={courseList.length}
-          onChange={handleChange}
-        />
+        <div className=" relative">
+          <div className=" flex ">
+            <Form
+                id="form-search-course"
+                onFinish={onFinish}
+                autoComplete="off"
+                className=" lg:max-w-max-w-1/3 flex"
+            >
+              <Form.Item name="valueSearchCourse">
+                <Input placeholder="Nhập tên/mã khóa học" />
+              </Form.Item>
+
+              <Form.Item>
+                <Button htmlType="submit">
+                  <SearchOutlined />
+                </Button>
+              </Form.Item>
+            </Form>
+            <Button
+                onClick={() => {
+                  dispatch(searchCourse(""));
+                  document.getElementById("form-search-course").reset();
+                }}
+            >
+              <UndoOutlined />
+            </Button>
+          </div>
+          <table className="w-full">
+            <thead className=" bg-yellow-400 h-14 shadow-lg">
+              <tr className="text-center">
+                <th className=" md:w-[5%] hidden lg:table-cell">STT</th>
+                <th className=" md:w-[20%] hidden md:table-cell ">Mã khóa học</th>
+                <th className=" md:w-[20%]">Tên khóa học</th>
+                <th>Hình ảnh </th>
+                <th className=" md:w-[5%]  hidden lg:table-cell">Lượt xem</th>
+                <th className=" md:w-[20%]">Người tạo</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody className=" h-[1200px]">{renderTableList()}</tbody>
+          </table>
+          <Pagination
+              className=" w-fit mx-auto mt-3 "
+              showSizeChanger={false}
+              pageSize={10}
+              defaultCurrent={stateTable.current}
+              current={stateTable.current}
+              total={courseList.length}
+              onChange={handleChange}
+          />
+        </div>
       </div>
-    </div>
   );
 }
