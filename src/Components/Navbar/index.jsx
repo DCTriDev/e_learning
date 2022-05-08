@@ -61,6 +61,7 @@ function Navbar() {
     });
   }, []);
   return widthWindow > 900 ? (
+    //  Default Navbar
     <div className="bg-navbar transition-all duration-300 navbar-height">
       <div className="container flex justify-between items-center mx-auto max-w-full h-full ">
         <NavLink to={"/"}>
@@ -86,13 +87,15 @@ function Navbar() {
               </a>
             </Dropdown>
             <NavLink className='text-xl text-blue-600 uppercase' to={"/blog"}>Blog</NavLink>
-            <NavLink className='text-xl text-blue-600 uppercase' to={"/"}>Contact</NavLink>
+            <NavLink className='text-xl text-blue-600 uppercase' to={"/events"}>Sự kiện</NavLink>
+            <NavLink className='text-xl text-blue-600 uppercase' to={"/about"}>Thông tin</NavLink>
           </div>
         </div>
         <UserNav />
       </div>
     </div>
   ) : (
+    //Small Navbar
     <div className="bg-navbar transition-all duration-300 navbar-height">
       <div className="container flex justify-between items-center mx-auto max-w-full h-full ">
         <NavLink to={"/"}>

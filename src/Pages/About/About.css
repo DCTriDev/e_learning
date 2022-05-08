@@ -1,0 +1,69 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+.sliderAbout {
+    background-image: url(../../Assets/Images/About/elearning-content-types.png);
+    background-position: 40%;
+    padding: 100px 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.sliderContentAbout {
+    text-align: center;
+    padding: 50px;
+}
+
+.sliderContentAbout h6 {
+    color: #dc3545;
+    font-size: 40px;
+    font-weight: 700;
+}
+.sliderContentAbout p {
+    font-size: 32px;
+    color: #000;
+}
+.AboutItem {
+    padding: 40px;
+}
+.AboutItem img {
+    width: 100%;
+    height: 90%;
+    object-fit: contain;
+}
+
+.AboutItem h6 {
+    text-transform: uppercase;
+    color:#41b294;
+    font-size: 20px;
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.AboutItem h5 {
+    color: #012025;
+    font-size: 40px;
+    padding: 10px 0;
+    margin-bottom: 0;
+    font-weight: 700;
+}
+
+.AboutItem p {
+    line-height: 2.0;
+    font-size: 16px;
+    color: #000;
+}
+
+@media screen and (max-width: 739px) {
+    .reverseItem {
+        flex-direction: column-reverse;
+    }
+    .About .AboutItem {
+        padding: 20px 50px;
+    }
+}
+
+/* Tablet */
+@media screen and (min-width: 740px) and (max-width: 1023px) {
+}

@@ -11,6 +11,8 @@ import {ModalUser} from "./Pages/userManagement/ModalUser";
 import Blog from "./Pages/Blog";
 import CourseDetail from "./Pages/CourseDetail";
 import Notfound from "./Pages/Notfound";
+import About from "./Pages/About/About";
+import Events from "./Pages/Events/Events";
 
 function App() {
     return (
@@ -65,6 +67,8 @@ function App() {
                             return <Blog {...match} />;
                         }}
                     />
+                    <Route exact path="/about" component={About} />
+                    <Route exact path="/events" component={Events} />
                     <Route component={Notfound} />
                 </Switch>
             </BrowserRouter>
