@@ -11,6 +11,7 @@ import {ModalUser} from "./Pages/userManagement/ModalUser";
 import Blog from "./Pages/Blog";
 import CourseDetail from "./Pages/CourseDetail";
 import Counter from "./Pages/Home/Counter";
+import Notfound from "./Pages/Notfound";
 
 function App() {
     return (
@@ -19,9 +20,9 @@ function App() {
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" component={HomePage}/>
-                    <Route path="/login" component={Login} />
-                    <Route path="/signup" component={SignUp} />
-                    <Route path="/course-detail/:courseID" component={CourseDetail} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/signup" component={SignUp} />
+                    <Route exact path="/course-detail/:courseID" component={CourseDetail} />
                     <Route exact path='/course-catalog/:maDanhMuc' render={({match}) => {
                         return <CourseCatalog maDanhMuc={match.params.maDanhMuc}/>
                     }}/>
@@ -52,6 +53,7 @@ function App() {
                     />
                     {/* <Layout2 path="/profile" Component={UserDetail} /> */}
                     <Route
+                        exact
                         path="/profile"
                         render={({ match }) => {
                             return <UserDetail match={match} />;
@@ -65,6 +67,7 @@ function App() {
                         }}
                     />
                     <Route exact path='/counter' component={Counter} />
+                    <Route component={Notfound} />
                 </Switch>
             </BrowserRouter>
         </div>
