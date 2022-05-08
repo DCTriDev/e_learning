@@ -6,6 +6,7 @@ import LoadingAnim from "./Components/LoadingAnim";
 import Search from "./Pages/Search";
 import Dashboard from "./Layouts/Dashboard/Dashboard";
 import {ModalUser} from "./Pages/userManagement/ModalUser";
+import Blog from "./Pages/Blog";
 
 function App() {
     return (
@@ -48,6 +49,13 @@ function App() {
                         path="/profile"
                         render={({ match }) => {
                             return <UserDetail match={match} />;
+                        }}
+                    />
+                    <Route
+                        exact
+                        path="/blog"
+                        render={({ match }) => {
+                            return <Blog {...match} />;
                         }}
                     />
                 </Switch>

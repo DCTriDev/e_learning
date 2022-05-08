@@ -77,15 +77,15 @@ function Navbar() {
               className="text-center"
             >
               <a
-                className="ant-dropdown-link text-xl"
+                className="ant-dropdown-link text-xl text-blue-600 uppercase"
                 href=""
                 onClick={(e) => e.preventDefault()}
               >
                 DANH MỤC
               </a>
             </Dropdown>
-            <NavLink to={"/"}>About</NavLink>
-            <NavLink to={"/"}>Contact</NavLink>
+            <NavLink className='text-xl text-blue-600 uppercase' to={"/blog"}>Blog</NavLink>
+            <NavLink className='text-xl text-blue-600 uppercase' to={"/"}>Contact</NavLink>
           </div>
         </div>
         <UserNav />
