@@ -1,7 +1,7 @@
 import React from 'react';
-import {Dropdown, Menu, Space} from 'antd';
+import {Dropdown, Menu} from 'antd';
 import {NavLink} from "react-router-dom";
-
+import localServices from "../../../Services/localServices";
 
 const menu = (
     <Menu className='rounded-xl p-2 translate-x-1/4'>
@@ -37,10 +37,11 @@ const menu = (
 );
 
 function UserNav() {
-    let userInfo = null;
+    let userInfo = localServices.getUserInfo();
+    console.log(userInfo);
     return userInfo?.accessToken ? (
         <div className="flex items-center justify-center space-x-2">
-            <div>{userInfo?.hoTen}</div>
+            <div>Xin chào, <span className='text-red-600'>{userInfo?.hoTen}</span></div>
             <Dropdown overlay={menu} trigger={["click"]}>
                 <a
                     className="ant-dropdown-link"
