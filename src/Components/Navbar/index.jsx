@@ -13,10 +13,12 @@ import logoSmall  from "../../Assets/Images/logo_small.png";
 const changeNavbarScollHeight = () => {
   window.addEventListener("scroll", () => {
     const nav = document.querySelector(".navbar-height");
-    if (window.scrollY > 100) {
-      nav.style.height = "80px";
-    } else {
-      nav.style.height = "70px";
+    if (nav) { // if navbar is present then only do the following
+      if ( window.scrollY > 100) {
+        nav.style.height = "80px";
+      } else {
+        nav.style.height = "70px";
+      }
     }
   });
 };
@@ -24,7 +26,6 @@ const changeNavbarScollHeight = () => {
 function Navbar() {
   let [widthWindow, setWidth] = useState(window.innerWidth);
   let smallNavEl = document.getElementById("small-nav");
-  let btnNavEl = document.querySelector(".btn-nav");
   const courseCatalog = useSelector((state) => state.courseSlice.courseCatalog);
   const dispatch = useDispatch();
   const items = (
@@ -48,14 +49,14 @@ function Navbar() {
   );
 
   useEffect(() => {
-    changeNavbarScollHeight();
     dispatch(fetchCourseCatalog());
-    window.addEventListener("resize", (e) => {
+    changeNavbarScollHeight();
+    window.addEventListener("resize", () => {
       setWidth(window.innerWidth);
     });
   }, []);
   useEffect(() => {
-    window.addEventListener("resize", (e) => {
+    window.addEventListener("resize", () => {
       setWidth(window.innerWidth);
     });
   }, []);

@@ -1,21 +1,18 @@
 import React from "react";
 import { Form, Input, Button, message } from "antd";
-
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import httpService from "../../../Services/http.service";
+import localServices from "../../../Services/localServices";
 
 export default function LogInForm() {
-    let dispatch = useDispatch();
     let history = useHistory();
 
-    const onFinishFailed = (errorInfo) => {
-        console.log("Failed:", errorInfo);
-    };
     const handleLogin = (values) => {
         return httpService
             .login(values)
             .then((res) => {
+                console.log(res);
+                localServices.setUserInfo(res.data)
                 history.push("/");
             })
             .catch(({ err }) => {
@@ -25,6 +22,10 @@ export default function LogInForm() {
 
     const onFinish = (values) => {
         handleLogin(values);
+    };
+
+    const onFinishFailed = (errorInfo) => {
+        console.log("Failed:", errorInfo);
     };
 
     return (
