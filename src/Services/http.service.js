@@ -1,7 +1,10 @@
 import AxiosServ from "./axios.service";
+import localServices from "./localServices";
 
 class HttpRequestService {
   constructor() {}
+
+  groupID = localServices.getGroupID();
 
   login(data, setLoading = true) {
     const uri = "/api/QuanLyNguoiDung/DangNhap";
@@ -14,7 +17,7 @@ class HttpRequestService {
   }
 
   getCoursesList = (data, setLoading = true) => {
-    const uri = '/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP05'
+    const uri = '/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=' + this.groupID;
     return AxiosServ.getMethod(uri, data, setLoading)
   }
 
@@ -24,7 +27,7 @@ class HttpRequestService {
   }
 
   getCourseListByCatalog = (values, data, setLoading = true) => {
-    const uri = `/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${values}&MaNhom=GP05`
+    const uri = `/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${values}&MaNhom=${this.groupID}`
     return AxiosServ.getMethod(uri, data, setLoading)
   }
 
@@ -34,7 +37,7 @@ class HttpRequestService {
   };
 
   getUserList = (setLoading = true) => {
-    const uri = `/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP05`;
+    const uri = `/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${this.groupID}`;
     return AxiosServ.getMethod(uri, setLoading);
   };
 
@@ -48,7 +51,7 @@ class HttpRequestService {
     return AxiosServ.putMethod(uri, data, setLoading);
   };
 
-  cancleCourse = (data, setLoading = true) => {
+  cancelCourse = (data, setLoading = true) => {
     const uri = "/api/QuanLyKhoaHoc/HuyGhiDanh";
     return AxiosServ.postMethod(uri, data, setLoading);
   };

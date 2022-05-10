@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchCourseCatalog} from "../../../Redux/Slice/courseSlice";
 import moment from "moment";
 import courseMangementService from "../../../Services/courseMangement.service";
+import localServices from "../../../Services/localServices";
 
 const { Option } = Select;
 
@@ -38,27 +39,18 @@ function PopupAddCourse(props) {
     }
 
     const onFinish = (values) => {
-        let newValues = {...values, maNhom : 'GP01', biDanh:'hello'}
+        let maNhomLocal = localServices.getGroupID()
+        let newValues = {...values, maNhom : maNhomLocal, biDanh:'hello'}
         newValues.ngayTao = moment(newValues.ngayTao).format('DD/MM/YYYY')
-        // const frm = new FormData();
-        // for (let key in newValues) {
-        //     if (key !== 'hinhAnh') {
-        //         frm.append('File', newValues.hinhAnh, newValues.hinhAnh.name)
-        //     }
-        //     else {
-        //         frm.append(key, newValues[key])
-        //     }
-        // }
-        // console.log(frm.get('File'))
+
         newValues.hinhAnh = newValues.hinhAnh.name
-
-        console.log('Received values of form: ', newValues);
-
         courseMangementService.addCourseUploadImg(newValues)
             .then(res => {
                 console.log(res)
                 handleUpdateImage(image, newValues.tenKhoaHoc)
-
+            })
+            .catch(err => {
+                console.log(err)
             })
     };
 
@@ -70,6 +62,9 @@ function PopupAddCourse(props) {
             .then(res => {
                 console.log(res.data)
                 message.success(res.data)
+            })
+            .catch(err => {
+                console.log(err)
             })
     }
 
@@ -148,8 +143,8 @@ function PopupAddCourse(props) {
                         </Form.Item>
 
                         <Form.Item
-                            name="hinhAnh"
                             label="Hình ảnh"
+                            name="hinhAnh"
                             rules={[{ required: true, message: 'Không được để trống!' }]}
                             getValueFromEvent={getFile}
                         >

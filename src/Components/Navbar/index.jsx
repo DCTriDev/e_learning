@@ -28,24 +28,18 @@ function Navbar() {
   let smallNavEl = document.getElementById("small-nav");
   const courseCatalog = useSelector((state) => state.courseSlice.courseCatalog);
   const dispatch = useDispatch();
-  const items = (
-    <Menu className="rounded-xl p-2 -translate-x-1/4 duration-300 transition-all ease-in-out">
-      {courseCatalog?.map((item, index) => {
-        return (
-          <Menu.Item
-            key={index}
-            className="hover:bg-blue-500 rounded-lg  duration-300 transition-all ease-in-out"
-          >
-            <a
-              className="text-lg duration-300 transition-all hover:text-white hover:text-white ease-in-out"
-              href={`/course-catalog/${item.maDanhMuc}`}
-            >
-              {item.tenDanhMuc}
-            </a>
-          </Menu.Item>
-        );
-      })}
-    </Menu>
+
+  const renderCourseCatalog = () => {
+    return courseCatalog?.map((item) => {
+      return ({
+        label: (<a className='ant-dropdown-link text-lg text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' href={`/course-catalog/${item.maDanhMuc}`}
+                   onClick={(e) => e.preventDefault()}>{item.tenDanhMuc}</a>)
+      })
+    })
+  }
+  const menu = (
+      <Menu className='' items={renderCourseCatalog()}>
+      </Menu>
   );
 
   useEffect(() => {
@@ -55,11 +49,7 @@ function Navbar() {
       setWidth(window.innerWidth);
     });
   }, []);
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      setWidth(window.innerWidth);
-    });
-  }, []);
+
   return widthWindow > 900 ? (
     //  Default Navbar
     <div className="bg-navbar transition-all duration-300 navbar-height">
@@ -73,22 +63,12 @@ function Navbar() {
         <SearchBox />
         <div>
           <div className="flex justify-between space-x-3">
-            <Dropdown
-              overlay={items}
-              trigger={["click"]}
-              className="text-center"
-            >
-              <a
-                className="ant-dropdown-link text-xl text-blue-600 uppercase"
-                href=""
-                onClick={(e) => e.preventDefault()}
-              >
-                DANH MỤC
-              </a>
+            <Dropdown overlay={menu} overlayClassName='' placement="bottom" arrow={{ pointAtCenter: true }}>
+              <span className="text-lg text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg">DANH MỤC</span>
             </Dropdown>
-            <NavLink className='text-xl text-blue-600 uppercase' to={"/blog"}>Blog</NavLink>
-            <NavLink className='text-xl text-blue-600 uppercase' to={"/events"}>Sự kiện</NavLink>
-            <NavLink className='text-xl text-blue-600 uppercase' to={"/about"}>Thông tin</NavLink>
+            <NavLink className='text-lg text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' activeClassName='text-red-600' to={"/blog"}>Blog</NavLink>
+            <NavLink className='text-xl text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' activeClassName='text-red-600' to={"/events"}>Sự kiện</NavLink>
+            <NavLink className='text-xl text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' activeClassName='text-red-600' to={"/about"}>Thông tin</NavLink>
           </div>
         </div>
         <UserNav />
@@ -109,7 +89,6 @@ function Navbar() {
               className="btn-nav w-12 h-12 rounded-2xl bg-transparent border-0"
               onClick={() => {
                 smallNavEl.classList.toggle("hidden");
-                // btnNavEl.classList.toggle("bg-yellow-500");
               }}
           >
             <BarsOutlined />
@@ -119,20 +98,22 @@ function Navbar() {
               className="hidden bottom-0 absolute right-auto rounded-xl -translate-x-1/2 translate-y-full z-20 bg-gray-100 shadow-2xl p-3"
           >
             <SearchBox />
-            <div className="flex flex-col items-start space-y-3">
+            <div className="flex flex-col items-start space-y-0.5">
               <Dropdown
-                  overlay={items}
-                  trigger={["click"]}
+                  overlay={menu}
+                  trigger={["hover"]}
                   className="text-center"
               >
                 <a
-                    className="ant-dropdown-link text-xl mx-auto mt-4"
-                    href=""
+                    className="ant-dropdown-link text-lg text-blue-600 mx-auto mt-4 px-1.5 py-2.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg"
                     onClick={(e) => e.preventDefault()}
                 >
                   DANH MỤC
                 </a>
               </Dropdown>
+              <NavLink className='text-lg text-blue-600 mx-auto mt-4 px-1.5 py-1.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' activeClassName='text-red-600' to={"/blog"}>Blog</NavLink>
+              <NavLink className='text-lg text-blue-600 mx-auto mt-4 px-1.5 py-1.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' activeClassName='text-red-600' to={"/events"}>Sự kiện</NavLink>
+              <NavLink className='text-lg text-blue-600 mx-auto mt-4 px-1.5 py-1.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' activeClassName='text-red-600' to={"/about"}>Thông tin</NavLink>
             </div>
           </div>
         </div>

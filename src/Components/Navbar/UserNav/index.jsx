@@ -18,7 +18,7 @@ const menu = (
             </NavLink>
         </Menu.Item>
         <Menu.Item key="1" className='hover:bg-blue-500 rounded-lg'>
-            <NavLink to="/profile" className='hover:text-white duration-300 transition-all ease-in-out'>
+            <NavLink to="/dashboard" className='hover:text-white duration-300 transition-all ease-in-out'>
                 <span className='flex items-center space-x-2'>
                     <ion-icon name="settings-outline"/>
                     <span>Settings</span>

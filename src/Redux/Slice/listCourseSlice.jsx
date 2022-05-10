@@ -10,7 +10,7 @@ export const fetchCourseDetail = createAsyncThunk(
 export const fetchCancleCourse = createAsyncThunk(
   "course/fetchCancleCourse",
   async (data) => {
-    await httpService.cancleCourse(data);
+    await httpService.cancelCourse(data);
     return data.maKhoaHoc;
   }
 );
