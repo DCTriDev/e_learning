@@ -32,8 +32,7 @@ function Navbar() {
   const renderCourseCatalog = () => {
     return courseCatalog?.map((item) => {
       return ({
-        label: (<a className='ant-dropdown-link text-lg text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' href={`/course-catalog/${item.maDanhMuc}`}
-                   onClick={(e) => e.preventDefault()}>{item.tenDanhMuc}</a>)
+        label: (<a className='ant-dropdown-link text-lg text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' href={`/course-catalog/${item.maDanhMuc}`}>{item.tenDanhMuc}</a>)
       })
     })
   }

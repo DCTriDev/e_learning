@@ -38,13 +38,14 @@ function PopupAddCourse(props) {
         })
     }
 
+
     const onFinish = (values) => {
         let maNhomLocal = localServices.getGroupID()
         let newValues = {...values, maNhom : maNhomLocal, biDanh:'hello'}
         newValues.ngayTao = moment(newValues.ngayTao).format('DD/MM/YYYY')
-
         newValues.hinhAnh = newValues.hinhAnh.name
-        courseMangementService.addCourseUploadImg(newValues)
+        isAdding?
+            courseMangementService.addCourseUploadImg(newValues)
             .then(res => {
                 console.log(res)
                 handleUpdateImage(image, newValues.tenKhoaHoc)
@@ -52,6 +53,14 @@ function PopupAddCourse(props) {
             .catch(err => {
                 console.log(err)
             })
+            :courseMangementService.modifyCourseUploadImg(newValues)
+                .then((res) => {
+                    console.log(res)
+                    handleUpdateImage(image, newValues.tenKhoaHoc)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
     };
 
     const handleUpdateImage = (img, tenKhoaHoc) => {
