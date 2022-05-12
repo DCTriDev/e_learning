@@ -1,0 +1,19 @@
+.title-list-course {
+  position: relative;
+}
+.title-list-course::before,
+.title-list-course::after {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  height: 2px;
+  right: 50%;
+  width: 70px;
+  background-color: rgba(0, 0, 0, 0.537);
+}
+.title-list-course::before {
+  transform: translateX(40%) translateY(10px);
+}
+.title-list-course::after {
+  transform: translateX(60%) translateY(15px);
+}
