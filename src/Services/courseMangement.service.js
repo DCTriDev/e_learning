@@ -39,6 +39,11 @@ class CourseManagementService {
     const uri = "/api/QuanLyKhoaHoc/ThemKhoaHoc";
     return AxiosServ.postMethod(uri, data,setLoading);
   }
+
+  modifyCourseUploadImg(data, setLoading = true){
+    const uri = "/api/QuanLyKhoaHoc/CapNhatKhoaHoc";
+    return AxiosServ.putMethod(uri, data,setLoading);
+  }
 }
 const CourseManagementSrv = new CourseManagementService();
 export default CourseManagementSrv;

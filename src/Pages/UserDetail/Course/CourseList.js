@@ -33,7 +33,8 @@ export default function CourseList() {
   let { listCourseDetail } = useSelector((state) => state.listCourseSlice);
 
   useEffect(() => {
-    userDetail.chiTietKhoaHocGhiDanh?.forEach((item, index) => {
+    for (let i = 0; i < userDetail.chiTietKhoaHocGhiDanh?.length; i++) {
+      let item = userDetail.chiTietKhoaHocGhiDanh[i];
       dispatch(fetchCourseDetail(item.maKhoaHoc));
       setState({
         data: listCourseDetail,
@@ -42,7 +43,17 @@ export default function CourseList() {
         current: 1,
         maxIndex: pageSize,
       });
-    });
+    }
+    // userDetail.chiTietKhoaHocGhiDanh?.forEach((item, index) => {
+    //   dispatch(fetchCourseDetail(item.maKhoaHoc));
+    //   setState({
+    //     data: listCourseDetail,
+    //     totalPage: listCourseDetail.length / pageSize,
+    //     minIndex: 0,
+    //     current: 1,
+    //     maxIndex: pageSize,
+    //   });
+    // });
   }, []);
   let renderContent = () => {
     if (listCourseDetail.length === 0) {

@@ -24,15 +24,13 @@ export default function ModalUpdateDetail() {
       values.hoTen === userDetail.hoTen &&
       values.soDT === userDetail.soDT
     ) {
-      error("chưa có thông tin nào  cập nhật");
+      error("chưa có thông tin nào cập nhật");
     } else {
       dispatch(fetchUpdateUser({ ...userDetail, ...values }));
-      success();
+      message.success("Cập nhật thành công");
     }
   };
-  const success = () => {
-    message.success("Cập nhật thành công");
-  };
+
   const error = (data) => {
     message.error(data);
   };

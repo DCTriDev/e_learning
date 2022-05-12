@@ -29,8 +29,6 @@ export default function Footer() {
             <div className="form-group ">
               <input
                 type="text"
-                name
-                id
                 className="form-control w-110 mr-3 h-9 border-none rounded-md"
                 placeholder="youremail@email.com"
                 aria-describedby="helpId"
@@ -49,24 +47,18 @@ export default function Footer() {
           <input
             type="text"
             className="form-control h-9 border-none rounded-md mt-3"
-            name
-            id
             aria-describedby="helpId"
             placeholder="Họ và tên *"
           />
           <input
             type="text"
             className="form-control h-9 border-none rounded-md mt-3"
-            name
-            id
             aria-describedby="helpId"
             placeholder="Email liên hệ *"
           />
           <input
             type="text"
             className="form-control h-9 border-none rounded-md mt-3"
-            name
-            id
             aria-describedby="helpId"
             placeholder="Điện thoại liên hệ *"
           />
@@ -82,7 +74,7 @@ export default function Footer() {
             style={{ border: "none", overflow: "hidden" }}
             scrolling="no"
             frameBorder={0}
-            allowFullScreen="true"
+            allowFullScreen={true}
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
           />
         </div>

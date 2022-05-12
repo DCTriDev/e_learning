@@ -1,8 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import httpService from "../../Services/http.service";
+import localServices from "../../Services/localServices";
 
 const initialState = {
-    userDetail: null,
+  userDetail: null,
+  statusLocal: true,
 };
 
 export const fetchUserDetail = createAsyncThunk(
@@ -17,8 +19,8 @@ export const fetchUserDetail = createAsyncThunk(
 export const fetchUpdateUser = createAsyncThunk(
   "user/fetchUpdateUser",
   async (ttcn) => {
-    await httpService.updateUserDetail(ttcn);
-    return ttcn;
+    const response = await httpService.updateUserDetail(ttcn);
+    return response.data;
   }
 );
 
@@ -31,7 +33,10 @@ const userSlice = createSlice({
       state.userDetail = action.payload;
     },
     [fetchUpdateUser.fulfilled]: (state, action) => {
-      state.userDetail = action.payload;
+      let { matKhau, ...rest } = action.payload;
+      localServices.setUserInfo({ ...localServices.getUserInfo(), ...rest });
+      state.statusLocal = !state.statusLocal;
+      state.userDetail = { ...action.payload, soDT: action.payload.soDt };
     },
   },
 });

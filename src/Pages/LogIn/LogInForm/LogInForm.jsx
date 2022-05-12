@@ -11,7 +11,6 @@ export default function LogInForm() {
     return httpService
       .login(values)
       .then((res) => {
-        console.log(res);
         message.success("Bạn đã đăng nhập thành công");
         localServices.setUserInfo(res.data);
         history.push("/");

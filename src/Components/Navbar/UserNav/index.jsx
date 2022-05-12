@@ -1,10 +1,11 @@
-import React from 'react';
-import {Dropdown, Menu} from 'antd';
-import {NavLink} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Dropdown, Menu } from "antd";
+import { NavLink } from "react-router-dom";
 import localServices from "../../../Services/localServices";
+import { useSelector } from "react-redux";
 
 const handleLogout = () => {
-    localServices.removeUserInfo()
+  localServices.removeUserInfo();
 };
 
 const menu = (
@@ -42,37 +43,42 @@ const menu = (
 );
 
 function UserNav() {
-    let userInfo = localServices.getUserInfo();
-    console.log(userInfo);
-    return userInfo?.accessToken ? (
-        <div className="flex items-center justify-center space-x-2 relative">
-            <div>Xin chào, <span className='text-red-600'>{userInfo?.hoTen}</span></div>
-            <Dropdown overlay={menu} trigger={["click"]} className='relative'>
-                <a
-                    className="ant-dropdown-link"
-                    onClick={(e) => e.preventDefault()}>
-                    <img
-                        className="w-12 h-12 object-cover rounded-full relative"
-                        src="https://picsum.photos/200/200"
-                        alt=""
-                    />
-                </a>
-            </Dropdown>
-        </div>
-    ) : (
-        <div>
-            <NavLink
-                to="/login"
-                className="bg-green-500 px-3 py-2 hover:scale-105 hover:bg-green-700 text-white duration-300 transition-all rounded-xl">
-                Log In
-            </NavLink>
-            <NavLink
-                to="/signup"
-                className="bg-red-500 mx-3 px-3 py-2 hover:scale-105 hover:bg-red-700 text-white duration-300 transition-all rounded-xl">
-                Sign Up
-            </NavLink>
-        </div>
-    );
+  let [userInfo, setUserInfor] = useState();
+  let { statusLocal } = useSelector((state) => state.userSlice);
+  useEffect(() => {
+    setUserInfor(localServices.getUserInfo() || {});
+  }, [statusLocal]);
+  return localServices.getUserInfo()?.accessToken ? (
+    <div className="flex items-center justify-center space-x-2 relative">
+      <div>
+        Xin chào, <span className="text-red-600">{userInfo?.hoTen}</span>
+      </div>
+      <Dropdown overlay={menu} trigger={["click"]} className="relative">
+        <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+          <img
+            className="w-12 h-12 object-cover rounded-full relative"
+            src="https://picsum.photos/200/200"
+            alt=""
+          />
+        </a>
+      </Dropdown>
+    </div>
+  ) : (
+    <div>
+      <NavLink
+        to="/login"
+        className="bg-green-500 px-3 py-2 hover:scale-105 hover:bg-green-700 text-white duration-300 transition-all rounded-xl"
+      >
+        Log In
+      </NavLink>
+      <NavLink
+        to="/signup"
+        className="bg-red-500 mx-3 px-3 py-2 hover:scale-105 hover:bg-red-700 text-white duration-300 transition-all rounded-xl"
+      >
+        Sign Up
+      </NavLink>
+    </div>
+  );
 }
 
 export default UserNav;
