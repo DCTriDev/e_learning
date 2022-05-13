@@ -265,7 +265,7 @@ export default function PopupRegister(props) {
         Ghi danh
       </button>
       <Modal
-        className=" w-screen"
+        className=" w-screen bg-none"
         title="Ghi Danh"
         visible={isModalVisible}
         onOk={handleOk}

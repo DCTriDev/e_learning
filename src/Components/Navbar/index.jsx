@@ -7,14 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCourseCatalog } from "../../Redux/Slice/courseSlice";
 import SearchBox from "./SearchBox";
 import { BarsOutlined } from "@ant-design/icons";
-import logoBig  from "../../Assets/Images/logo_big.png";
-import logoSmall  from "../../Assets/Images/logo_small.png";
+import logoBig from "../../Assets/Images/logo_big.png";
+import logoSmall from "../../Assets/Images/logo_small.png";
 
 const changeNavbarScollHeight = () => {
   window.addEventListener("scroll", () => {
     const nav = document.querySelector(".navbar-height");
-    if (nav) { // if navbar is present then only do the following
-      if ( window.scrollY > 100) {
+    if (nav) {
+      // if navbar is present then only do the following
+      if (window.scrollY > 100) {
         nav.style.height = "80px";
       } else {
         nav.style.height = "70px";
@@ -31,16 +32,20 @@ function Navbar() {
 
   const renderCourseCatalog = () => {
     return courseCatalog?.map((item) => {
-      return ({
-        label: (<a className='ant-dropdown-link text-lg text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' href={`/course-catalog/${item.maDanhMuc}`}
-                   onClick={(e) => e.preventDefault()}>{item.tenDanhMuc}</a>)
-      })
-    })
-  }
-  const menu = (
-      <Menu className='' items={renderCourseCatalog()}>
-      </Menu>
-  );
+      return {
+        label: (
+          <a
+            className="ant-dropdown-link text-lg text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg"
+            href={`/course-catalog/${item.maDanhMuc}`}
+            onClick={(e) => e.preventDefault()}
+          >
+            {item.tenDanhMuc}
+          </a>
+        ),
+      };
+    });
+  };
+  const menu = <Menu className="" items={renderCourseCatalog()}></Menu>;
 
   useEffect(() => {
     dispatch(fetchCourseCatalog());
@@ -55,20 +60,42 @@ function Navbar() {
     <div className="bg-navbar transition-all duration-300 navbar-height">
       <div className="container flex justify-between items-center mx-auto max-w-full h-full ">
         <NavLink to={"/"}>
-          <img
-            src={logoBig}
-            alt="logo"
-            className="w-48 mr-4"/>
+          <img src={logoBig} alt="logo" className="w-48 mr-4" />
         </NavLink>
         <SearchBox />
         <div>
           <div className="flex justify-between space-x-3">
-            <Dropdown overlay={menu} overlayClassName='' placement="bottom" arrow={{ pointAtCenter: true }}>
-              <span className="text-lg text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg">DANH MỤC</span>
+            <Dropdown
+              overlay={menu}
+              overlayClassName=""
+              placement="bottom"
+              arrow={{ pointAtCenter: true }}
+            >
+              <span className="text-lg text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg">
+                DANH MỤC
+              </span>
             </Dropdown>
-            <NavLink className='text-lg text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' activeClassName='text-red-600' to={"/blog"}>Blog</NavLink>
-            <NavLink className='text-xl text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' activeClassName='text-red-600' to={"/events"}>Sự kiện</NavLink>
-            <NavLink className='text-xl text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' activeClassName='text-red-600' to={"/about"}>Thông tin</NavLink>
+            <NavLink
+              className="text-lg text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg"
+              activeClassName="text-red-600"
+              to={"/blog"}
+            >
+              Blog
+            </NavLink>
+            <NavLink
+              className="text-xl text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg"
+              activeClassName="text-red-600"
+              to={"/events"}
+            >
+              Sự kiện
+            </NavLink>
+            <NavLink
+              className="text-xl text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg"
+              activeClassName="text-red-600"
+              to={"/about"}
+            >
+              Thông tin
+            </NavLink>
           </div>
         </div>
         <UserNav />
@@ -79,41 +106,57 @@ function Navbar() {
     <div className="bg-navbar transition-all duration-300 navbar-height">
       <div className="container flex justify-between items-center mx-auto max-w-full h-full ">
         <NavLink to={"/"}>
-          <img
-              src={logoSmall}
-              alt="logo"
-              className="w-24 mr-4"/>
+          <img src={logoSmall} alt="logo" className="w-24 mr-4" />
         </NavLink>
         <div className="relative ">
           <button
-              className="btn-nav w-12 h-12 rounded-2xl bg-transparent border-0"
-              onClick={() => {
-                smallNavEl.classList.toggle("hidden");
-              }}
+            className="btn-nav w-12 h-12  bg-transparent border-2 hover:bg-yellow-400 cursor-pointer  "
+            onClick={() => {
+              smallNavEl.classList.toggle("hidden");
+              smallNavEl.classList.toggle("show");
+            }}
           >
-            <BarsOutlined />
+            <BarsOutlined className=" text-3xl leading-[100%]" />
           </button>
           <div
-              id="small-nav"
-              className="hidden bottom-0 absolute right-auto rounded-xl -translate-x-1/2 translate-y-full z-20 bg-gray-100 shadow-2xl p-3"
+            id="small-nav"
+            className="hidden bottom-0 absolute right-auto rounded-xl -translate-x-1/2 translate-y-full z-20 bg-gray-100 shadow-2xl p-3 transition-all duration-[500ms]"
           >
             <SearchBox />
             <div className="flex flex-col items-start space-y-0.5">
               <Dropdown
-                  overlay={menu}
-                  trigger={["hover"]}
-                  className="text-center"
+                overlay={menu}
+                trigger={["hover"]}
+                className="text-center"
               >
                 <a
-                    className="ant-dropdown-link text-lg text-blue-600 mx-auto mt-4 px-1.5 py-2.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg"
-                    onClick={(e) => e.preventDefault()}
+                  className="ant-dropdown-link text-lg text-blue-600 mx-auto mt-4 px-1.5 py-2.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg"
+                  onClick={(e) => e.preventDefault()}
                 >
                   DANH MỤC
                 </a>
               </Dropdown>
-              <NavLink className='text-lg text-blue-600 mx-auto mt-4 px-1.5 py-1.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' activeClassName='text-red-600' to={"/blog"}>Blog</NavLink>
-              <NavLink className='text-lg text-blue-600 mx-auto mt-4 px-1.5 py-1.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' activeClassName='text-red-600' to={"/events"}>Sự kiện</NavLink>
-              <NavLink className='text-lg text-blue-600 mx-auto mt-4 px-1.5 py-1.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg' activeClassName='text-red-600' to={"/about"}>Thông tin</NavLink>
+              <NavLink
+                className="text-lg text-blue-600 mx-auto mt-4 px-1.5 py-1.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg"
+                activeClassName="text-red-600"
+                to={"/blog"}
+              >
+                Blog
+              </NavLink>
+              <NavLink
+                className="text-lg text-blue-600 mx-auto mt-4 px-1.5 py-1.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg"
+                activeClassName="text-red-600"
+                to={"/events"}
+              >
+                Sự kiện
+              </NavLink>
+              <NavLink
+                className="text-lg text-blue-600 mx-auto mt-4 px-1.5 py-1.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg"
+                activeClassName="text-red-600"
+                to={"/about"}
+              >
+                Thông tin
+              </NavLink>
             </div>
           </div>
         </div>

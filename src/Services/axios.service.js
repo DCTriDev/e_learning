@@ -19,23 +19,23 @@ class AxiosService {
     return BASE_URL;
   }
 
-  getAxiosConfig = (_token) => {
+  getAxiosConfig(_token) {
     // const token = _token ? _token : localServices.getUserInfo.accessToken;
     this.axiosConfig = {
       headers: {
         TokenCybersoft: TOKEN_CYBERSOFT,
-        Authorization: `Bearer ${localServices.getUserInfo().accessToken}`,
+        Authorization: `Bearer ${localServices.getUserInfo()?.accessToken}`,
       },
     };
-  };
-  removeAxiosConfig = () => {
+  }
+  removeAxiosConfig() {
     this.axiosConfig = {
       headers: {
         iKeapy: ``,
         "Content-Type": "application/json",
       },
     };
-  };
+  }
 
   getMethod(uri, loading = true) {
     return this.handleFlow(this.axios.get(uri, this.axiosConfig), loading);
