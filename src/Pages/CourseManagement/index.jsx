@@ -59,7 +59,7 @@ export default function CourseManagement() {
               key={i}
               className={`${
                 i % 2 === 0 ? "bg-gray-200" : "bg-white"
-              } text-center`}
+              } text-center h-[10%] `}
             >
               <td className="text-center hidden lg:table-cell">{++i}</td>
               <td className="text-center hidden md:table-cell ">
@@ -165,7 +165,7 @@ export default function CourseManagement() {
               <th>Thao tác</th>
             </tr>
           </thead>
-          <tbody className=" h-[1200px]">{renderTableList()}</tbody>
+          <tbody className="">{renderTableList()}</tbody>
         </table>
         <Pagination
           className=" w-fit mx-auto mt-3 "

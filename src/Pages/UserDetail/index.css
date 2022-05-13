@@ -21,10 +21,10 @@
 .ant-tabs-top > .ant-tabs-nav:before {
   border-bottom: 1px solid rgb(250 204 21);
 }
-.ant-modal-body {
+/* .ant-modal-body {
   background: url("https://cdn.dribbble.com/users/538183/screenshots/4455410/media/e28c4f10bbcc32a9771be27af90dafef.gif")
     center;
-}
+} */
 
 .ant-btn-primary {
   background-color: rgb(250 204 21);
@@ -34,7 +34,8 @@
   background-color: rgb(250 204 21);
   box-shadow: rgba(255, 255, 255, 0.2) 0 0 0 1px inset;
 }
-.ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
+.ant-form-item-label
+  > label.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
   content: "";
 }
 /* panigation  */
