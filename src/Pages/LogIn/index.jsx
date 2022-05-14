@@ -1,21 +1,27 @@
 import React from "react";
-import HomeBtn from "../../Components/HomeButton";
+import { NavLink } from "react-router-dom";
+import ButtonHome from "../../Components/ButtonHome/ButtonHome";
 import LogInForm from "./LogInForm/LogInForm";
 
 export default function Login() {
   return (
-    <div className=" overflow-hidden">
-      <HomeBtn />
-      <div className="lg:container px-14 lg:px-0 grid lg:grid-cols-2 md:grid-cols-1 py-20 gap-12">
-        <div className="col-span-1  ">
-          <img
-            className=" w-full"
-            src="https://pixerio.com/wp-content/uploads/2020/11/E-learning-Company.png"
-            alt="login"
-          />
-        </div>
-        <div className="col-span-1 self-center">
+    <div className=" w-screen h-screen flex items-center bg-gray-300 overflow-hidden">
+      <ButtonHome />
+      <div className=" lg:container w-[90%] mx-auto  lg:h-3/4 md:h-4/5 h-full lg:p-3 bg-white  shadow-xl rounded-2xl flex lg:flex-row flex-col  justify-center items-center ">
+        <div
+          className=" lg:w-1/2 w-full lg:h-full h-1/2  bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url(https://pixerio.com/wp-content/uploads/2020/11/E-learning-Company.png)",
+          }}
+        ></div>
+        <div className=" lg:w-1/2 w-full lg:p-0 p-3">
           <LogInForm />
+          <NavLink to="/signup">
+            <span className=" italic text-red-400 text-base hover:text-red-600 hover:text-lg leading-10 hover:leading-10">
+              Bạn chưa có tài khoản ?
+            </span>
+          </NavLink>
         </div>
       </div>
     </div>

@@ -105,9 +105,12 @@ export default function PopupRegister(props) {
   const searchUserRegisted = (text) => {
     let newUsersRegisted = [...UsersRegistedClone].filter((item) => {
       return (
-        item.taiKhoan.toLowerCase().trim().search(text.toLowerCase().trim()) !==
-          -1 ||
-        item.hoTen.toLowerCase().trim().search(text.toLowerCase().trim()) !== -1
+        item.taiKhoan
+          ?.toLowerCase()
+          .trim()
+          .search(text?.toLowerCase().trim()) !== -1 ||
+        item.hoTen?.toLowerCase().trim().search(text?.toLowerCase().trim()) !==
+          -1
       );
     });
     setUsersRegisted(newUsersRegisted);
@@ -265,7 +268,7 @@ export default function PopupRegister(props) {
         Ghi danh
       </button>
       <Modal
-        className=" w-screen"
+        className=" w-screen bg-none"
         title="Ghi Danh"
         visible={isModalVisible}
         onOk={handleOk}
@@ -284,15 +287,16 @@ export default function PopupRegister(props) {
                 showSearch
                 style={{ width: 200 }}
                 placeholder="Nhập tên người dùng"
-                optionFilterProp="children"
+                optionFilterProp="item"
                 filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
+                  option.children
+                    ?.toLowerCase()
+                    .indexOf(input?.toLowerCase()) >= 0
                 }
                 filterSort={(optionA, optionB) =>
-                  optionA.children
-                    .toLowerCase()
-                    .localeCompare(optionB.children.toLowerCase())
+                  optionA?.children
+                    ?.toLowerCase()
+                    .localeCompare(optionB.item?.toLowerCase())
                 }
               >
                 {UnregisteredUssers.map((item, i) => {
@@ -334,7 +338,7 @@ export default function PopupRegister(props) {
                   <tbody>{renderTableUsersWaitingApproval()}</tbody>
                 </table>
                 <Pagination
-                  className=" w-fit absolute -bottom-12 left-1/2 -translate-x-1/2"
+                  className=" w-fit absolute bottom-0 left-1/2 translate-y-[100%] -translate-x-1/2"
                   showSizeChanger={false}
                   pageSize={5}
                   defaultCurrent={stateTable1.current}
@@ -397,7 +401,7 @@ export default function PopupRegister(props) {
                   <tbody>{renderTableUsersRegisted()}</tbody>
                 </table>
                 <Pagination
-                  className=" w-fit absolute -bottom-12 left-1/2 -translate-x-1/2"
+                  className=" w-fit absolute  bottom-0  translate-y-[100%] left-1/2 -translate-x-1/2 "
                   showSizeChanger={false}
                   pageSize={5}
                   defaultCurrent={stateTable2.current}

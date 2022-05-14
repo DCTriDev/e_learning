@@ -18,11 +18,11 @@ const localServices = {
   getGroupID() {
     if (localStorage.getItem(USER_INFO)) {
       return JSON.parse(localStorage.getItem(USER_INFO)).maNhom;
-    }else {
+    } else {
       this.removeUserInfo();
       return 0;
     }
-  }
+  },
 };
 
 export default localServices;
