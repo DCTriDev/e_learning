@@ -35,7 +35,7 @@ class CourseManagementService {
     );
   }
 
-  addCourseUploadImg(data, setLoading = true){
+  addCourse(data, setLoading = true){
     const uri = "/api/QuanLyKhoaHoc/ThemKhoaHoc";
     return AxiosServ.postMethod(uri, data,setLoading);
   }
@@ -45,7 +45,7 @@ class CourseManagementService {
     return AxiosServ.postMethod(uri, data,setLoading);
   }
 
-  modifyCourseUploadImg(data, setLoading = true){
+  editCourse(data, setLoading = true){
     const uri = "/api/QuanLyKhoaHoc/CapNhatKhoaHoc";
     return AxiosServ.putMethod(uri, data,setLoading);
   }

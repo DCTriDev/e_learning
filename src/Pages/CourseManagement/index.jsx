@@ -8,20 +8,18 @@ import {
   searchCourse,
 } from "../../Redux/Slice/courseSlice";
 import PopupRegister from "./PopupRegister";
-import PopupAddCourse from "./PopupAddCourse";
 
-export default function CourseManagement() {
-  let dispatch = useDispatch();
-  let [stateTable, setStateTable] = useState({
+export default function CourseManagement(props) {
+  const dispatch = useDispatch();
+  const [stateTable, setStateTable] = useState({
     data: [],
     totalPage: 0,
     current: 1,
     minIndex: 0,
     maxIndex: 0,
   });
-  let [courseData, setCourseData] = useState(null)
 
-  const [isAddCourse, setIsAddCourse] = useState(false)
+  const handleClickEdit = props.handleClickEdit
 
   useEffect(() => {
     dispatch(fetchCourseList());
@@ -33,8 +31,8 @@ export default function CourseManagement() {
       maxIndex: 10,
     });
   }, []);
-  let { courseList } = useSelector((state) => state.courseSlice);
-  let handleChange = (page) => {
+  const { courseList } = useSelector((state) => state.courseSlice);
+  const handleChange = (page) => {
     setStateTable({
       current: page,
       minIndex: (page - 1) * 10,
@@ -75,9 +73,8 @@ export default function CourseManagement() {
                   <td className="text-center">{item.nguoiTao.hoTen}</td>
                   <td className="text-center space-y-3 lg:space-y-0 lg:space-x-2  flex flex-col items-center lg:flex-row justify-center lg:h-[120px] ">
                     <button className=" cursor-pointer  text-white lg:px-4 lg:py-2 rounded-lg border-none shadow-lg   bg-yellow-500 w-16 lg:w-auto"
-                      onClick={() => {
-                      setCourseData(item)
-                      setIsAddCourse(true)
+                    onClick={() => {
+                      handleClickEdit(item)
                     }}>
                       Sửa
                     </button>
@@ -109,13 +106,6 @@ export default function CourseManagement() {
   };
   return (
       <div>
-        <div>
-          <button onClick={()=> {
-            setIsAddCourse(true)
-            setCourseData(null)
-          }}>Thêm Khóa Học</button>
-          <PopupAddCourse isAddCourse={isAddCourse} setIsAddCourse={setIsAddCourse} data={courseData}/>
-        </div>
         <div className=" relative">
           <div className=" flex ">
             <Form

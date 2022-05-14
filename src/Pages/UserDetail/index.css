@@ -21,10 +21,6 @@
 .ant-tabs-top > .ant-tabs-nav:before {
   border-bottom: 1px solid rgb(250 204 21);
 }
-.ant-modal-body {
-  background: url("https://cdn.dribbble.com/users/538183/screenshots/4455410/media/e28c4f10bbcc32a9771be27af90dafef.gif")
-    center;
-}
 
 .ant-btn-primary {
   background-color: rgb(250 204 21);

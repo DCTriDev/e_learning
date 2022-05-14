@@ -9,6 +9,7 @@ const initialState = {
   courseCatalog: null,
   courseListByCatalog: null,
   error: null,
+  editCourseData: null,
 };
 
 export const fetchCourseList = createAsyncThunk(
@@ -97,6 +98,6 @@ const courseSlice = createSlice({
   },
 });
 
-export const { setCourseListCatalog, searchCourse } = courseSlice.actions;
+export const { searchCourse, editCourseData, setEditCourseData } = courseSlice.actions;
 
 export default courseSlice.reducer;

@@ -4,7 +4,7 @@ import localServices from "./localServices";
 class HttpRequestService {
   constructor() {}
 
-  groupID = localServices.getGroupID();
+  groupID = localServices.getGroupID()?localServices.getGroupID():"GP01";
 
   login(data, setLoading = true) {
     const uri = "/api/QuanLyNguoiDung/DangNhap";

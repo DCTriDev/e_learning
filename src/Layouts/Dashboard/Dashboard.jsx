@@ -3,24 +3,31 @@ import {Layout, Menu} from 'antd';
 import logoBig from '../../Assets/Images/logo_big.png';
 import logoSmall from '../../Assets/Images/logo_small.png';
 import {
-    DesktopOutlined, PieChartOutlined,
+    PieChartOutlined, UserOutlined, PlusSquareOutlined
 } from '@ant-design/icons';
 import './Dashboard.css';
 import CourseManagement from "../../Pages/CourseManagement";
 import UserManagement from "../../Pages/userManagement";
 import UserNav from "../../Components/Navbar/UserNav";
+import AddCourse from "../../Pages/CourseManagement/AddCourse";
+import EditCourse from "../../Pages/CourseManagement/EditCourse";
+import {setEditCourseData} from "../../Redux/Slice/courseSlice";
+import {useDispatch} from "react-redux";
 
 const {Header, Content, Sider} = Layout;
 
-function getItem(label, key, icon, children) {
+function getItem(label, key, icon, children, disabled = false) {
     return {
-        key, icon, children, label,
+        key, icon, children, label, disabled
     };
 }
 
 const items = [
-    getItem('Quản Lý Khóa Học', '1', <PieChartOutlined/>),
-    getItem('Quản Lý Người Dùng', '2', <DesktopOutlined/>),
+    getItem('Khóa Học', '1', <PieChartOutlined/>,[
+        getItem('Quản Lý Khóa Học', '1-1', <PieChartOutlined/> ),
+        getItem('Thêm Khóa Học', '1-2', <PlusSquareOutlined />),
+    ]),
+    getItem('Quản Lý Người Dùng', '2', <UserOutlined />),
 ];
 
 function Dashboard(props) {
@@ -28,15 +35,22 @@ function Dashboard(props) {
     const onCollapse = (collapsed) => {
         setCollapsed(collapsed);
     };
-    const [renderKey, updateRenderKey] = useState('1');
+    const dispatch = useDispatch();
+    const [renderKey, updateRenderKey] = useState('1-1');
     const handleRenderContent = key =>{
         switch (key) {
-            case '1': return <CourseManagement/>
+            case '1-1': return <CourseManagement handleClickEdit={handleClickEdit}/>
+            case '1-2': return <AddCourse/>
+            case '1-3': return <EditCourse handleMenuClick={handleMenuClick}/>
             case '2': return <UserManagement/>
         }
     }
     const handleMenuClick = menu => {
         updateRenderKey(menu.key)
+    }
+    const handleClickEdit = (data) => {
+        updateRenderKey('1-3')
+        dispatch(setEditCourseData(data))
     }
     return (<Layout
         style={{
