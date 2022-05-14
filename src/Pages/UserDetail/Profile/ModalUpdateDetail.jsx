@@ -72,7 +72,7 @@ export default function ModalUpdateDetail() {
         >
           <Form.Item
             className=" flex items-center"
-            label={<span className=" text-lg text-white">Mật khẩu</span>}
+            label={<span className=" text-lg">Mật khẩu</span>}
             name="matKhau"
             rules={[
               {
@@ -90,7 +90,7 @@ export default function ModalUpdateDetail() {
           </Form.Item>
           <Form.Item
             className=" flex items-center"
-            label={<span className=" text-lg text-white">Email</span>}
+            label={<span className=" text-lg">Email</span>}
             name="email"
             rules={[
               {
@@ -110,7 +110,7 @@ export default function ModalUpdateDetail() {
           </Form.Item>
           <Form.Item
             className=" flex items-center"
-            label={<span className=" text-lg text-white">Họ tên</span>}
+            label={<span className=" text-lg">Họ tên</span>}
             name="hoTen"
             rules={[
               {
@@ -124,7 +124,7 @@ export default function ModalUpdateDetail() {
           </Form.Item>
           <Form.Item
             className=" flex items-center"
-            label={<span className=" text-lg text-white">Số điện thoại</span>}
+            label={<span className=" text-lg">Số điện thoại</span>}
             name="soDT"
             rules={[
               {
