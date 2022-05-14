@@ -7,14 +7,15 @@ import {fetchCourseCatalog} from "../../../Redux/Slice/courseSlice";
 import moment from "moment";
 import courseMangementService from "../../../Services/courseMangement.service";
 import localServices from "../../../Services/localServices";
+import validator from "validator";
 
 const {Option} = Select;
 
 function AddCourse(props) {
     const [image, setImage] = useState()
     const dispatch = useDispatch()
-
     const [courseForm] = Form.useForm();
+    const IMG_SIZE_LIMIT = 1048576 // 1MB
 
     const getFile = (e) => {
         setImage(e.file)
@@ -111,7 +112,15 @@ function AddCourse(props) {
                     <Form.Item
                         label="Đánh giá"
                         name="danhGia"
-                        rules={[{required: true, message: 'Không được để trống!'}]}
+                        rules={[{required: true, message: 'Không được để trống!'},
+                            {
+                                validator: (rule, value) => {
+                                    return validator.isNumeric(value)?
+                                        Promise.resolve():
+                                        Promise.reject('Đánh giá phải là số')
+                                },message: 'Đánh giá phải là số!'
+                            },
+                        ]}
                     >
                         <Input/>
                     </Form.Item>
@@ -119,7 +128,12 @@ function AddCourse(props) {
                     <Form.Item
                         label="Lượt xem"
                         name="luotXem"
-                        rules={[{required: true, message: 'Không được để trống!'}]}
+                        rules={[{required: true, message: 'Không được để trống!'},
+                            {validator: (rule, value) => {
+                                    return validator.isNumeric(value)?
+                                        Promise.resolve():
+                                        Promise.reject('Lượt xem phải là số')
+                                },message: 'Lượt xem phải là số!'}]}
                     >
                         <Input/>
                     </Form.Item>
@@ -135,7 +149,14 @@ function AddCourse(props) {
                     <Form.Item
                         label="Hình ảnh"
                         name="hinhAnh"
-                        rules={[{required: true, message: 'Không được để trống!'}]}
+                        rules={[
+                            {required: true, message: 'Không được để trống!'},
+                            {validator:(_,value) => {
+                                    return (value.size > IMG_SIZE_LIMIT) ?
+                                        Promise.reject('Hình ảnh phải nhỏ hơn 1MB') :
+                                        Promise.resolve()
+                                }, message: 'Kích thước hình ảnh không được lớn hơn 1MB'}
+                            ]}
                         getValueFromEvent={getFile}
                     >
                         <Upload beforeUpload={() => {
@@ -167,7 +188,7 @@ function AddCourse(props) {
             </Form.Item>
 
             <Form.Item>
-                <Button type="primary" htmlType="submit">Thêm</Button>
+                <Button type='primary' shape="round" className='btn btn-primary' htmlType="submit">Thêm</Button>
             </Form.Item>
         </Form>
     );

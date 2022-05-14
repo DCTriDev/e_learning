@@ -6,6 +6,7 @@ import {UploadOutlined} from "@ant-design/icons";
 import localServices from "../../../Services/localServices";
 import moment from "moment";
 import courseMangementService from "../../../Services/courseMangement.service";
+import validator from "validator";
 
 const {Option} = Select;
 
@@ -14,6 +15,7 @@ function EditCourse(props) {
     const dispatch = useDispatch()
     const {courseCatalog, editCourseData} = useSelector((state) => state.courseSlice)
     const [courseForm] = Form.useForm();
+    const IMG_SIZE_LIMIT = 1048576 // 1MB
 
     const getFile = (e) => {
         console.log('Upload event:', e.file);
@@ -32,35 +34,36 @@ function EditCourse(props) {
         dispatch(fetchCourseCatalog())
     }, []);
 
+    const isChanged = (values) => {
+        return !values.nguoiTao === editCourseData.nguoiTao.taiKhoan
+            && !values.tenKhoaHoc === editCourseData.tenKhoaHoc
+            && !values.moTa === editCourseData.moTa
+            && !values.luotXem == editCourseData.luotXem
+            && !values.maDanhMucKhoaHoc === editCourseData.danhMucKhoaHoc.maDanhMucKhoaHoc
+            && !values.biDanh === editCourseData.biDanh;
+    }
+
     const onFinish = (values) => {
         const maNhomLocal = localServices.getGroupID()
         let newValues = {
             ...values,
             ngayTao: moment(values.ngayTao).format('DD/MM/YYYY'),
-            hinhAnh: values.tenKhoaHoc,
+            hinhAnh: image?.name,
             maNhom: maNhomLocal,
             danhGia: values.danhGia * 1,
         }
-        console.log("newValues", newValues)
-        courseMangementService.editCourse(newValues)
-            .then((res) => {
-                console.log(res)
-                !image ? message.success('Sửa khóa học thành công') : handleUpdateImage(image, res.data.tenKhoaHoc)
 
-                // image&&handleUpdateImage(image, res.data.tenKhoaHoc)
-                //     .then((res) => {
-                //         message.success('Thêm khóa học thành công')
-                //         props.history.push('/course-management')
-                //     })
-                //     .catch((err) => {
-                //         message.error('Thêm khóa học thất bại')
-                //         console.log('err upload image', err)
-                //     }):message.success('Sửa khóa học thành công')
-            })
-            .catch((err) => {
-                console.log(err)
-                message.error(err.err.response.data)
-            })
+        !isChanged(newValues)?
+            courseMangementService.editCourse(newValues)
+                .then((res) => {
+                    console.log(res)
+                    !image ? message.success('Sửa khóa học thành công') : handleUpdateImage(image, res.data.tenKhoaHoc)
+                })
+                .catch((err) => {
+                    console.log(err)
+                    message.error(err.err.response.data)
+                })
+            : message.warning('Bạn cần thay đổi ít nhất một thông tin!')
     };
 
     const handleUpdateImage = (img, tenKhoaHoc) => {
@@ -146,7 +149,15 @@ function EditCourse(props) {
                 <Form.Item
                     label="Đánh giá"
                     name="danhGia"
-                    rules={[{required: true, message: 'Không được để trống!'}]}
+                    rules={[{required: true, message: 'Không được để trống!'},
+                        {
+                            validator: (rule, value) => {
+                                return validator.isNumeric(value)?
+                                    Promise.resolve():
+                                    Promise.reject('Đánh giá phải là số')
+                            },message: 'Đánh giá phải là số!'
+                        },
+                    ]}
                 >
                     <Input/>
                 </Form.Item>
@@ -154,7 +165,12 @@ function EditCourse(props) {
                 <Form.Item
                     label="Lượt xem"
                     name="luotXem"
-                    rules={[{required: true, message: 'Không được để trống!'}]}
+                    rules={[{required: true, message: 'Không được để trống!'},
+                        {validator: (rule, value) => {
+                                return validator.isNumeric(value)?
+                                    Promise.resolve():
+                                    Promise.reject('Lượt xem phải là số')
+                            },message: 'Lượt xem phải là số!'}]}
                 >
                     <Input/>
                 </Form.Item>
@@ -170,16 +186,32 @@ function EditCourse(props) {
                 <Form.Item
                     label="Hình ảnh"
                     name="hinhAnh"
-                    rules={[{required: true, message: 'Không được để trống!'}]}
+                    rules={[
+                        {required: true, message: 'Không được để trống!'},
+                        {
+                            validator: (rule, value) => {
+                                return (value == editCourseData.hinhAnh)?
+                                    Promise.reject('Không được để trống!'):
+                                    Promise.resolve()
+                            }, message: 'Không được để trống!'
+                        },
+                        {validator:(_,value) => {
+                            return (value.size > IMG_SIZE_LIMIT) ?
+                                Promise.reject('Hình ảnh phải nhỏ hơn 1MB') :
+                                Promise.resolve()
+                        }, message: 'Kích thước hình ảnh không được lớn hơn 1MB'}
+                    ]}
                     getValueFromEvent={getFile}
                 >
-                    <Upload beforeUpload={() => {
+                    <Upload
+                        accept={'image/*'}
+                        beforeUpload={() => {
                         return false
                     }}
                             listType="picture"
                             maxCount={1}
                             defaultFileList={[{
-                                uid: '1',
+                                uid: '-1',
                                 name: 'Hình ảnh hiện tại',
                                 status: 'done',
                                 url: editCourseData.hinhAnh
@@ -208,7 +240,7 @@ function EditCourse(props) {
         </Form.Item>
 
         <Form.Item>
-            <Button type="primary" htmlType="submit">Thêm</Button>
+            <Button type="primary" shape="round" htmlType="submit">Cập nhập</Button>
         </Form.Item>
     </Form>);
 }
