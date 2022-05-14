@@ -9,7 +9,6 @@ export default function SignUpForm() {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
   const handleSignUp = (values) => {
     let cloneValues = { ...values, maNhom: "GP01" };

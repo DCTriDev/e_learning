@@ -15,7 +15,6 @@ function UserDetail() {
   const [confirmLoading, setConfirmLoading] = useState(false);
   const dispatch = useDispatch();
   let userDetail = useSelector((state) => state.userSlice.userDetail);
-    console.log(userDetail);
   const showModal = () => {
     setVisible(true);
   };

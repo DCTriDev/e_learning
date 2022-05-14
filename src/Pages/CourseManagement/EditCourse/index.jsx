@@ -18,7 +18,6 @@ function EditCourse(props) {
     const IMG_SIZE_LIMIT = 1048576 // 1MB
 
     const getFile = (e) => {
-        console.log('Upload event:', e.file);
         setImage(e.file)
         return e.file
     };
@@ -56,11 +55,9 @@ function EditCourse(props) {
         !isChanged(newValues)?
             courseMangementService.editCourse(newValues)
                 .then((res) => {
-                    console.log(res)
                     !image ? message.success('Sửa khóa học thành công') : handleUpdateImage(image, res.data.tenKhoaHoc)
                 })
                 .catch((err) => {
-                    console.log(err)
                     message.error(err.err.response.data)
                 })
             : message.warning('Bạn cần thay đổi ít nhất một thông tin!')
@@ -70,28 +67,13 @@ function EditCourse(props) {
         let frm = new FormData();
         frm.append('file', img)
         frm.append('tenKhoaHoc', tenKhoaHoc)
-        console.log('img',image)
-        console.log('tenKhoaHoc',tenKhoaHoc)
         courseMangementService.uploadImage(frm)
-            // .then((res) => {
-            //     console.log(res)
-            //     // message.success(res.data)
-            //     message.success('Thêm khóa học thành công')
-            //     courseForm.resetFields()
-            // })
-            // .catch((err) => {
-            //     console.log(err)
-            //     message.error(`${err.err.response}, vui lòng cập nhật lại hình ảnh sau!`)
-            //     courseForm.resetFields()
-            // })
             .then((res) => {
-                console.log(res)
                 message.success('Sửa khóa học thành công')
                 window.location.reload(false);
             })
             .catch((err) => {
                 message.warn(`Sửa thông tin khóa học thành công nhưng ${err.err.response.data}, vui lòng thử lại sau!`)
-                console.log('err upload image', err)
             })
     }
 

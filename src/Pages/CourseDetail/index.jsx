@@ -5,12 +5,9 @@ import { useParams } from "react-router-dom";
 import "./index.css";
 function CourseDetail() {
   let [courseDetail, setCourseDetail] = useState({});
-  console.log(courseDetail);
   let { courseID } = useParams();
-  console.log(courseID);
   useEffect(() => {
     httpService.getCourseDetail(courseID).then((res) => {
-      console.log(res.data);
       setCourseDetail(res.data);
     });
   }, []);

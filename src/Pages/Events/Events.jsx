@@ -36,7 +36,7 @@ function Events() {
                 <div className="speecher mt-4">
                     <h6>Các nhà đồng sáng tạo</h6>
                     <div className="grid grid-cols-4 gap-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 speechDetail ">
-                        {/* <div className="xl:w-1/4   lg:w-1/3 pr-4 pl-4 md:w-1/2 "> */}
+
                         <div className="cardSpeecher">
                             <img
                                 src={require("../../Assets/Images/Events/instrutor5.jpg")}
@@ -45,8 +45,7 @@ function Events() {
                             <h6>Nguyễn Nhật</h6>
                             <p>Ceo TechViet Production</p>
                         </div>
-                        {/* </div> */}
-                        {/* <div className="xl:w-1/4  lg:w-1/3  md:w-1/2 "> */}
+
                         <div className="cardSpeecher">
                             <img
                                 src={require("../../Assets/Images/Events/instrutor6.jpg")}
@@ -55,8 +54,7 @@ function Events() {
                             <h6>Nguyễn Nhật Nam</h6>
                             <p>Ceo TechViet Production</p>
                         </div>
-                        {/* </div> */}
-                        {/* <div className="xl:w-1/4 pr-4 pl-4 lg:w-1/3  md:w-1/2 "> */}
+
                         <div className="cardSpeecher">
                             <img
                                 src={require("../../Assets/Images/Events/instrutor7.jpg")}
@@ -65,8 +63,7 @@ function Events() {
                             <h6>Nguyễn Nam</h6>
                             <p>Ceo TechViet Production</p>
                         </div>
-                        {/* </div> */}
-                        {/* <div className="xl:w-1/4 pr-4 pl-4 lg:w-1/3  md:w-1/2 "> */}
+
                         <div className="cardSpeecher">
                             <img
                                 src={require("../../Assets/Images/Events/instrutor8.jpg")}
@@ -75,8 +72,7 @@ function Events() {
                             <h6>Jhonny Đặng</h6>
                             <p>Ceo TechViet Production</p>
                         </div>
-                        {/* </div> */}
-                        {/* <div className="xl:w-1/4 pr-4 pl-4 lg:w-1/3  md:w-1/2 "> */}
+
                         <div className="cardSpeecher">
                             <img
                                 src={require("../../Assets/Images/Events/instrutor9.jpg")}
@@ -95,8 +91,7 @@ function Events() {
                             <h6>Vương Phạm Vn</h6>
                             <p>Ceo TechViet Production</p>
                         </div>
-                        {/* </div> */}
-                        {/* <div className="xl:w-1/4 pr-4 pl-4 lg:w-1/3  md:w-1/2 "> */}
+
                         <div className="cardSpeecher">
                             <img
                                 src={require("../../Assets/Images/Events/instrutor11.jpg")}
@@ -105,8 +100,7 @@ function Events() {
                             <h6>Rober Imacu</h6>
                             <p>Ceo TechViet Production</p>
                         </div>
-                        {/* </div> */}
-                        {/* <div className="xl:w-1/4 pr-4 pl-4 lg:w-1/3  md:w-1/2 "> */}
+
                         <div className="cardSpeecher">
                             <img
                                 src={require("../../Assets/Images/Events/instrutor12.jpg")}
@@ -115,7 +109,7 @@ function Events() {
                             <h6>Khoa Pug</h6>
                             <p>Ceo TechViet Production</p>
                         </div>
-                        {/* </div> */}
+
                     </div>
                 </div>
                 <div className="donors">
@@ -148,15 +142,6 @@ function Events() {
                                 <p>Google</p>
                             </div>
                         </div>
-                        {/* <div className="xl:w-1/4 pr-4 pl-4 lg:w-1/3  md:w-1/2 ">
-                            <div className="itemDonors">
-                                <img
-                                    src={require("../../Assets/Images/Events/amazon.jpg")}
-                                    alt=""
-                                />
-                                <p>Amazon</p>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
             </section>

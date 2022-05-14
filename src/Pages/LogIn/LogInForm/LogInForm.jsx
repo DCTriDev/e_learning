@@ -25,7 +25,6 @@ export default function LogInForm() {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (

@@ -25,7 +25,6 @@ export default function PopupRegister(props) {
     maxIndex: 0,
   });
   const onFinish = (values) => {
-    console.log("Success:", values);
     CourseManagementSrv.registerUser(props.data.maKhoaHoc, values.taiKhoan)
       .then((res) => {
         message.success(res.data);
@@ -61,25 +60,21 @@ export default function PopupRegister(props) {
     });
   };
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
   const showModal = () => {
     CourseManagementSrv.getUsersWaitingApproval(props.data.maKhoaHoc)
       .then((res) => {
         setUsersWaitingApproval(res.data);
       })
-      .catch((err) => console.log(err));
     CourseManagementSrv.getUsersRegisted(props.data.maKhoaHoc)
       .then((res) => {
         setUsersRegisted(res.data);
         setUsersRegistedClone(res.data);
       })
-      .catch((err) => console.log(err));
     CourseManagementSrv.getUnregisteredUssers(props.data.maKhoaHoc)
       .then((res) => {
         setUnregisteredUssers(res.data);
       })
-      .catch((err) => console.log(err));
     setStateTable1({
       data: UsersWaitingApproval,
       totalPage: UsersWaitingApproval.length / 5,
@@ -125,7 +120,6 @@ export default function PopupRegister(props) {
   const handleCancleUserWaitingApproval = (maKhoaHoc, taiKhoan) => {
     CourseManagementSrv.cancleUsersWaitingApproval(maKhoaHoc, taiKhoan)
       .then((res) => {
-        console.log(res);
         message.success(res.data);
 
         let newUnregisteredUsser = [...UsersWaitingApproval].find(

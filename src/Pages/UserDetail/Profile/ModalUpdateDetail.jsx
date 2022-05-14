@@ -35,7 +35,6 @@ export default function ModalUpdateDetail() {
     message.error(data);
   };
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
     error(errorInfo);
   };
   const { userDetail } = useSelector((state) => state.userSlice);

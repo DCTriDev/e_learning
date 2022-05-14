@@ -17,11 +17,9 @@ const adminSlice = createSlice({
   initialState,
   reducers: {
     deleteUser: (state, action) => {
-      console.log(state, action);
       state.listUser = [...state.listUser].filter((item) => {
         return item.taiKhoan !== action.payload;
       });
-      console.log(state.listUser);
     },
     searchUser: (state, action) => {
       if (action.payload.trim().length === 0) {

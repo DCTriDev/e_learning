@@ -1,5 +1,4 @@
 import React from "react";
-import { Card } from "antd";
 import { NavLink } from "react-router-dom";
 import "./index.css";
 import {
@@ -10,7 +9,6 @@ import {
   StarOutlined,
 } from "@ant-design/icons";
 import "./index.css";
-const { Meta } = Card;
 
 function CourseCard({ data }) {
   let substringByLength = (string, length) => {
@@ -20,36 +18,6 @@ function CourseCard({ data }) {
     return string;
   };
   return (
-    // <Card
-    //   className="rounded-lg overflow-hidden hover:scale-105 duration-300 transition-all cursor-default col-span-1"
-    //   hoverable
-    //   style={{ width: "100%", height: "auto", padding: "0", margin: "0" }}
-    //   cover={
-    //     <img
-    //       className="w-full h-48 object-cover"
-    //       alt="example"
-    //       src={data.hinhAnh}
-    //     />
-    //   }
-    //   actions={[
-    //     <NavLink
-    //       className="text-center text-white text-lg py-2 px-4 rounded-lg bg-green-600 hover:bg-green-700"
-    //       to={`/course-detail/${data.maKhoaHoc}`}
-    //     >
-    //       <div className="">Xem chi tiết</div>
-    //     </NavLink>,
-    //   ]}
-    // >
-    //   <div className="h-28 flex flex-col space-y-1">
-    //     <h3 className="text-xl text-center uppercase whitespace-wrap font-semibold">
-    //       {substringByLength(data.tenKhoaHoc, 20)}
-    //     </h3>
-    //     <Meta
-    //       className="italic text-md"
-    //       description={substringByLength(data.moTa, 75)}
-    //     />
-    //   </div>
-    // </Card>
     <div className=" course__card min-h-[500px] border-gray-200 border-solid border-[1px] overflow-hidden flex flex-col justify-between rounded-xl shadow-lg hover:scale-125 hover:shadow-xl transition-all bg-white relative hover:z-20">
       <div className=" h-[85%] relative">
         <div

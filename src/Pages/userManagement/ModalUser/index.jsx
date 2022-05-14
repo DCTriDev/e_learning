@@ -18,11 +18,9 @@ export const ModalUser = (props) => {
     type
       ? AdminSrv.addUser({ ...values, maNhom: "GP01" })
           .then((res) => {
-            console.log(res);
             message.success("Thêm người dùng thành công");
           })
           .catch((err) => {
-            console.log(err.err.response.data);
             message.error(err.err.response.data);
           })
       : AdminSrv.updateUser({ ...values, maNhom: "GP01" })
@@ -34,7 +32,6 @@ export const ModalUser = (props) => {
           });
   };
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
   return (
     <div className="  h-screen bg-yellow-400">
@@ -146,7 +143,6 @@ export const ModalUser = (props) => {
             { required: true, message: "Không được bỏ trống" },
             {
               validator: (_, value) => {
-                console.log("valueItem:", value);
                 if (value === undefined) {
                   value = "";
                 }
