@@ -136,7 +136,7 @@ export default function ModalUpdateDetail() {
                 validator: (_, value) =>
                   validator.isMobilePhone(value)
                     ? Promise.resolve()
-                    : Promise.reject(new Error("Số Diện thoại không hợp lệ")),
+                    : Promise.reject(new Error("Số điện thoại không hợp lệ")),
               },
             ]}
             hasFeedback

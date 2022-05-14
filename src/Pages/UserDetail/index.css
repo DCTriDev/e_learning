@@ -12,22 +12,8 @@
   color: rgb(255, 255, 253);
   text-shadow: 0 0 0.25px currentcolor;
 }
-.ant-tabs-tab:hover {
-  color: rgb(250 204 21);
-}
-.ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab {
-  border-bottom: 1px solid rgb(250 204 21);
-}
-.ant-tabs-top > .ant-tabs-nav:before {
-  border-bottom: 1px solid rgb(250 204 21);
-}
-
-.ant-btn-primary {
-  background-color: rgb(250 204 21);
-  border: rgb(250 204 21);
-}
 .ant-btn-primary:hover {
-  background-color: rgb(250 204 21);
+
   box-shadow: rgba(255, 255, 255, 0.2) 0 0 0 1px inset;
 }
 .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
