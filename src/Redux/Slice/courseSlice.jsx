@@ -71,6 +71,9 @@ const courseSlice = createSlice({
         });
       }
     },
+    setEditCourseData: (state, action) => {
+      state.editCourseData = action.payload;
+    },
   },
   extraReducers: {
     [fetchCourseList.fulfilled]: (state, action) => {
