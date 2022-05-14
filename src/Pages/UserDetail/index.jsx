@@ -66,15 +66,16 @@ function UserDetail() {
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
             onFinish={(values) => {
-              dispatch(fetchUserDetail(values));
-              if(values.matKhau !== userDetail?.matKhau){
-                message.error("Mật khẩu không đúng, Vui lòng thử lại!")
-                  showModal()
-                dispatch(setUserDetail(null))
-              }else {
-                message.success("Đăng Nhập Thành Công!");
-                hideModal()
-              }
+              dispatch(fetchUserDetail(values))
+                  .then((res) => {
+                    if (res.payload.matKhau === values.matKhau) {
+                      setVisible(false);
+                      message.success("Đăng nhập thành công");
+                    } else {
+                      dispatch(setUserDetail(null));
+                      message.error("Tài khoản hoặc mật khẩu không đúng");
+                    }
+                  })
             }}
             onFinishFailed={() => {
               setVisible(true);
