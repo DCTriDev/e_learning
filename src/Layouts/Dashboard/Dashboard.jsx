@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Layout, Menu} from 'antd';
 import logoBig from '../../Assets/Images/logo_big.png';
 import logoSmall from '../../Assets/Images/logo_small.png';
@@ -13,6 +13,8 @@ import AddCourse from "../../Pages/CourseManagement/AddCourse";
 import EditCourse from "../../Pages/CourseManagement/EditCourse";
 import {setEditCourseData} from "../../Redux/Slice/courseSlice";
 import {useDispatch} from "react-redux";
+import localServices from "../../Services/localServices";
+import UserRestrict from "./UserRestrict";
 
 const {Header, Content, Sider} = Layout;
 
@@ -43,6 +45,7 @@ function Dashboard(props) {
             case '1-2': return <AddCourse/>
             case '1-3': return <EditCourse handleMenuClick={handleMenuClick}/>
             case '2': return <UserManagement/>
+            case '3': return <UserRestrict/>
         }
     }
     const handleMenuClick = menu => {
@@ -52,6 +55,12 @@ function Dashboard(props) {
         updateRenderKey('1-3')
         dispatch(setEditCourseData(data))
     }
+    useEffect(() => {
+       if (localServices.getUserInfo()===undefined || localServices.getUserInfo()?.accessToken !== "GV") {
+           updateRenderKey('3')
+       }
+    }, [renderKey]);
+
     return (<Layout
         style={{
             minHeight: '100vh',
@@ -60,7 +69,7 @@ function Dashboard(props) {
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse} >
             <div className='bg-emerald-50 w-full rounded-3xl'>
                 <a href="/">
-                    <img src={logoBig} className='w-full h-auto mx-auto' alt="logo"/>
+                    <img src={!collapsed?logoBig:logoSmall} className='w-full h-auto mx-auto' alt="logo"/>
                 </a>
             </div>
             <Menu theme="dark" defaultSelectedKeys={[renderKey]} mode="inline" items={items} onClick={handleMenuClick}/>

@@ -21,7 +21,7 @@ class AxiosService {
     }
 
     getAxiosConfig = (_token) => {
-        const token = _token ? _token : localServices.getUserInfo().accessToken;
+        const token = _token ? _token : localServices.getUserInfo()?.accessToken;
         this.axiosConfig = {
             headers: {
                 TokenCybersoft: TOKEN_CYBERSOFT,
