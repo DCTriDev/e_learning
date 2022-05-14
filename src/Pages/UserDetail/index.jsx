@@ -3,7 +3,7 @@ import { Form, Input, Tabs, message } from "antd";
 import { Modal } from "antd";
 import Layout from "../../Layouts";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserDetail } from "../../Redux/Slice/userSlice";
+import {fetchUserDetail, setUserDetail} from "../../Redux/Slice/userSlice";
 import CourseList from "./Course/CourseList";
 import Profile from "./Profile";
 import "./index.css";
@@ -14,7 +14,8 @@ function UserDetail() {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const dispatch = useDispatch();
-  const userDetail = useSelector((state) => state.userSlice.userDetail);
+  let userDetail = useSelector((state) => state.userSlice.userDetail);
+    console.log(userDetail);
   const showModal = () => {
     setVisible(true);
   };
@@ -24,9 +25,8 @@ function UserDetail() {
       showModal();
     } else {
       hideModal();
-      message.success("Đăng Nhập Thành Công!");
     }
-  }, [userDetail]);
+  }, []);
 
   const handleOk = () => {
     setConfirmLoading(true);
@@ -67,8 +67,15 @@ function UserDetail() {
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
             onFinish={(values) => {
-              console.log(values);
               dispatch(fetchUserDetail(values));
+              if(values.matKhau !== userDetail?.matKhau){
+                message.error("Mật khẩu không đúng, Vui lòng thử lại!")
+                  showModal()
+                dispatch(setUserDetail(null))
+              }else {
+                message.success("Đăng Nhập Thành Công!");
+                hideModal()
+              }
             }}
             onFinishFailed={() => {
               setVisible(true);

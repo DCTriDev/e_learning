@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import httpService from "../../Services/http.service";
 import localServices from "../../Services/localServices";
+import {message} from "antd";
 
 const initialState = {
   userDetail: null,
@@ -27,10 +28,17 @@ export const fetchUpdateUser = createAsyncThunk(
 const userSlice = createSlice({
   name: "userSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    setUserDetail: (state, action) => {
+      state.userDetail = action.payload;
+    },
+  },
   extraReducers: {
     [fetchUserDetail.fulfilled]: (state, action) => {
       state.userDetail = action.payload;
+    },
+    [fetchUserDetail.rejected]: (state, action) => {
+      message.error(action.payload);
     },
     [fetchUpdateUser.fulfilled]: (state, action) => {
       let { matKhau, ...rest } = action.payload;
@@ -40,5 +48,7 @@ const userSlice = createSlice({
     },
   },
 });
+
+export const { setUserDetail } = userSlice.actions;
 
 export default userSlice.reducer;
