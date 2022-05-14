@@ -14,7 +14,7 @@ const menu = (
             <NavLink to="/profile" className='hover:text-white duration-300 transition-all ease-in-out'>
                 <span className='flex items-center space-x-2'>
                     <ion-icon className='self-center' name="person-outline"/>
-                    <span>Profile</span>
+                    <span>Trang cá nhân</span>
                 </span>
             </NavLink>
         </Menu.Item>
@@ -22,7 +22,7 @@ const menu = (
             <NavLink to="/dashboard" className='hover:text-white duration-300 transition-all ease-in-out'>
                 <span className='flex items-center space-x-2'>
                     <ion-icon name="settings-outline"/>
-                    <span>Settings</span>
+                    <span>Bảng điều khiển</span>
                 </span>
             </NavLink>
         </Menu.Item>
@@ -35,7 +35,7 @@ const menu = (
                 className="hover:text-white duration-300 transition-all ease-in-out">
                 <span className="flex items-center space-x-2">
                     <ion-icon name="log-out-outline" />
-                    <span>Logout</span>
+                    <span>Đăng xuất</span>
                 </span>
             </NavLink>
         </Menu.Item>
@@ -69,13 +69,13 @@ function UserNav() {
         to="/login"
         className="bg-green-500 px-3 py-2 hover:scale-105 hover:bg-green-700 text-white duration-300 transition-all rounded-xl"
       >
-        Log In
+        Đăng Nhập
       </NavLink>
       <NavLink
         to="/signup"
         className="bg-red-500 mx-3 px-3 py-2 hover:scale-105 hover:bg-red-700 text-white duration-300 transition-all rounded-xl"
       >
-        Sign Up
+        Đăng Ký
       </NavLink>
     </div>
   );

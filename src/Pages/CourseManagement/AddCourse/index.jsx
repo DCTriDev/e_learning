@@ -71,7 +71,7 @@ function AddCourse(props) {
               labelCol={{span: 24}}
               wrapperCol={{span: 24}}
               onFinish={onFinish}>
-            <h1 className='text-center'>Thêm khóa học</h1>
+            <h1 className='text-center text-3xl mb-6'>Thêm khóa học</h1>
             <div className='grid grid-cols-2 gap-6'>
                 <div className='col-span-1'>
                     <Form.Item

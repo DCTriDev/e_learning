@@ -106,6 +106,7 @@ export default function CourseManagement(props) {
   };
   return (
       <div>
+        <h1 className='text-center text-3xl mb-6'>Quản lý khóa học</h1>
         <div className=" relative">
           <div className=" flex ">
             <Form

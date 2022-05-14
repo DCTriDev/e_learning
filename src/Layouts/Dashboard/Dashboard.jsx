@@ -56,7 +56,7 @@ function Dashboard(props) {
         dispatch(setEditCourseData(data))
     }
     useEffect(() => {
-       if (localServices.getUserInfo()===undefined || localServices.getUserInfo()?.accessToken !== "GV") {
+       if (localServices.getUserInfo()===undefined || localServices.getUserInfo()?.maLoaiNguoiDung !== "GV") {
            updateRenderKey('3')
        }
     }, [renderKey]);
