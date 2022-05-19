@@ -21,14 +21,15 @@ function CourseCatalog({ maDanhMuc }) {
   }, []);
 
   return (
-    <div className="mt-20 lg:container px-20">
-      <h1>
-        {courseListByCatalog ? (
+    <div className=" mt-28 lg:container md:px-20">
+      
+      <h2 className="title-list-course text-4xl font-bold mb-8 text-center">
+      {courseListByCatalog ? (
           courseListByCatalog[0].danhMucKhoaHoc.tenDanhMucKhoaHoc
         ) : (
           <></>
         )}
-      </h1>
+      </h2>
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5">
         {handleRenderCourseItem()}
       </div>

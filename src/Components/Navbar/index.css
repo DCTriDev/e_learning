@@ -7,3 +7,6 @@
     width:            100%;
     z-index:          1;
 }
+.navbar-height{
+    z-index: 999999999999999999999999999;
+}

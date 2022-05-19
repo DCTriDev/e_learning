@@ -9,7 +9,7 @@ export default function Login() {
       <ButtonHome />
       <div className=" lg:container w-[90%] mx-auto  lg:h-3/4 md:h-4/5 h-full lg:p-3 bg-white  shadow-xl rounded-2xl flex lg:flex-row flex-col  justify-center items-center ">
         <div
-          className=" lg:w-1/2 w-full lg:h-full h-1/2  bg-cover bg-center"
+          className=" lg:w-1/2 w-full lg:h-full h-[50vh]  bg-cover bg-center"
           style={{
             backgroundImage:
               "url(https://pixerio.com/wp-content/uploads/2020/11/E-learning-Company.png)",

@@ -13,11 +13,15 @@ import logoSmall  from "../../Assets/Images/logo_small.png";
 const changeNavbarScollHeight = () => {
   window.addEventListener("scroll", () => {
     const nav = document.querySelector(".navbar-height");
-    if (nav) { // if navbar is present then only do the following
+    if (nav) { 
       if ( window.scrollY > 100) {
-        nav.style.height = "80px";
-      } else {
         nav.style.height = "70px";
+        document.querySelector('.bg-navbar').style.backgroundColor = "transparent";
+
+      } else {
+        nav.style.height = "80px";
+        document.querySelector('.bg-navbar').style.backgroundColor = "#FFF";
+
       }
     }
   });
@@ -37,7 +41,7 @@ function Navbar() {
     })
   }
   const menu = (
-      <Menu className='' items={renderCourseCatalog()}>
+      <Menu className=' z-20' items={renderCourseCatalog()}>
       </Menu>
   );
 
@@ -51,17 +55,17 @@ function Navbar() {
 
   return widthWindow > 900 ? (
     //  Default Navbar
-    <div className="bg-navbar transition-all duration-300 navbar-height">
-      <div className="container flex justify-between items-center mx-auto max-w-full h-full ">
-        <NavLink to={"/"}>
+    <div className="bg-navbar transition-all duration-300 navbar-height ">
+      <div className="container flex justify-between items-center mx-auto max-w-full h-full " id='home' >
+        <NavLink to={"/"} >
           <img
             src={logoBig}
             alt="logo"
-            className="w-48 mr-4"/>
+            className="w-48 md:mr-4"/>
         </NavLink>
         <SearchBox />
         <div>
-          <div className="flex justify-between space-x-3">
+          <div className="flex justify-between md:space-x-3">
             <Dropdown overlay={menu} overlayClassName='' placement="bottom" arrow={{ pointAtCenter: true }}>
               <span className="text-lg text-blue-600 px-1.5 py-0.5 uppercase hover:text-white duration-300 transition-all ease-in-out hover:bg-blue-500 rounded-lg">DANH MỤC</span>
             </Dropdown>
@@ -76,25 +80,30 @@ function Navbar() {
   ) : (
     //Small Navbar
     <div className="bg-navbar transition-all duration-300 navbar-height">
-      <div className="container flex justify-between items-center mx-auto max-w-full h-full ">
+      <div className=" flex justify-between  items-center mx-auto max-w-full h-full ">
         <NavLink to={"/"}>
           <img
               src={logoSmall}
               alt="logo"
-              className="w-24 mr-4"/>
+              className="w-24"/>
         </NavLink>
-        <div className="relative ">
+       
+        <div className=" flex items-center" >
+        <div className="">
+          <UserNav />
+        </div>
+        <div className="relative  ">
           <button
               className="btn-nav w-12 h-12 rounded-2xl bg-transparent border-0"
               onClick={() => {
                 smallNavEl.classList.toggle("hidden");
               }}
           >
-            <BarsOutlined />
+            <BarsOutlined className=" text-2xl " />
           </button>
           <div
               id="small-nav"
-              className="hidden bottom-0 absolute right-auto rounded-xl -translate-x-1/2 translate-y-full z-20 bg-gray-100 shadow-2xl p-3"
+              className="hidden bottom-0 absolute right-auto rounded-xl -translate-x-1/2  translate-y-full z-20 bg-gray-100 shadow-2xl p-3"
           >
             <SearchBox />
             <div className="flex flex-col items-start space-y-0.5">
@@ -116,8 +125,6 @@ function Navbar() {
             </div>
           </div>
         </div>
-        <div className="flex items-start space-x-5">
-          <UserNav />
         </div>
       </div>
     </div>

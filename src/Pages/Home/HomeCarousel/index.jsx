@@ -14,8 +14,8 @@ const textGradient = {
 
 function HomeCarousel() {
     return (
-        <Carousel autoplay className='' style={{background: '#232323'}}>
-            <div className='grid space-x-5 lg:grid-cols-2 sm:grid-cols-1  h-96 md:h-auto'>
+        <Carousel autoplay className='' style={{background: '#232323'}} >
+            <div className='grid space-x-5 lg:grid-cols-2 sm:grid-cols-1  h-96 md:h-auto' id='home'>
             <div className="col-span-1">
                     <div className='bg-red-400 relative w-full h-full'>
                         <img className='w-full h-full md:h-72 object-cover'

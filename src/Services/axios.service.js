@@ -21,15 +21,13 @@ class AxiosService {
   }
 
   getAxiosConfig(_token) {
-    // const token = localServices.getUserInfo()
-    //   ? localServices.getUserInfo().accessToken
-    //   : "";
+    const token = localServices.getUserInfo()
+      ? localServices.getUserInfo().accessToken
+      : "";
     this.axiosConfig = {
       headers: {
         TokenCybersoft: TOKEN_CYBERSOFT,
-        Authorization: `Bearer ${localServices.getUserInfo()
-          ? localServices.getUserInfo().accessToken
-          : ""}`,
+        Authorization: `Bearer ${token}`,
       },
     };
   }

@@ -21,7 +21,7 @@ function CourseList() {
   };
 
   return (
-    <div className="lg:container mx-auto mt-10 px-12">
+    <div className="md:container mx-auto mt-10 md:px-12">
       <h2 className="title-list-course text-4xl font-bold mb-8 text-center">
         Khóa Học <span className=" text-[#ff6e65]">Mới Nhất</span>
       </h2>

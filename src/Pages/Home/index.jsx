@@ -7,8 +7,10 @@ import Counter from "./Counter";
 function HomePage() {
     return (
         <div className='mt-20'>
-            <HomeCarousel/>
+            <HomeCarousel />
+            <div className=' md:container'>
             <CourseList/>
+            </div>
             <Counter/>
         </div>
     );

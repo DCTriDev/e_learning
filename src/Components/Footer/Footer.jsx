@@ -1,4 +1,5 @@
 import React from "react";
+import bigSmall  from "../../Assets/Images/logo_big.png";
 import "./footer.css";
 export default function Footer() {
   return (
@@ -6,13 +7,13 @@ export default function Footer() {
       <div className=" ">
         <div className="footer__logo">
           <img
-            src="https://cybersoft.edu.vn/wp-content/uploads/2017/04/MAX-OP1.png"
+            src={bigSmall}
             width={300}
             height={100}
             alt="Cybersoft logo"
           />
           <p>
-            Cybersoft Academy - Hệ thống đào tạo lập trình chuyên sâu theo dự án
+            E-Learning - Hệ thống đào tạo lập trình chuyên sâu theo dự án
             thực tế
           </p>
         </div>

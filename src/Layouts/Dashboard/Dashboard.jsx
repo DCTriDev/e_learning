@@ -18,9 +18,9 @@ import UserRestrict from "./UserRestrict";
 
 const {Header, Content, Sider} = Layout;
 
-function getItem(label, key, icon, children, disabled = false) {
+function getItem(label, key, icon, items, disabled = false) {
     return {
-        key, icon, children, label, disabled
+        key, icon, items, label, disabled
     };
 }
 
