@@ -21,13 +21,15 @@ class AxiosService {
   }
 
   getAxiosConfig(_token) {
-    const token = localServices.getUserInfo()
-      ? localServices.getUserInfo().accessToken
-      : "";
+    // const token = localServices.getUserInfo()
+    //   ? localServices.getUserInfo().accessToken
+    //   : "";
     this.axiosConfig = {
       headers: {
         TokenCybersoft: TOKEN_CYBERSOFT,
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${localServices.getUserInfo()
+          ? localServices.getUserInfo().accessToken
+          : ""}`,
       },
     };
   }
@@ -48,21 +50,21 @@ class AxiosService {
   postMethod(uri, data, loading = true) {
     return this.handleFlow(
       this.axios.post(uri, data, this.axiosConfig),
-      loading
+      loading,
     );
   }
 
   putMethod(uri, data, loading = true) {
     return this.handleFlow(
       this.axios.put(uri, data, this.axiosConfig),
-      loading
+      loading,
     );
   }
 
   patchMethod(uri, data, loading = true) {
     return this.handleFlow(
       this.axios.patch(uri, data, this.axiosConfig),
-      loading
+      loading,
     );
   }
 
